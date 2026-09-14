@@ -11,48 +11,296 @@
 html,body{margin:0;min-height:100%;overflow-x:hidden;background:radial-gradient(circle at 50% 22%,#a98cff16,transparent 30rem),var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;overscroll-behavior:none}
 body{min-height:100svh;display:flex;justify-content:center}
 .app{width:min(100%,560px);min-height:100svh;display:flex;flex-direction:column;padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom))}
-.top{display:flex;justify-content:space-between;align-items:center}
-.brand h1{font-size:1.2rem;margin:0;letter-spacing:.08em;text-transform:uppercase}
-.brand p{font-size:.76rem;color:var(--muted);margin:3px 0 0}
-.btn{border:1px solid var(--line);background:#ffffff0e;color:var(--text);border-radius:13px;min-height:40px;padding:0 13px;font-weight:800}
-.gear{width:42px;padding:0;font-size:1rem}
-.modes{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;margin-top:20px;padding:4px;border:1px solid var(--line);border-radius:15px;background:#ffffff08}
-.mode{border:0;border-radius:11px;background:transparent;color:var(--muted);min-height:40px;font-weight:800}
-.mode.active{background:#ffffff12;color:white}
-.mode.unhinged{color:#ffc0f6}
-.stage{flex:1;display:grid;place-items:center;min-height:430px;padding:26px 0 18px;overflow:visible}
-.center{text-align:center}
+.top{display:flex;justify-content:space-between;align-items:center}.brand h1{font-size:1.2rem;margin:0;letter-spacing:.08em;text-transform:uppercase}.brand p{font-size:.76rem;color:var(--muted);margin:3px 0 0}
+.btn{border:1px solid var(--line);background:#ffffff0e;color:var(--text);border-radius:13px;min-height:40px;padding:0 13px;font-weight:800}.gear{width:42px;padding:0;font-size:1rem}
+.modes{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;margin-top:20px;padding:4px;border:1px solid var(--line);border-radius:15px;background:#ffffff08}.mode{border:0;border-radius:11px;background:transparent;color:var(--muted);min-height:40px;font-weight:800}.mode.active{background:#ffffff12;color:white}.mode.unhinged{color:#ffc0f6}
+.stage{flex:1;display:grid;place-items:center;min-height:430px;padding:26px 0 18px;overflow:visible}.center{text-align:center}
 .ball-wrap{--x:0px;--y:0px;--r:0deg;width:min(82vw,390px);aspect-ratio:1;position:relative;touch-action:none;user-select:none;transform:translate3d(var(--x),var(--y),0);will-change:transform;filter:drop-shadow(0 28px 38px #0008)}
 .ball{position:absolute;inset:0;border-radius:50%;overflow:hidden;transform:rotate(var(--r));will-change:transform;background:radial-gradient(circle at 32% 23%,#ffffff29,transparent 11%),radial-gradient(circle at 37% 29%,#30333b,#17191f 24%,#090a0d 57%,#020203 77%);border:1px solid #ffffff18;box-shadow:inset -34px -38px 80px #000e,inset 20px 18px 46px #ffffff0b}
-.window{position:absolute;inset:19%;border-radius:50%;display:grid;place-items:center;overflow:hidden;border:10px solid #050506;background:radial-gradient(circle at 50% 45%,#2d1e64f2,#0a0a1ef2 58%,#000 73%);box-shadow:inset 0 0 30px #5644ff3d,0 0 0 2px #ffffff0c,0 6px 28px #000c}
-.bubbles{position:absolute;inset:4%;border-radius:50%;overflow:hidden;pointer-events:none}
-.bubble{position:absolute;bottom:-20px;border:1px solid #e0e8ff88;border-radius:50%;background:#b9ceff25;box-shadow:inset 2px 2px 3px #fff6;animation:bubble var(--d) linear infinite;animation-delay:var(--delay)}
-.bubble:nth-child(1){left:12%;width:13px;height:13px;--d:8s;--delay:-2s}
-.bubble:nth-child(2){left:30%;width:8px;height:8px;--d:6s;--delay:-4s}
-.bubble:nth-child(3){left:55%;width:17px;height:17px;--d:10s;--delay:-7s}
-.bubble:nth-child(4){left:75%;width:9px;height:9px;--d:7s;--delay:-3s}
-.bubble:nth-child(5){left:43%;width:6px;height:6px;--d:5.5s;--delay:-1s}
-@keyframes bubble{0%{transform:translateY(0);opacity:0}10%{opacity:.75}100%{transform:translate(5px,-215px);opacity:0}}
+.window{
+position:absolute;
+inset:19%;
+border-radius:50%;
+display:grid;
+place-items:center;
+overflow:hidden;
+clip-path:circle(50% at 50% 50%);
+isolation:isolate;
+border:10px solid #050506;
+background:
+radial-gradient(circle at 48% 38%,#282044f2 0 18%,#17142cf2 40%,#090914f5 63%,#000 78%);
+box-shadow:
+inset 0 0 28px #5146a82f,
+inset 0 10px 22px #ffffff08,
+0 0 0 2px #ffffff0c,
+0 6px 28px #000c;
+}
+
+.window::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:50%;
+pointer-events:none;
+z-index:8;
+background:
+linear-gradient(128deg,#ffffff14 0 9%,transparent 24% 62%,#ffffff08 78%,transparent 90%),
+radial-gradient(ellipse at 35% 17%,#ffffff18 0 7%,transparent 26%);
+mix-blend-mode:screen;
+}
+
+.window::after{
+content:"";
+position:absolute;
+left:2%;
+right:2%;
+bottom:-14%;
+height:55%;
+border-radius:50%;
+pointer-events:none;
+z-index:1;
+background:
+radial-gradient(ellipse at center,#6676d91a 0 34%,#171a5340 60%,transparent 78%);
+filter:blur(4px);
+transform-origin:50% 50%;
+animation:liquidIdle 5.2s ease-in-out infinite alternate;
+}
+
+@keyframes liquidIdle{
+from{transform:translateY(3%) scaleX(1.02)}
+to{transform:translateY(-2%) scaleX(.97)}
+}
+
+.ball-wrap.shake-live .window{
+animation:shakeWindow .12s linear infinite alternate;
+}
+
+.ball-wrap.shake-live .bubbles{
+filter:brightness(1.15);
+}
+
+@keyframes shakeWindow{
+from{transform:translate(-1px,1px) rotate(-.35deg)}
+to{transform:translate(1px,-1px) rotate(.35deg)}
+}
+
+.bubbles{position:absolute;inset:4%;border-radius:50%;overflow:hidden;pointer-events:none}.bubble{position:absolute;bottom:-20px;border:1px solid #e0e8ff88;border-radius:50%;background:#b9ceff25;box-shadow:inset 2px 2px 3px #fff6;animation:bubble var(--d) linear infinite;animation-delay:var(--delay)}.bubble:nth-child(1){left:12%;width:13px;height:13px;--d:8s;--delay:-2s}.bubble:nth-child(2){left:30%;width:8px;height:8px;--d:6s;--delay:-4s}.bubble:nth-child(3){left:55%;width:17px;height:17px;--d:10s;--delay:-7s}.bubble:nth-child(4){left:75%;width:9px;height:9px;--d:7s;--delay:-3s}.bubble:nth-child(5){left:43%;width:6px;height:6px;--d:5.5s;--delay:-1s}@keyframes bubble{0%{transform:translateY(0);opacity:0}10%{opacity:.75}100%{transform:translate(5px,-215px);opacity:0}}
 .eight{position:relative;z-index:2;width:58%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#f7f7f8;color:#08090c;font-size:clamp(3rem,14vw,5.4rem);font-weight:950;transition:.2s}
-.answer{position:absolute;inset:5%;display:grid;place-items:center;opacity:0;transform:translateY(38%) scale(.68);z-index:3}
-.triangle{width:95%;height:91%;clip-path:polygon(50% 0,100% 100%,0 100%);display:flex;align-items:flex-end;justify-content:center;padding:0 10% 12%;background:linear-gradient(#4d76ff,#4522bd);filter:drop-shadow(0 0 14px #5664ff6b)}
-.answer-text{width:100%;color:#f2f4ff;font-weight:950;line-height:1.02;text-wrap:balance;overflow-wrap:anywhere;text-shadow:0 1px 8px #000b;font-size:clamp(.78rem,3.4vw,1.1rem)}
+.answer{
+position:absolute;
+inset:5%;
+display:grid;
+place-items:center;
+opacity:0;
+transform:translateY(46%) scale(.60);
+z-index:4;
+}
+
+.triangle{
+width:95%;
+height:91%;
+clip-path:polygon(50% 0,100% 100%,0 100%);
+display:flex;
+align-items:flex-end;
+justify-content:center;
+padding:0 10% 12%;
+background:
+linear-gradient(180deg,#536bd0 0%,#3f50b8 34%,#322081 100%);
+filter:
+drop-shadow(0 0 12px #8190ff77)
+drop-shadow(0 8px 16px #10083ca0);
+transform-origin:50% 60%;
+}
+
+.answer-text{
+width:100%;
+color:#f2f4ff;
+font-weight:950;
+line-height:1.02;
+text-wrap:balance;
+overflow-wrap:anywhere;
+text-shadow:0 1px 8px #000b,0 0 8px #8da1ff55;
+font-size:clamp(.78rem,3.4vw,1.1rem)
+}
 .answer-text[data-s="lg"]{font-size:clamp(1rem,4.8vw,1.48rem)}
 .answer-text[data-s="md"]{font-size:clamp(.9rem,4vw,1.26rem)}
 .answer-text[data-s="xs"]{font-size:clamp(.66rem,2.9vw,.9rem)}
-.revealed .eight{opacity:0;transform:scale(.7)}
-.revealed .answer{opacity:1;animation:rise .68s cubic-bezier(.16,.9,.26,1.04) both}
-@keyframes rise{0%{opacity:0;transform:translateY(44%) scale(.62);filter:blur(4px)}55%{opacity:1;transform:translateY(-3%) scale(1.03);filter:blur(.7px)}100%{opacity:1;transform:none;filter:none}}
-.thinking .ball{animation:shake .65s ease both}
-@keyframes shake{20%{transform:translate(-8px,2px) rotate(calc(var(--r) - 3deg))}40%{transform:translate(8px,-2px) rotate(calc(var(--r) + 3deg))}60%{transform:translate(-6px,2px) rotate(calc(var(--r) - 2deg))}80%{transform:translate(5px,-1px) rotate(calc(var(--r) + 2deg))}}
-html[data-mode=aggressive] .window{background:radial-gradient(circle,#5c182df5,#1c0814f5 58%,#000 73%)}
-html[data-mode=aggressive] .triangle{background:linear-gradient(#ff5670,#941c50)}
-html[data-mode=unhinged] .window{background:radial-gradient(circle,#4c1c65fa,#0f081ffa 58%,#000 73%)}
-html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
+
+.revealed .eight{
+opacity:0;
+transform:scale(.7);
+transition:opacity .12s ease,transform .18s ease;
+}
+
+.revealed .answer{
+opacity:1;
+animation:oracleRise .92s cubic-bezier(.12,.82,.18,1.04) both;
+}
+
+.revealed .triangle{
+animation:triangleFloat .92s cubic-bezier(.12,.82,.18,1.04) both;
+}
+
+@keyframes oracleRise{
+0%{
+opacity:0;
+transform:translateY(58%) scale(.50);
+filter:blur(8px) saturate(.6);
+}
+24%{
+opacity:.42;
+filter:blur(5px) saturate(.8);
+}
+58%{
+opacity:1;
+transform:translateY(-7%) scale(1.045);
+filter:blur(.8px) saturate(1.08);
+}
+76%{
+transform:translateY(3%) scale(.99);
+}
+100%{
+opacity:1;
+transform:translateY(0) scale(1);
+filter:none;
+}
+}
+
+@keyframes triangleFloat{
+0%{transform:rotate(-2.5deg) skewX(-1deg)}
+45%{transform:rotate(1.2deg) skewX(.5deg)}
+72%{transform:rotate(-.55deg)}
+100%{transform:none}
+}
+
+.reveal-ripple{
+border-radius:50%;
+position:absolute;
+left:50%;
+top:58%;
+width:18%;
+aspect-ratio:1;
+border:2px solid #dceaff;
+box-shadow:0 0 10px #fff,0 0 22px #7aa4ffcc;
+transform:translate(-50%,-50%) scale(.2);
+opacity:0;
+pointer-events:none;
+z-index:6;
+}
+
+.revealed .reveal-ripple{
+animation:revealRipple .72s cubic-bezier(.1,.72,.18,1) both;
+}
+
+@keyframes revealRipple{
+0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}
+18%{opacity:.95}
+100%{opacity:0;transform:translate(-50%,-50%) scale(5.8)}
+}
+
+.reveal-splash{
+border-radius:50%;
+position:absolute;
+inset:0;
+z-index:7;
+pointer-events:none;
+}
+
+.reveal-splash i{
+position:absolute;
+left:50%;
+top:58%;
+width:5px;
+height:5px;
+border-radius:50%;
+background:#dff4ff;
+box-shadow:0 0 7px #fff,0 0 12px #7fa6ff;
+opacity:0;
+}
+
+.reveal-splash i:nth-child(1){--x:-74px;--y:-58px}
+.reveal-splash i:nth-child(2){--x:-48px;--y:-82px}
+.reveal-splash i:nth-child(3){--x:-18px;--y:-96px}
+.reveal-splash i:nth-child(4){--x:22px;--y:-94px}
+.reveal-splash i:nth-child(5){--x:52px;--y:-78px}
+.reveal-splash i:nth-child(6){--x:76px;--y:-50px}
+.reveal-splash i:nth-child(7){--x:-62px;--y:-28px}
+.reveal-splash i:nth-child(8){--x:64px;--y:-24px}
+
+.revealed .reveal-splash i{
+animation:revealDrop .62s cubic-bezier(.12,.7,.2,1) both;
+}
+
+.revealed .reveal-splash i:nth-child(2),
+.revealed .reveal-splash i:nth-child(5){animation-delay:.035s}
+.revealed .reveal-splash i:nth-child(3),
+.revealed .reveal-splash i:nth-child(6){animation-delay:.07s}
+.revealed .reveal-splash i:nth-child(4),
+.revealed .reveal-splash i:nth-child(8){animation-delay:.105s}
+
+@keyframes revealDrop{
+0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}
+18%{opacity:1}
+100%{
+opacity:0;
+transform:
+translate(calc(-50% + var(--x)),calc(-50% + var(--y)))
+scale(.9);
+}
+}
+
+.glass-flash{
+border-radius:50%;
+position:absolute;
+inset:-18%;
+pointer-events:none;
+z-index:9;
+opacity:0;
+background:
+linear-gradient(118deg,transparent 28%,#ffffff00 37%,#ffffff88 47%,#b7d9ff66 53%,transparent 64%);
+transform:translateX(-42%) rotate(8deg);
+mix-blend-mode:screen;
+}
+
+.revealed .glass-flash{
+animation:glassSweep .48s ease-out both;
+}
+
+@keyframes glassSweep{
+0%{opacity:0;transform:translateX(-50%) rotate(8deg)}
+18%{opacity:.9}
+100%{opacity:0;transform:translateX(55%) rotate(8deg)}
+}
+
+.thinking .ball{animation:shake .65s ease both}@keyframes shake{20%{transform:translate(-8px,2px) rotate(calc(var(--r) - 3deg))}40%{transform:translate(8px,-2px) rotate(calc(var(--r) + 3deg))}60%{transform:translate(-6px,2px) rotate(calc(var(--r) - 2deg))}80%{transform:translate(5px,-1px) rotate(calc(var(--r) + 2deg))}}
+
+html[data-mode=aggressive] .window{
+background:radial-gradient(circle at 48% 38%,#4c1829f5,#28101af5 46%,#10070df7 66%,#000 80%)
+}
+html[data-mode=aggressive] .triangle{
+background:linear-gradient(#ff6e83,#d52f65 42%,#84143f)
+}
+html[data-mode=aggressive] .reveal-ripple{
+border-color:#ffdce4;
+box-shadow:0 0 10px #fff,0 0 24px #ff587dcc
+}
+html[data-mode=unhinged] .window{
+background:radial-gradient(circle at 48% 38%,#432055fa,#261330fa 47%,#0e0818fa 68%,#000 80%)
+}
+html[data-mode=unhinged] .triangle{
+background:linear-gradient(#df68ff,#884af2 43%,#3a38c7)
+}
+html[data-mode=unhinged] .reveal-ripple{
+border-color:#f6dcff;
+box-shadow:0 0 10px #fff,0 0 26px #c35cffcc
+}
+
 .aura{position:absolute;inset:-22%;border-radius:50%;opacity:0;pointer-events:none;z-index:-1;background:radial-gradient(circle,#fff8 0 5%,#73c2ffaa 16%,#756fff55 36%,transparent 68%);filter:blur(10px)}
+.spin-start .aura{opacity:.55;animation:aura .34s ease-in-out infinite alternate}
 .spin .aura{opacity:.92;animation:aura .22s ease-in-out infinite alternate}
 .spin.max .aura{opacity:1;filter:blur(8px) brightness(1.4)}
 @keyframes aura{from{transform:scale(.87)}to{transform:scale(1.04)}}
+
 .spark{position:absolute;left:50%;top:50%;width:3px;height:34%;transform-origin:50% 100%;background:linear-gradient(transparent,#fff,#8bd8ff,transparent);opacity:0}
 .spin .spark{opacity:1;animation:spark .28s ease-out infinite}
 .spark:nth-child(2){transform:translate(-50%,-100%) rotate(60deg);animation-delay:-.1s}
@@ -61,1123 +309,501 @@ html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
 .spark:nth-child(5){transform:translate(-50%,-100%) rotate(240deg);animation-delay:-.16s}
 .spark:nth-child(6){transform:translate(-50%,-100%) rotate(300deg);animation-delay:-.22s}
 @keyframes spark{0%,100%{opacity:0}35%{opacity:1}}
-.power .aura{opacity:1;animation:power 7s ease-out both;background:radial-gradient(circle,#fff 0 4%,#fff07ebf 16%,#90bcff70 38%,transparent 70%)}
-@keyframes power{0%{transform:scale(.7);opacity:0}8%{transform:scale(1);opacity:1}80%{opacity:.8}100%{transform:scale(1.18);opacity:0}}
-.prompt{margin-top:4px}
-.prompt strong{display:block}
-.prompt span,.status{color:var(--muted);font-size:.76rem}
-.status{height:24px;margin-top:8px;font-weight:850;text-transform:uppercase;letter-spacing:.07em}
-.status.good{color:var(--good)}
-.status.bad{color:var(--bad)}
-.status.neutral{color:var(--warn)}
-.hints{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.hint{border:1px solid var(--line);border-radius:13px;padding:9px 6px;background:#ffffff07;color:var(--muted);font-size:.7rem}
-.hint b{display:block;color:#d7d9df}
-.modal{position:fixed;inset:0;background:#0009;display:none;place-items:end center;z-index:50}
-.modal.open{display:grid}
-.sheet{width:min(100%,560px);background:#0d0f14;border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;padding:18px 18px max(22px,env(safe-area-inset-bottom))}
-.sheet-head{display:flex;justify-content:space-between;align-items:center}
-.setting{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #ffffff0d}
-.setting strong{font-size:.86rem}
-.setting small{display:block;color:var(--muted);font-size:.7rem;margin-top:3px}
-.switch{width:46px;height:27px}
-.toast,.pop{position:fixed;left:50%;transform:translateX(-50%);z-index:90;background:#15161cef;border:1px solid var(--line);border-radius:15px;box-shadow:0 20px 60px #0009;opacity:0;pointer-events:none;transition:.18s;padding:12px 14px;text-align:center}
-.toast{bottom:calc(22px + env(safe-area-inset-bottom));width:min(calc(100% - 36px),420px)}
-.pop{top:max(18px,env(safe-area-inset-top));width:min(calc(100% - 32px),430px)}
-.show{opacity:1!important}
-.mtx-bg{position:fixed;inset:0;background:#000a;backdrop-filter:blur(5px);z-index:80;display:none}
-.mtx-bg.show{display:block}
-.mtx{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:81;width:min(calc(100% - 34px),420px);background:#11131af7;border:1px solid #ffffff26;border-radius:22px;padding:18px;display:none;text-align:center}
-.mtx.show{display:block}
-.mtx h2{font-size:1.1rem}
-.mtx p{color:#b5bbc8;font-size:.78rem}
-.mtx .btn{width:100%;margin-top:8px}
-.mtx .buy{background:linear-gradient(135deg,#b16aff55,#4a79ff4d)}
-.fine{color:#777;font-size:.63rem;margin-top:9px}
+
+.spin-fx{
+position:absolute;
+inset:-22%;
+pointer-events:none;
+z-index:20;
+overflow:visible;
+opacity:0;
+transition:opacity .08s linear;
+}
+
+.ball-wrap.spin-start .spin-fx,
+.ball-wrap.spin .spin-fx,
+.ball-wrap.max .spin-fx{
+opacity:1;
+}
+
+.spin-ring{
+position:absolute;
+inset:10%;
+border-radius:50%;
+background:
+conic-gradient(
+from 0deg,
+transparent 0 5%,
+#fff 8%,
+#6fe4ff 13%,
+transparent 19% 27%,
+#bc75ff 34%,
+#fff 40%,
+transparent 47% 57%,
+#6fe4ff 64%,
+#fff 70%,
+transparent 77% 100%
+);
+-webkit-mask:radial-gradient(circle,transparent 0 62%,#000 66% 75%,transparent 80%);
+mask:radial-gradient(circle,transparent 0 62%,#000 66% 75%,transparent 80%);
+filter:
+drop-shadow(0 0 9px #fff)
+drop-shadow(0 0 18px #72dcff)
+drop-shadow(0 0 30px #9a70ff99);
+opacity:.76;
+animation:spinRing 1.1s linear infinite;
+animation-direction:var(--spin-fx-direction,normal);
+}
+
+.ball-wrap.spin .spin-ring{
+opacity:1;
+animation-duration:.72s;
+}
+
+.ball-wrap.max .spin-ring{
+opacity:1;
+animation-duration:.42s;
+filter:
+drop-shadow(0 0 12px #fff)
+drop-shadow(0 0 25px #72e6ff)
+drop-shadow(0 0 40px #a171ff)
+brightness(1.45);
+}
+
+@keyframes spinRing{
+to{transform:rotate(360deg)}
+}
+
+.spin-particles{
+position:absolute;
+inset:0;
+overflow:visible;
+}
+
+.spin-particle{
+position:absolute;
+left:50%;
+top:50%;
+width:8px;
+height:8px;
+margin:-4px;
+border-radius:50%;
+background:#fff;
+box-shadow:
+0 0 8px #fff,
+0 0 20px #78e6ff,
+0 0 34px #a174ff;
+opacity:0;
+transform:
+rotate(var(--a))
+translateY(-48%)
+scale(.4);
+}
+
+.ball-wrap.spin-start .spin-particle{
+animation:
+orbitParticle 1.15s linear infinite;
+animation-delay:calc(var(--i) * -70ms);
+animation-direction:var(--spin-fx-direction,normal);
+}
+
+.ball-wrap.spin .spin-particle{
+animation-duration:.82s;
+opacity:.92;
+}
+
+.ball-wrap.max .spin-particle{
+width:10px;
+height:10px;
+margin:-5px;
+animation-duration:.56s;
+box-shadow:
+0 0 11px #fff,
+0 0 23px #6fe6ff,
+0 0 38px #a273ff;
+}
+
+@keyframes orbitParticle{
+0%{
+opacity:0;
+transform:rotate(var(--a)) translateY(-44%) scale(.35);
+}
+12%{opacity:1}
+55%{opacity:1}
+100%{
+opacity:0;
+transform:
+rotate(calc(var(--a) + 170deg))
+translateY(-78%)
+scale(1.2);
+}
+}
+
+.ball-wrap.spin-pop .spin-particle{
+animation:spinPop .42s cubic-bezier(.12,.8,.18,1) both!important;
+animation-delay:calc(var(--i) * 8ms)!important;
+}
+
+.ball-wrap.spin-pop-max .spin-particle{
+animation:spinPopMax .55s cubic-bezier(.08,.82,.14,1) both!important;
+animation-delay:calc(var(--i) * 7ms)!important;
+}
+
+@keyframes spinPop{
+0%{
+opacity:0;
+transform:rotate(var(--a)) translateY(-35%) scale(.25);
+}
+20%{opacity:1}
+100%{
+opacity:0;
+transform:rotate(var(--a)) translateY(-88%) scale(1.3);
+}
+}
+
+@keyframes spinPopMax{
+0%{
+opacity:0;
+transform:rotate(var(--a)) translateY(-38%) scale(.3);
+}
+18%{opacity:1}
+65%{opacity:1}
+100%{
+opacity:0;
+transform:rotate(calc(var(--a) + 28deg)) translateY(-100%) scale(1.45);
+}
+}
+
+.ball-wrap.snap-lock::before,.ball-wrap.snap-lock::after{
+content:"";position:absolute;left:50%;top:50%;border-radius:50%;pointer-events:none;z-index:6;
+transform:translate(-50%,-50%) scale(.65);opacity:0
+}
+.ball-wrap.snap-lock::before{
+width:104%;height:104%;border:2px solid #e9f9ff;
+box-shadow:0 0 8px #fff,0 0 20px #72c8ff,0 0 38px #9476ff99;
+animation:snapRing .5s cubic-bezier(.1,.8,.2,1) both
+}
+.ball-wrap.snap-lock::after{
+width:72%;height:72%;
+background:radial-gradient(circle,transparent 54%,#ffffffdd 58%,#72c8ff66 62%,transparent 70%);
+animation:snapFlash .4s ease-out both
+}
+.ball-wrap.snap-lock .window{animation:snapWindow .44s cubic-bezier(.12,.82,.18,1) both}
+.ball-wrap.snap-lock .aura{animation:snapAura .54s ease-out both!important}
+@keyframes snapRing{
+0%{opacity:0;transform:translate(-50%,-50%) scale(.66)}
+18%{opacity:1}
+100%{opacity:0;transform:translate(-50%,-50%) scale(1.23)}
+}
+@keyframes snapFlash{
+0%{opacity:0;transform:translate(-50%,-50%) scale(.7)}
+24%{opacity:.95}
+100%{opacity:0;transform:translate(-50%,-50%) scale(1.18)}
+}
+@keyframes snapWindow{
+0%{filter:brightness(1)}
+38%{filter:brightness(1.55) saturate(1.25)}
+100%{filter:brightness(1)}
+}
+@keyframes snapAura{
+0%{opacity:.1;transform:scale(.9)}
+28%{opacity:1;transform:scale(1.08)}
+100%{opacity:0;transform:scale(1.23)}
+}
+
+.power .aura{opacity:1;animation:power 7s ease-out both;background:radial-gradient(circle,#fff 0 4%,#fff07ebf 16%,#90bcff70 38%,transparent 70%)}@keyframes power{0%{transform:scale(.7);opacity:0}8%{transform:scale(1);opacity:1}80%{opacity:.8}100%{transform:scale(1.18);opacity:0}}
+.prompt{margin-top:4px}.prompt strong{display:block}.prompt span,.status{color:var(--muted);font-size:.76rem}.status{height:24px;margin-top:8px;font-weight:850;text-transform:uppercase;letter-spacing:.07em}.status.good{color:var(--good)}.status.bad{color:var(--bad)}.status.neutral{color:var(--warn)}
+.hints{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.hint{border:1px solid var(--line);border-radius:13px;padding:9px 6px;background:#ffffff07;color:var(--muted);font-size:.7rem}.hint b{display:block;color:#d7d9df}
+.modal{position:fixed;inset:0;background:#0009;display:none;place-items:end center;z-index:50}.modal.open{display:grid}.sheet{width:min(100%,560px);background:#0d0f14;border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;padding:18px 18px max(22px,env(safe-area-inset-bottom))}.sheet-head{display:flex;justify-content:space-between;align-items:center}.setting{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #ffffff0d}.setting strong{font-size:.86rem}.setting small{display:block;color:var(--muted);font-size:.7rem;margin-top:3px}.switch{width:46px;height:27px}
+.toast,.pop{position:fixed;left:50%;transform:translateX(-50%);z-index:90;background:#15161cef;border:1px solid var(--line);border-radius:15px;box-shadow:0 20px 60px #0009;opacity:0;pointer-events:none;transition:.18s;padding:12px 14px;text-align:center}.toast{bottom:calc(22px + env(safe-area-inset-bottom));width:min(calc(100% - 36px),420px)}.pop{top:max(18px,env(safe-area-inset-top));width:min(calc(100% - 32px),430px)}.show{opacity:1!important}
+.mtx-bg{position:fixed;inset:0;background:#000a;backdrop-filter:blur(5px);z-index:80;display:none}.mtx-bg.show{display:block}.mtx{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:81;width:min(calc(100% - 34px),420px);background:#11131af7;border:1px solid #ffffff26;border-radius:22px;padding:18px;display:none;text-align:center}.mtx.show{display:block}.mtx h2{font-size:1.1rem}.mtx p{color:#b5bbc8;font-size:.78rem}.mtx .btn{width:100%;margin-top:8px}.mtx .buy{background:linear-gradient(135deg,#b16aff55,#4a79ff4d)}.fine{color:#777;font-size:.63rem;margin-top:9px}
 @media(max-height:720px){.stage{min-height:340px;padding:15px 0}.ball-wrap{width:min(67vh,330px,80vw)}}
 </style>
 </head>
-
 <body>
 <main class="app">
-
-<header class="top">
-<div class="brand" id="brand">
-<h1>Brain Rot 8 Ball</h1>
-<p>ask ts. accept the consequences.</p>
-</div>
-<button class="btn gear" id="settings">⚙</button>
-</header>
-
-<nav class="modes" id="modes">
-<button class="mode active" data-mode="normal">Normal</button>
-<button class="mode" data-mode="aggressive">Aggressive</button>
-</nav>
-
-<section class="stage">
-<div class="center">
-
+<header class="top"><div class="brand" id="brand"><h1>Brain Rot 8 Ball</h1><p>ask ts. accept the consequences.</p></div><button class="btn gear" id="settings">⚙</button></header>
+<nav class="modes" id="modes"><button class="mode active" data-mode="normal">Normal</button><button class="mode" data-mode="aggressive">Aggressive</button></nav>
+<section class="stage"><div class="center">
 <div class="ball-wrap" id="bw" tabindex="0">
-
-<div class="aura">
-<i class="spark"></i>
-<i class="spark"></i>
-<i class="spark"></i>
-<i class="spark"></i>
-<i class="spark"></i>
-<i class="spark"></i>
+<div class="aura"><i class="spark"></i><i class="spark"></i><i class="spark"></i><i class="spark"></i><i class="spark"></i><i class="spark"></i></div>
+<div class="spin-fx" aria-hidden="true">
+<div class="spin-ring"></div>
+<div class="spin-particles">
+<i class="spin-particle" style="--i:0;--a:0deg"></i>
+<i class="spin-particle" style="--i:1;--a:30deg"></i>
+<i class="spin-particle" style="--i:2;--a:60deg"></i>
+<i class="spin-particle" style="--i:3;--a:90deg"></i>
+<i class="spin-particle" style="--i:4;--a:120deg"></i>
+<i class="spin-particle" style="--i:5;--a:150deg"></i>
+<i class="spin-particle" style="--i:6;--a:180deg"></i>
+<i class="spin-particle" style="--i:7;--a:210deg"></i>
+<i class="spin-particle" style="--i:8;--a:240deg"></i>
+<i class="spin-particle" style="--i:9;--a:270deg"></i>
+<i class="spin-particle" style="--i:10;--a:300deg"></i>
+<i class="spin-particle" style="--i:11;--a:330deg"></i>
+</div>
 </div>
 
-<div class="ball">
-<div class="window">
-
-<div class="bubbles">
-<i class="bubble"></i>
-<i class="bubble"></i>
-<i class="bubble"></i>
-<i class="bubble"></i>
-<i class="bubble"></i>
+<div class="ball"><div class="window">
+<div class="bubbles"><i class="bubble"></i><i class="bubble"></i><i class="bubble"></i><i class="bubble"></i><i class="bubble"></i></div>
+<div class="reveal-ripple" aria-hidden="true"></div>
+<div class="reveal-splash" aria-hidden="true">
+<i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
 </div>
-
+<div class="glass-flash" aria-hidden="true"></div>
 <div class="eight">8</div>
-
-<div class="answer">
-<div class="triangle">
-<div class="answer-text" id="answer">ASK AGAIN</div>
+<div class="answer"><div class="triangle"><div class="answer-text" id="answer">ASK AGAIN</div></div></div>
+</div></div>
 </div>
-</div>
-
-</div>
-</div>
-</div>
-
-<div class="prompt">
-<strong id="pt">ask ts. accept the consequences.</strong>
-<span id="ps">tap, drag, throw, spin, or shake. orb knows ball.</span>
-</div>
-
+<div class="prompt"><strong id="pt">ask ts. accept the consequences.</strong><span id="ps">tap, drag, throw, spin, or shake. orb knows ball.</span></div>
 <div class="status" id="status"></div>
-
-</div>
-</section>
-
-<div class="hints">
-<div class="hint"><b>Tap</b>instant bad advice</div>
-<div class="hint"><b>Throw</b>drag + release</div>
-<div class="hint"><b>Spin</b>circle the edge, then throw</div>
-</div>
-
+</div></section>
+<div class="hints"><div class="hint"><b>Tap</b>instant bad advice</div><div class="hint"><b>Throw</b>drag + release</div><div class="hint"><b>Spin</b>circle the edge, then throw</div></div>
 </main>
 
-<div class="modal" id="settingsModal">
-<section class="sheet">
-
-<div class="sheet-head">
-<h2>Settings</h2>
-<button class="btn" id="close">×</button>
-</div>
-
-<div class="setting">
-<div>
-<strong>Sound</strong>
-<small>Small answer/UI sounds.</small>
-</div>
-<input class="switch" id="sound" type="checkbox">
-</div>
-
-<div class="setting">
-<div>
-<strong>Haptics</strong>
-<small>Vibration when supported.</small>
-</div>
-<input class="switch" id="haptic" type="checkbox">
-</div>
-
-<div class="setting">
-<div>
-<strong>Shake control</strong>
-<small id="motionText">Checking support…</small>
-</div>
-<button class="btn" id="motion">Enable</button>
-</div>
-
-<div class="setting">
-<div>
-<strong>Tilt physics</strong>
-<small id="tiltText">Rolls the ball with phone tilt.</small>
-</div>
-<input class="switch" id="tilt" type="checkbox">
-</div>
-
-<div class="setting">
-<div>
-<strong>Test fake MTX</strong>
-<small>Spawn the annoying paywall.</small>
-</div>
-<button class="btn" id="testMtx">Spawn</button>
-</div>
-
-<div class="setting">
-<div>
-<strong>Test chaos</strong>
-<small>Force a cursed answer.</small>
-</div>
-<button class="btn" id="testChaos">Cursed</button>
-</div>
-
-</section>
-</div>
+<div class="modal" id="settingsModal"><section class="sheet">
+<div class="sheet-head"><h2>Settings</h2><button class="btn" id="close">×</button></div>
+<div class="setting"><div><strong>Sound</strong><small>Small answer/UI sounds.</small></div><input class="switch" id="sound" type="checkbox"></div>
+<div class="setting"><div><strong>Haptics</strong><small>Vibration when supported.</small></div><input class="switch" id="haptic" type="checkbox"></div>
+<div class="setting"><div><strong>Shake control</strong><small id="motionText">Checking support…</small></div><button class="btn" id="motion">Enable</button></div>
+<div class="setting"><div><strong>Tilt physics</strong><small id="tiltText">Rolls the ball with phone tilt.</small></div><input class="switch" id="tilt" type="checkbox"></div>
+<div class="setting"><div><strong>Test fake MTX</strong><small>Spawn the annoying paywall.</small></div><button class="btn" id="testMtx">Spawn</button></div>
+<div class="setting"><div><strong>Test chaos</strong><small>Force a cursed answer.</small></div><button class="btn" id="testChaos">Cursed</button></div>
+</section></div>
 
 <div class="mtx-bg" id="mtxBg"></div>
-
-<div class="mtx" id="mtx">
-<small>LIMITED TIME OPPORTUNITY</small>
-<h2 id="mtxTitle">Premium Oracle DLC</h2>
-<p id="mtxSub">Unlock 3% more certainty for only $4.99.</p>
-<button class="btn buy" id="buy">BUY AURA, COWARD</button>
-<button class="btn" id="nope">nah I'm broke</button>
-<div class="fine">
-This is fake. No money is collected. The orb is just being annoying.
-</div>
-</div>
-
-<div class="pop" id="pop"></div>
-<div class="toast" id="toast"></div>
+<div class="mtx" id="mtx"><small>LIMITED TIME OPPORTUNITY</small><h2 id="mtxTitle">Premium Oracle DLC</h2><p id="mtxSub">Unlock 3% more certainty for only $4.99.</p><button class="btn buy" id="buy">BUY AURA, COWARD</button><button class="btn" id="nope">nah I'm broke</button><div class="fine">This is fake. No money is collected. The orb is just being annoying.</div></div>
+<div class="pop" id="pop"></div><div class="toast" id="toast"></div>
 
 <script>
 (()=>{
 "use strict";
-
 const $=s=>document.querySelector(s);
-
-const bw=$("#bw");
-const ans=$("#answer");
-const status=$("#status");
-const modes=$("#modes");
-const brand=$("#brand");
-const toast=$("#toast");
-const pop=$("#pop");
-const modal=$("#settingsModal");
-const sound=$("#sound");
-const haptic=$("#haptic");
-const tilt=$("#tilt");
-const motion=$("#motion");
-const motionText=$("#motionText");
-const tiltText=$("#tiltText");
-const mtx=$("#mtx");
-const mtxBg=$("#mtxBg");
-const mtxTitle=$("#mtxTitle");
-const mtxSub=$("#mtxSub");
+const bw=$("#bw"),ans=$("#answer"),status=$("#status"),modes=$("#modes"),brand=$("#brand"),toast=$("#toast"),pop=$("#pop"),modal=$("#settingsModal"),sound=$("#sound"),haptic=$("#haptic"),tilt=$("#tilt"),motion=$("#motion"),motionText=$("#motionText"),tiltText=$("#tiltText"),mtx=$("#mtx"),mtxBg=$("#mtxBg"),mtxTitle=$("#mtxTitle"),mtxSub=$("#mtxSub");
 
 const S={
-mode:localStorage.br8mode||"normal",
-unhinged:localStorage.br8u==="1",
-
-sound:localStorage.br8s!=="0",
-haptic:localStorage.br8h!=="0",
-tilt:localStorage.br8t==="1",
-
-motion:false,
-orient:false,
-
-busy:false,
-last:0,
-taps:[],
-
-x:0,
-y:0,
-r:0,
-
-vx:0,
-vy:0,
-vr:0,
-
-raf:0,
-running:false,
-lastT:0,
-
-tx:0,
-ty:0,
-
-p0:null,
-p1:null,
-moved:false,
-
-throwVX:0,
-throwVY:0,
-throwT:0,
-
-rawVX:0,
-rawVY:0,
-
-angularPeak:0,
-
-curve:0,
-curveLife:0,
-
-lastThrowSpeed:0,
-lastThrowSpin:0,
-
-readToken:0,
-readable:false,
-
-audio:null,
-
-q:0,
-neg:0,
-aura:0,
-rizz:67,
-
-forced:false
+mode:localStorage.br8mode||"normal",unhinged:localStorage.br8u==="1",sound:localStorage.br8s!=="0",haptic:localStorage.br8h!=="0",tilt:localStorage.br8t==="1",
+motion:false,orient:false,busy:false,last:0,taps:[],x:0,y:0,r:0,vx:0,vy:0,vr:0,raf:0,running:false,lastT:0,tx:0,ty:0,
+p0:null,p1:null,moved:false,samples:[],gestureHeading:null,turnSigned:0,turnAbs:0,spinCharge:0,spinDir:0,spinOmega:0,spinLastT:0,spinFxLevel:0,curve:0,curveLife:0,
+lastThrowSpeed:0,lastThrowSpin:0,readToken:0,readable:false,audio:null,q:0,neg:0,aura:0,rizz:67,forced:false,
+shakeActive:false,shakePeak:0,shakeLastMove:0,shakeCooldownUntil:0,shakePermissionAsked:false
 };
 
 const A={
-
 normal:{
-
-positive:[
-"you cooked",
-"let him cook",
-"big W",
-"bet",
-"send it",
-"hell yeah brother",
-"YOLO",
-"based",
-"slay",
-"ate, no crumbs",
-"we're so back",
-"sigma behavior",
-"W rizz",
-"certified dub",
-"goated",
-"absolute cinema",
-"chef's kiss",
-"do it for the plot",
-"valid af",
-"hell yeah dude"
-],
-
-neutral:[
-"idk fam",
-"bro...",
-"it's giving maybe",
-"ask again bestie",
-"the math ain't mathing",
-"kinda sus",
-"weird flex but okay",
-"bruh moment",
-"orb buffering",
-"ask your group chat",
-"not enough lore",
-"idk chief",
-"jury's still out",
-"big maybe energy",
-"the vibes are weird",
-"coin toss behavior",
-"could go either way",
-"manifest harder"
-],
-
-negative:[
-"you're cooked",
-"hard no",
-"cringe",
-"L + ratio",
-"nah fam",
-"skill issue",
-"delete this",
-"goofy ahh plan",
-"that ain't it chief",
-"major ick",
-"bro thought he cooked",
-"take the L",
-"no ❤️",
-"put the fries in the bag",
-"negative aura",
-"it's joever",
-"generational fumble",
-"brother eugh"
-]
-
+positive:["you cooked","let him cook","big W","bet","send it","hell yeah brother","YOLO","based","slay","ate, no crumbs","we're so back","sigma behavior","W rizz","certified dub","goated","absolute cinema","chef's kiss","do it for the plot","valid af","hell yeah dude"],
+neutral:["idk fam","bro...","it's giving maybe","ask again bestie","the math ain't mathing","kinda sus","weird flex but okay","bruh moment","orb buffering","ask your group chat","not enough lore","idk chief","jury's still out","big maybe energy","the vibes are weird","coin toss behavior","could go either way","manifest harder"],
+negative:["you're cooked","hard no","cringe","L + ratio","nah fam","skill issue","delete this","goofy ahh plan","that ain't it chief","major ick","bro thought he cooked","take the L","no ❤️","put the fries in the bag","negative aura","it's joever","generational fumble","brother eugh"]
 },
-
 aggressive:{
-
-positive:[
-"YES. LOCK TF IN",
-"you actually cooked",
-"FULL SEND",
-"rare sigma W",
-"go off king",
-"fucking yolo",
-"W rizz decision",
-"based. next.",
-"run it",
-"we are so fucking back",
-"YES NOW MOVE",
-"COOK THEN",
-"W DECISION DETECTED",
-"DO IT YOU COWARD",
-"AURA RESTORED",
-"LET BRO COOK",
-"THIS ACTUALLY SLAPS"
-],
-
-neutral:[
-"bro WHAT",
-"50/50. cope.",
-"orb is buffering",
-"mid question",
-"touch grass and reboot",
-"idk ask Jeeves",
-"the vibes failed QA",
-"could slap. could flop.",
-"go consult Reddit",
-"millennial pause...",
-"I NEED AN ADULT",
-"WHY ARE YOU LIKE THIS",
-"THIS QUESTION IS MID",
-"GO ASK THE GROUP CHAT",
-"THE ORB DECLINES"
-],
-
-negative:[
-"SYBAU",
-"HELL NAH",
-"ts is ASS",
-"bro is cooked",
-"delete the thought",
-"negative infinity aura",
-"put the fries in the bag",
-"u are NOT him",
-"generational L",
-"it's joever",
-"absolute clownery",
-"touch grass immediately",
-"FUCK NO",
-"ABORT THE MISSION",
-"AURA REPOSSESSED",
-"YOUR COOKING LICENSE IS REVOKED",
-"STRAIGHT TO JAIL"
-]
-
+positive:["YES. LOCK TF IN","you actually cooked","FULL SEND","rare sigma W","go off king","fucking yolo","W rizz decision","based. next.","run it","we are so fucking back","YES NOW MOVE","COOK THEN","W DECISION DETECTED","DO IT YOU COWARD","AURA RESTORED","LET BRO COOK","THIS ACTUALLY SLAPS"],
+neutral:["bro WHAT","50/50. cope.","orb is buffering","mid question","touch grass and reboot","idk ask Jeeves","the vibes failed QA","could slap. could flop.","go consult Reddit","millennial pause...","I NEED AN ADULT","WHY ARE YOU LIKE THIS","THIS QUESTION IS MID","GO ASK THE GROUP CHAT","THE ORB DECLINES"],
+negative:["SYBAU","HELL NAH","ts is ASS","bro is cooked","delete the thought","negative infinity aura","put the fries in the bag","u are NOT him","generational L","it's joever","absolute clownery","touch grass immediately","FUCK NO","ABORT THE MISSION","AURA REPOSSESSED","YOUR COOKING LICENSE IS REVOKED","STRAIGHT TO JAIL"]
 },
-
 unhinged:{
+positive:["SIGMA MODE ACTIVATED","MANGO MANGO YES","67. DO IT.","skibidi approval granted","fuck it we ball","W rizz from the abyss","the mewing council approves","based and orb-pilled","the gyatt oracle has spoken","YOLO 2: electric boogaloo","big chungus energy","brainrot jackpot","those who know 💀","MAXIMUM AURA OVERDRIVE","ULTRA INSTINCT RIZZ","COSMIC W DETECTED","THE PROPHECY IS BUSSIN","WE'RE SO BACK x1000"],
+neutral:["still water detected","german stare","balkan rage pending","the ohio servers are down","sigma council in recess","ask the skibidi toilet","mew harder and ask again","67? maybe 68.","npc dialogue unavailable","orb.exe stopped responding","Subway Surfers clip loading","THE ORB IS IN A MEETING","COSMIC BUFFERING...","AURA CALCULATION PENDING","DESTINY LEFT YOU ON READ"],
+negative:["ABSOLUTELY COOKED","SKIBIDI DENIED","generational aura debt","67 YEARS OF BAD RIZZ","sigma license revoked","german stare intensifies","balkan rage initiated","negative gyatt","mewing cannot save you","fanum taxed by destiny","straight to ohio","this is anti-cinema","THE TIMELINE FILED A RESTRAINING ORDER","AURA FORECLOSURE","COSMIC SKILL ISSUE","YOUR RIZZ HAS BEEN GARNISHED","NEGATIVE INFINITY SIGMA"]
+}};
+const W={normal:[.42,.35],aggressive:[.31,.24],unhinged:[.34,.29]};
+const rare=["MYTHIC: MAXIMUM RIZZ","ULTRA RARE: THOSE WHO KNOW 💀","LEGENDARY W. DON'T FUMBLE","RARE DROP: USE YOUR FRONTAL LOBE","MYTHIC: AURA BANKRUPTCY"];
+const night=["go to bed bestie","3 AM brain is cooked","night shift sigma says bet","THE WITCHING HOUR IS BUSSIN","the moon said SYBAU"];
+const cursed=["ERROR 67: TOO MUCH AURA","[ R E D A C T E D ]","bro idk ask ChatGPT","CRITICAL HIT: FUCK IT WE BALL","ORACLE SERVERS UNAVAILABLE","BAG OF CHIPS DLC INSTALLED"];
+const sponsors=["OrbVPN — hide your search history from your ancestors.","BetterOrb™ — therapy, except the therapist is a plastic triangle.","Temu Aura — shop like a billionaire with negative rizz.","NordRizz — military-grade protection from embarrassing DMs.","Bag of Chips DLC — zero gameplay, maximum crunch."];
+const offers=[["Premium Oracle DLC — $4.99","Unlock 3% more certainty and one additional vibe."],["Sigma Pass — $2.99/month","Priority rizz processing and zero actual benefits."],["Remove Ads* — $7.99","There are no ads. This is just financial damage."],["Aura Booster Pack — $1.99","+15 imaginary aura. Probably cursed."],["Bag of Chips DLC — $1.49","All that, plus a legally distinct bag of chips."]];
 
-positive:[
-"SIGMA MODE ACTIVATED",
-"MANGO MANGO YES",
-"67. DO IT.",
-"skibidi approval granted",
-"fuck it we ball",
-"W rizz from the abyss",
-"the mewing council approves",
-"based and orb-pilled",
-"the gyatt oracle has spoken",
-"YOLO 2: electric boogaloo",
-"big chungus energy",
-"brainrot jackpot",
-"those who know 💀",
-"MAXIMUM AURA OVERDRIVE",
-"ULTRA INSTINCT RIZZ",
-"COSMIC W DETECTED",
-"THE PROPHECY IS BUSSIN",
-"WE'RE SO BACK x1000"
-],
+const pick=a=>a[Math.floor(Math.random()*a.length)],clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+function showToast(t,ms=1700){toast.textContent=t;toast.classList.add("show");clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove("show"),ms)}
+function showPop(t,ms=2500){pop.textContent=t;pop.classList.add("show");clearTimeout(showPop.t);showPop.t=setTimeout(()=>pop.classList.remove("show"),ms)}
+function vib(p){if(S.haptic&&navigator.vibrate)try{navigator.vibrate(p)}catch{}}
+function audio(){if(!S.sound)return null;const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;if(!S.audio)S.audio=new C;if(S.audio.state==="suspended")S.audio.resume();return S.audio}
+function tone(f,d=.08,type="sine",g=.025,delay=0){const c=audio();if(!c)return;const o=c.createOscillator(),a=c.createGain(),t=c.currentTime+delay;o.type=type;o.frequency.value=f;a.gain.setValueAtTime(.0001,t);a.gain.exponentialRampToValueAtTime(g,t+.008);a.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(a);a.connect(c.destination);o.start(t);o.stop(t+d+.02)}
+function snd(k){if(k==="good"){tone(430,.08);tone(660,.1,"sine",.025,.06)}else if(k==="bad"){tone(170,.11,"sawtooth",.018);tone(125,.12,"sine",.02,.06)}else if(k==="rare"){tone(420,.07);tone(620,.08,"sine",.028,.05);tone(900,.14,"sine",.024,.11)}else tone(220,.05,"sine",.018)}
+function setBall(x=S.x,y=S.y,r=S.r){S.x=x;S.y=y;S.r=r;bw.style.setProperty("--x",x+"px");bw.style.setProperty("--y",y+"px");bw.style.setProperty("--r",r+"deg")}
+function bounds(){const rad=bw.offsetWidth/2,st=$(".stage");return{x:Math.max(42,innerWidth/2-rad+rad*.52),y:Math.max(34,st.clientHeight/2-rad+rad*.24)}}
+function stop(){if(S.raf)cancelAnimationFrame(S.raf);S.raf=0;S.running=false;S.vx=S.vy=0;S.lastT=0}
+function hit(){vib(6);tone(95,.04,"sine",.018)}
 
-neutral:[
-"still water detected",
-"german stare",
-"balkan rage pending",
-"the ohio servers are down",
-"sigma council in recess",
-"ask the skibidi toilet",
-"mew harder and ask again",
-"67? maybe 68.",
-"npc dialogue unavailable",
-"orb.exe stopped responding",
-"Subway Surfers clip loading",
-"THE ORB IS IN A MEETING",
-"COSMIC BUFFERING...",
-"AURA CALCULATION PENDING",
-"DESTINY LEFT YOU ON READ"
-],
+function spinFxPop(level){
+const cls=level>=2?"spin-pop-max":"spin-pop";
+bw.classList.remove("spin-pop","spin-pop-max");
+void bw.offsetWidth;
+bw.classList.add(cls);
 
-negative:[
-"ABSOLUTELY COOKED",
-"SKIBIDI DENIED",
-"generational aura debt",
-"67 YEARS OF BAD RIZZ",
-"sigma license revoked",
-"german stare intensifies",
-"balkan rage initiated",
-"negative gyatt",
-"mewing cannot save you",
-"fanum taxed by destiny",
-"straight to ohio",
-"this is anti-cinema",
-"THE TIMELINE FILED A RESTRAINING ORDER",
-"AURA FORECLOSURE",
-"COSMIC SKILL ISSUE",
-"YOUR RIZZ HAS BEEN GARNISHED",
-"NEGATIVE INFINITY SIGMA"
-]
+vib(level>=2?[7,16,9]:5);
 
+setTimeout(()=>{
+bw.classList.remove("spin-pop","spin-pop-max");
+},620);
 }
 
-};
+function spinChargeBurst(level){
+const cls=level>=2?"spin-burst-max":"spin-burst";
+bw.classList.remove("spin-burst","spin-burst-max");
+void bw.offsetWidth;
+bw.classList.add(cls);
 
-const W={
-normal:[.42,.35],
-aggressive:[.31,.24],
-unhinged:[.34,.29]
-};
+vib(level>=2?[8,18,10]:6);
 
-const rare=[
-"MYTHIC: MAXIMUM RIZZ",
-"ULTRA RARE: THOSE WHO KNOW 💀",
-"LEGENDARY W. DON'T FUMBLE",
-"RARE DROP: USE YOUR FRONTAL LOBE",
-"MYTHIC: AURA BANKRUPTCY"
-];
-
-const night=[
-"go to bed bestie",
-"3 AM brain is cooked",
-"night shift sigma says bet",
-"THE WITCHING HOUR IS BUSSIN",
-"the moon said SYBAU"
-];
-
-const cursed=[
-"ERROR 67: TOO MUCH AURA",
-"[ R E D A C T E D ]",
-"bro idk ask ChatGPT",
-"CRITICAL HIT: FUCK IT WE BALL",
-"ORACLE SERVERS UNAVAILABLE",
-"BAG OF CHIPS DLC INSTALLED"
-];
-
-const sponsors=[
-"OrbVPN — hide your search history from your ancestors.",
-"BetterOrb™ — therapy, except the therapist is a plastic triangle.",
-"Temu Aura — shop like a billionaire with negative rizz.",
-"NordRizz — military-grade protection from embarrassing DMs.",
-"Bag of Chips DLC — zero gameplay, maximum crunch."
-];
-
-const offers=[
-
-[
-"Premium Oracle DLC — $4.99",
-"Unlock 3% more certainty and one additional vibe."
-],
-
-[
-"Sigma Pass — $2.99/month",
-"Priority rizz processing and zero actual benefits."
-],
-
-[
-"Remove Ads* — $7.99",
-"There are no ads. This is just financial damage."
-],
-
-[
-"Aura Booster Pack — $1.99",
-"+15 imaginary aura. Probably cursed."
-],
-
-[
-"Bag of Chips DLC — $1.49",
-"All that, plus a legally distinct bag of chips."
-]
-
-];
-
-const pick=a=>
-a[
-Math.floor(
-Math.random()*a.length
-)
-];
-
-const clamp=(n,a,b)=>
-Math.max(
-a,
-Math.min(b,n)
-);
-
-function showToast(t,ms=1700){
-
-toast.textContent=t;
-
-toast.classList.add(
-"show"
-);
-
-clearTimeout(
-showToast.t
-);
-
-showToast.t=
-setTimeout(
-()=>toast.classList.remove("show"),
-ms
-);
-
+if(level>=2){
+tone(760,.06,"sine",.018);
+tone(980,.08,"sine",.016,.04);
 }
 
-function showPop(t,ms=2500){
-
-pop.textContent=t;
-
-pop.classList.add(
-"show"
-);
-
-clearTimeout(
-showPop.t
-);
-
-showPop.t=
-setTimeout(
-()=>pop.classList.remove("show"),
-ms
-);
-
+setTimeout(()=>{
+bw.classList.remove("spin-burst","spin-burst-max");
+},700);
 }
 
-function vib(p){
-
-if(
-S.haptic &&
-navigator.vibrate
-){
-
-try{
-navigator.vibrate(p);
-}catch{}
-
-}
-
-}
-
-function audio(){
-
-if(!S.sound)return null;
-
-const C=
-window.AudioContext ||
-window.webkitAudioContext;
-
-if(!C)return null;
-
-if(!S.audio){
-S.audio=new C;
-}
-
-if(
-S.audio.state==="suspended"
-){
-S.audio.resume();
-}
-
-return S.audio;
-
-}
-
-function tone(
-f,
-d=.08,
-type="sine",
-g=.025,
-delay=0
-){
-
-const c=audio();
-
-if(!c)return;
-
-const o=
-c.createOscillator();
-
-const a=
-c.createGain();
-
-const t=
-c.currentTime+delay;
-
-o.type=type;
-o.frequency.value=f;
-
-a.gain.setValueAtTime(
-.0001,
-t
-);
-
-a.gain.exponentialRampToValueAtTime(
-g,
-t+.008
-);
-
-a.gain.exponentialRampToValueAtTime(
-.0001,
-t+d
-);
-
-o.connect(a);
-a.connect(c.destination);
-
-o.start(t);
-
-o.stop(
-t+d+.02
-);
-
-}
-
-function snd(k){
-
-if(k==="good"){
-
-tone(
-430,
-.08
-);
-
-tone(
-660,
-.1,
-"sine",
-.025,
-.06
-);
-
-}else if(k==="bad"){
-
-tone(
-170,
-.11,
-"sawtooth",
-.018
-);
-
-tone(
-125,
-.12,
-"sine",
-.02,
-.06
-);
-
-}else if(k==="rare"){
-
-tone(
-420,
-.07
-);
-
-tone(
-620,
-.08,
-"sine",
-.028,
-.05
-);
-
-tone(
-900,
-.14,
-"sine",
-.024,
-.11
-);
-
-}else{
-
-tone(
-220,
-.05,
-"sine",
-.018
-);
-
-}
-
-}
-
-function setBall(
-x=S.x,
-y=S.y,
-r=S.r
-){
-
-S.x=x;
-S.y=y;
-S.r=r;
-
-bw.style.setProperty(
-"--x",
-x+"px"
-);
-
-bw.style.setProperty(
-"--y",
-y+"px"
-);
-
-bw.style.setProperty(
-"--r",
-r+"deg"
-);
-
-}
-
-function bounds(){
-
-const rad=
-bw.offsetWidth/2;
-
-const st=
-$(".stage");
-
-return{
-
-x:Math.max(
-42,
-innerWidth/2-rad+rad*.52
-),
-
-y:Math.max(
-34,
-st.clientHeight/2-rad+rad*.24
-)
-
-};
-
-}
-
-function stop(){
-
-if(S.raf){
-cancelAnimationFrame(
-S.raf
-);
-}
-
-S.raf=0;
-S.running=false;
-
-S.vx=0;
-S.vy=0;
-
-S.lastT=0;
-
-}
-
-function hit(){
-
-vib(6);
-
-tone(
-95,
-.04,
-"sine",
-.018
-);
-
+function snapLockFx(){
+bw.classList.remove("snap-lock");
+void bw.offsetWidth;
+bw.classList.add("snap-lock");
+
+vib([10,18,8]);
+tone(520,.055,"sine",.02);
+tone(840,.085,"sine",.018,.035);
+
+setTimeout(()=>{
+bw.classList.remove("snap-lock");
+},650);
 }
 
 function physics(){
-
-if(
-S.running ||
-S.p0
-)return;
-
-S.running=true;
-
-S.lastT=
-performance.now();
-
+if(S.running||S.p0)return;
+S.running=true;S.lastT=performance.now();
 const step=n=>{
-
 if(!S.running)return;
-
-const dt=
-clamp(
-(n-S.lastT)/1000,
-.008,
-.032
-);
-
-S.lastT=n;
-
-if(
-S.tilt &&
-S.orient
-){
-
-S.vx+=
-S.tx*17*dt;
-
-S.vy+=
-S.ty*17*dt;
-
+const dt=clamp((n-S.lastT)/1000,.008,.032);S.lastT=n;
+if(S.tilt&&S.orient){S.vx+=S.tx*17*dt;S.vy+=S.ty*17*dt}
+const sp=Math.hypot(S.vx,S.vy);
+if(S.curveLife>.01&&Math.abs(S.curve)>.02&&sp>65){
+const turn=(92+46*Math.min(1,Math.abs(S.curve)))*S.curve*S.curveLife*Math.PI/180*dt,
+c=Math.cos(turn),s=Math.sin(turn),vx=S.vx,vy=S.vy;
+S.vx=vx*c-vy*s;
+S.vy=vx*s+vy*c;
+S.curveLife*=Math.pow(.986,dt*60)
 }
+S.x+=S.vx*dt;S.y+=S.vy*dt;
+if(!S.readable)S.r+=S.vr*dt;
+const b=bounds();let h=false;
+if(S.x>b.x){S.x=b.x;S.vx=-Math.abs(S.vx)*.38;h=true}else if(S.x<-b.x){S.x=-b.x;S.vx=Math.abs(S.vx)*.38;h=true}
+if(S.y>b.y){S.y=b.y;S.vy=-Math.abs(S.vy)*.38;h=true}else if(S.y<-b.y){S.y=-b.y;S.vy=Math.abs(S.vy)*.38;h=true}
+if(h){hit();S.curveLife*=.65}
 
-const sp=
-Math.hypot(
-S.vx,
-S.vy
-);
+S.vx*=Math.pow(.979,dt*60);
+S.vy*=Math.pow(.979,dt*60);
 
-if(
-S.curveLife>.01 &&
-Math.abs(S.curve)>.02 &&
-sp>65
-){
+let angularNow=Math.abs(S.vr);
 
-const turn=
-118 *
-S.curve *
-S.curveLife *
-Math.PI/180 *
-dt;
+const spinDrag=
+angularNow>420
+?.982
+:angularNow>220
+?.966
+:angularNow>90
+?.93
+:.84;
 
-const c=
-Math.cos(turn);
+S.vr*=Math.pow(spinDrag,dt*60);
 
-const s=
-Math.sin(turn);
+let linearNow=Math.hypot(S.vx,S.vy);
+angularNow=Math.abs(S.vr);
+const tiltDriving=(S.tilt&&S.orient)&&(Math.abs(S.tx)>1||Math.abs(S.ty)>1);
 
-const vx=S.vx;
-const vy=S.vy;
-
-S.vx=
-vx*c-vy*s;
-
-S.vy=
-vx*s+vy*c;
-
-S.curveLife*=
-Math.pow(
-.989,
-dt*60
-);
-
+if(linearNow<18&&!tiltDriving){
+S.vx=0;
+S.vy=0;
+linearNow=0;
 }
-
-S.x+=S.vx*dt;
-S.y+=S.vy*dt;
-
-if(!S.readable){
-S.r+=S.vr*dt;
-}
-
-const b=
-bounds();
-
-let h=false;
-
-if(S.x>b.x){
-
-S.x=b.x;
-
-S.vx=
--Math.abs(S.vx)*.38;
-
-h=true;
-
-}else if(S.x<-b.x){
-
-S.x=-b.x;
-
-S.vx=
-Math.abs(S.vx)*.38;
-
-h=true;
-
-}
-
-if(S.y>b.y){
-
-S.y=b.y;
-
-S.vy=
--Math.abs(S.vy)*.38;
-
-h=true;
-
-}else if(S.y<-b.y){
-
-S.y=-b.y;
-
-S.vy=
-Math.abs(S.vy)*.38;
-
-h=true;
-
-}
-
-if(h){
-
-hit();
-
-S.curveLife*=.65;
-
-}
-
-S.vx*=
-Math.pow(
-.979,
-dt*60
-);
-
-S.vy*=
-Math.pow(
-.979,
-dt*60
-);
-
-S.vr*=
-Math.pow(
-.965,
-dt*60
-);
 
 setBall();
 
-if(
+if(angularNow<16){
+S.vr=0;
+angularNow=0;
+}
 
-Math.hypot(
-S.vx,
-S.vy
-)<22 &&
-
-!(
-
-(S.tilt&&S.orient) &&
-
-(
-Math.abs(S.tx)>1 ||
-Math.abs(S.ty)>1
-)
-
-)
-
-){
-
+if(linearNow===0&&angularNow===0&&!tiltDriving){
 S.running=false;
 S.raf=0;
-
-S.vx=0;
-S.vy=0;
-S.vr=0;
-
-S.curve=0;
-S.curveLife=0;
-
-return;
-
+S.vx=S.vy=S.vr=0;
+S.curve=S.curveLife=0;
+return
 }
 
-S.raf=
-requestAnimationFrame(
-step
-);
-
+S.raf=requestAnimationFrame(step)
 };
-
-S.raf=
-requestAnimationFrame(
-step
-);
-
+S.raf=requestAnimationFrame(step)
 }
 
-function normDeg(d){
-
-d%=360;
-
-if(d>180){
-d-=360;
-}
-
-if(d<-180){
-d+=360;
-}
-
-return d;
-
-}
-
-function normRad(a){
-
-while(a>Math.PI){
-a-=Math.PI*2;
-}
-
-while(a<-Math.PI){
-a+=Math.PI*2;
-}
-
-return a;
-
-}
+function normDeg(d){d%=360;if(d>180)d-=360;if(d<-180)d+=360;return d}
+function normRad(a){while(a>Math.PI)a-=Math.PI*2;while(a<-Math.PI)a+=Math.PI*2;return a}
 
 function readable(delay=0){
-
-const token=
-++S.readToken;
+const token=++S.readToken;
 
 setTimeout(()=>{
-
-if(
-token!==S.readToken
-)return;
+if(token!==S.readToken)return;
 
 S.readable=true;
-
 S.vr=0;
 
-const start=
-performance.now();
-
+const start=performance.now();
 const r0=S.r;
 
-const target=
-Math.round(
-r0/360
-)*360;
+const dir=
+Math.abs(S.lastThrowSpin)>1
+?Math.sign(S.lastThrowSpin)
+:1;
 
-const delta=
-normDeg(
-target-r0
-);
+let target;
 
-const dur=520;
+if(dir>0){
+target=Math.ceil(r0/360)*360;
+if(Math.abs(target-r0)<.5){
+target=r0;
+}
+}else{
+target=Math.floor(r0/360)*360;
+if(Math.abs(target-r0)<.5){
+target=r0;
+}
+}
+
+let delta=target-r0;
+
+if(dir>0&&delta<0){
+delta+=360;
+}
+
+if(dir<0&&delta>0){
+delta-=360;
+}
+
+const absDelta=Math.abs(delta);
+const dur=clamp(420+absDelta*1.15,460,760);
+let snapTriggered=false;
 
 const step=n=>{
+if(token!==S.readToken)return;
 
-if(
-token!==S.readToken
-)return;
+const t=Math.min(1,(n-start)/dur);
+let e;
 
-const t=
-Math.min(
-1,
-(n-start)/dur
-);
+if(t<.74){
+const u=t/.74;
+e=.82*(1-Math.pow(1-u,2.25));
+}else{
+const u=(t-.74)/.26;
+e=.82+.18*(1-Math.pow(1-u,4.8));
 
-const e=
-1-Math.pow(
-1-t,
-3.2
-);
+if(!snapTriggered&&u>.22){
+snapTriggered=true;
+snapLockFx();
+}
+}
 
 setBall(
 S.x,
@@ -1186,953 +812,406 @@ r0+delta*e
 );
 
 if(t<1){
-
-requestAnimationFrame(
-step
-);
-
+requestAnimationFrame(step);
 }else{
-
 setBall(
 S.x,
 S.y,
-target
+r0+delta
 );
-
 S.readable=false;
-
 }
-
 };
 
-requestAnimationFrame(
-step
-);
+requestAnimationFrame(step);
 
 },delay);
-
 }
 
 function result(){
-
-const m=S.mode;
-const h=new Date().getHours();
-
-if(S.forced){
-
-S.forced=false;
-
-return{
-kind:"neutral",
-text:pick(cursed),
-special:"cursed"
-};
-
-}
-
-if(
-Math.random()<.022
-){
-
-const t=
-pick(rare);
-
-return{
-
-kind:
-t.includes(
-"BANKRUPTCY"
-)
-?"bad"
-:"good",
-
-text:t,
-
-special:"rare"
-
-};
-
-}
-
-if(
-
-(h>=22||h<5) &&
-
-Math.random()<.13
-
-){
-
-return{
-
-kind:"neutral",
-
-text:
-pick(night),
-
-special:"night"
-
-};
-
-}
-
-const r=
-Math.random();
-
-const w=
-W[m];
-
-const kind=
-r<w[0]
-?"positive"
-:r<w[0]+w[1]
-?"neutral"
-:"negative";
-
-return{
-
-kind,
-
-text:
-pick(
-A[m][kind]
-),
-
-special:""
-
-};
-
+const m=S.mode,h=new Date().getHours();
+if(S.forced){S.forced=false;return{kind:"neutral",text:pick(cursed),special:"cursed"}}
+if(Math.random()<.022){const t=pick(rare);return{kind:t.includes("BANKRUPTCY")?"bad":"good",text:t,special:"rare"}}
+if((h>=22||h<5)&&Math.random()<.13)return{kind:"neutral",text:pick(night),special:"night"};
+const r=Math.random(),w=W[m],kind=r<w[0]?"positive":r<w[0]+w[1]?"neutral":"negative";
+return{kind,text:pick(A[m][kind]),special:""}
 }
 
 function reveal(src="tap"){
-
-const now=
-performance.now();
-
-if(
-S.busy ||
-now-S.last<500
-)return;
-
-S.last=now;
-S.busy=true;
-S.q++;
-
-audio();
-
-vib(
-
-src==="shake"
-?[16,22,28]
-
-:src==="throw"
-?[8,14,12]
-
-:14
-
-);
-
-bw.classList.remove(
-"revealed"
-);
-
-if(src!=="throw"){
-
-stop();
-
-setBall(
-0,
-0,
-0
-);
-
-bw.classList.add(
-"thinking"
-);
-
-}
-
+const now=performance.now();if(S.busy||now-S.last<500)return;S.last=now;S.busy=true;S.q++;audio();
+vib(src==="shake"?[16,22,28]:src==="throw"?[8,14,12]:14);
+bw.classList.remove("revealed");
+if(src!=="throw"){stop();setBall(0,0,0);bw.classList.add("thinking")}
 status.textContent="";
-
 setTimeout(()=>{
-
-const z=
-result();
-
-ans.textContent=
-z.text;
-
-ans.dataset.s=
-
-z.text.length<12
-?"lg"
-
-:z.text.length<20
-?"md"
-
-:z.text.length>29
-?"xs"
-
-:"sm";
-
-bw.classList.remove(
-"thinking"
-);
-
-bw.classList.add(
-"revealed"
-);
-
-status.className=
-"status "+
-(
-
-z.kind==="positive" ||
-z.kind==="good"
-
-?"good"
-
-:z.kind==="negative" ||
-z.kind==="bad"
-
-?"bad"
-
-:"neutral"
-
-);
-
-status.textContent=
-
-z.special==="rare"
-?"∞ aura pull"
-
-:z.special==="cursed"
-?"cursed pull"
-
-:z.kind==="positive"
-?"we up"
-
-:z.kind==="negative"
-?"it's over"
-
-:"orb buffering";
-
-if(
-z.kind==="negative" ||
-z.kind==="bad"
-){
-
-S.neg++;
-
-S.aura-=67;
-
-snd("bad");
-
-}else if(
-z.kind==="positive" ||
-z.kind==="good"
-){
-
-S.neg=0;
-
-S.aura+=100;
-
-snd(
-z.special==="rare"
-?"rare"
-:"good"
-);
-
-}else{
-
-S.neg=0;
-
-S.aura+=7;
-
-snd("neutral");
-
+const z=result();ans.textContent=z.text;ans.dataset.s=z.text.length<12?"lg":z.text.length<20?"md":z.text.length>29?"xs":"sm";
+bw.classList.remove("thinking");bw.classList.add("revealed");
+if(src==="throw")setTimeout(()=>vib(7),90);
+if(src==="shake")setTimeout(()=>vib(8),70);
+status.className="status "+((z.kind==="positive"||z.kind==="good")?"good":(z.kind==="negative"||z.kind==="bad")?"bad":"neutral");
+status.textContent=z.special==="rare"?"∞ aura pull":z.special==="cursed"?"cursed pull":z.kind==="positive"?"we up":z.kind==="negative"?"it's over":"orb buffering";
+if(z.kind==="negative"||z.kind==="bad"){S.neg++;S.aura-=67;snd("bad")}else if(z.kind==="positive"||z.kind==="good"){S.neg=0;S.aura+=100;snd(z.special==="rare"?"rare":"good")}else{S.neg=0;S.aura+=7;snd("neutral")}
+if(S.neg>=3)showPop("🏆 Aura Bankruptcy — three Ls in a row.");
+if(z.text.includes("THOSE WHO KNOW"))showPop("🏆 Those Who Know 💀");
+if(Math.random()<.03)setTimeout(()=>showPop("Definitely Sponsored: "+pick(sponsors)),500);
+if(src!=="throw"){readable(0);}
+setTimeout(()=>S.busy=false,700)
+},src==="throw"?0:420)
 }
 
-if(S.neg>=3){
-
-showPop(
-"🏆 Aura Bankruptcy — three Ls in a row."
-);
-
-}
-
-if(
-z.text.includes(
-"THOSE WHO KNOW"
-)
-){
-
-showPop(
-"🏆 Those Who Know 💀"
-);
-
-}
-
-if(
-Math.random()<.03
-){
-
-setTimeout(()=>{
-
-showPop(
-"Definitely Sponsored: "+
-pick(sponsors)
-);
-
-},500);
-
-}
-
-const realSpin=
-Math.abs(
-S.lastThrowSpin
-);
-
-readable(
-
-src==="throw"
-
-?
-
-(
-realSpin>420
-?620
-
-:realSpin>140
-?430
-
-:180
-)
-
-:0
-
-);
-
-setTimeout(()=>{
-
-S.busy=false;
-
-},700);
-
-},
-
-src==="throw"
-?0
-:420
-
-);
-
-}
-
-function power(){
-
-bw.classList.remove(
-"power"
-);
-
-void bw.offsetWidth;
-
-bw.classList.add(
-"power"
-);
-
-snd("rare");
-
-vib(
-[16,20,18,24,34]
-);
-
-showToast(
-"+9999 imaginary aura"
-);
-
-setTimeout(()=>{
-
-bw.classList.remove(
-"power"
-);
-
-},7000);
-
-}
-
-function showMtx(force=false){
-
-if(
-!force &&
-Math.random()>.085
-)return;
-
-const o=
-pick(offers);
-
-mtxTitle.textContent=
-o[0];
-
-mtxSub.textContent=
-o[1];
-
-mtx.classList.add(
-"show"
-);
-
-mtxBg.classList.add(
-"show"
-);
-
-vib(
-[10,16,10]
-);
-
-}
-
-function hideMtx(){
-
-mtx.classList.remove(
-"show"
-);
-
-mtxBg.classList.remove(
-"show"
-);
-
-}
+function power(){bw.classList.remove("power");void bw.offsetWidth;bw.classList.add("power");snd("rare");vib([16,20,18,24,34]);showToast("+9999 imaginary aura");setTimeout(()=>bw.classList.remove("power"),7000)}
+function showMtx(force=false){if(!force&&Math.random()>.085)return;const o=pick(offers);mtxTitle.textContent=o[0];mtxSub.textContent=o[1];mtx.classList.add("show");mtxBg.classList.add("show");vib([10,16,10])}
+function hideMtx(){mtx.classList.remove("show");mtxBg.classList.remove("show")}
 
 function mode(m){
-
-if(
-m==="unhinged" &&
-!S.unhinged
-)return;
-
-S.mode=m;
-
-localStorage.br8mode=m;
-
-document.documentElement.dataset.mode=m;
-
-document
-.querySelectorAll(".mode")
-.forEach(b=>{
-
-b.classList.toggle(
-"active",
-b.dataset.mode===m
-);
-
-});
-
-$("#pt").textContent=
-
-m==="normal"
-?"ask ts. accept the consequences."
-
-:m==="aggressive"
-?"ask ts then. don't fold."
-
-:"u found the lobotomy timeline.";
-
-$("#ps").textContent=
-
-m==="unhinged"
-?"those who know 💀"
-
-:"tap, drag, throw, spin, or shake. orb knows ball.";
-
-stop();
-
-setBall(
-0,
-0,
-0
-);
-
-bw.classList.remove(
-"revealed"
-);
-
+if(m==="unhinged"&&!S.unhinged)return;S.mode=m;localStorage.br8mode=m;document.documentElement.dataset.mode=m;
+document.querySelectorAll(".mode").forEach(b=>b.classList.toggle("active",b.dataset.mode===m));
+$("#pt").textContent=m==="normal"?"ask ts. accept the consequences.":m==="aggressive"?"ask ts then. don't fold.":"u found the lobotomy timeline.";
+$("#ps").textContent=m==="unhinged"?"those who know 💀":"tap, drag, throw, spin, or shake. orb knows ball.";
+stop();setBall(0,0,0);bw.classList.remove("revealed")
 }
 
 function addU(){
-
 if($("#u"))return;
-
-const b=
-document.createElement(
-"button"
-);
-
+const b=document.createElement("button");
 b.id="u";
-
-b.className=
-"mode unhinged";
-
-b.dataset.mode=
-"unhinged";
-
-b.textContent=
-"Unhinged";
-
-modes.appendChild(b);
-
+b.className="mode unhinged";
+b.dataset.mode="unhinged";
+b.textContent="Unhinged";
+modes.appendChild(b)
 }
 
-if(S.unhinged){
-addU();
-}
-
-mode(
-
-S.mode==="unhinged" &&
-!S.unhinged
-
-?"normal"
-
-:S.mode
-
-);
+if(S.unhinged)addU();
+mode(S.mode==="unhinged"&&!S.unhinged?"normal":S.mode);
 
 modes.onclick=e=>{
-
-const b=
-e.target.closest(
-".mode"
-);
-
-if(b){
-mode(
-b.dataset.mode
-);
-}
-
+const b=e.target.closest(".mode");
+if(b)mode(b.dataset.mode)
 };
 
-brand.addEventListener(
-"pointerup",
-()=>{
-
-const n=
-Date.now();
-
-S.taps=
-S.taps.filter(
-t=>n-t<2400
-);
-
+brand.addEventListener("pointerup",()=>{
+const n=Date.now();
+S.taps=S.taps.filter(t=>n-t<2400);
 S.taps.push(n);
-
-if(
-S.taps.length>=5 &&
-!S.unhinged
-){
-
+if(S.taps.length>=5&&!S.unhinged){
 S.unhinged=true;
-
 localStorage.br8u="1";
-
 addU();
+showToast("UNHINGED UNLOCKED");
+vib([18,30,18,30,38]);
+snd("rare")
+}
+});
 
-showToast(
-"UNHINGED UNLOCKED"
-);
-
-vib(
-[18,30,18,30,38]
-);
-
-snd("rare");
-
+function recordGestureSample(x,y,t){
+S.samples.push({x,y,t});
+const cutoff=t-150;
+while(S.samples.length>2&&S.samples[0].t<cutoff){
+S.samples.shift();
+}
 }
 
+function getFlickVelocity(x,y,t){
+recordGestureSample(x,y,t);
+
+if(S.samples.length<2){
+return{x:0,y:0,speed:0};
 }
-);
 
-/*
-REAL ANGULAR PHYSICS
+let first=S.samples[0];
+const target=t-105;
 
-Near center:
-mostly translation.
+for(let i=0;i<S.samples.length-1;i++){
+if(S.samples[i].t>=target){
+first=S.samples[i];
+break;
+}
+}
 
-Around edge:
-tangential motion becomes real rotation.
+const last=S.samples[S.samples.length-1];
+const dt=Math.max(20,last.t-first.t);
 
-No spin-mode detector.
+const vx=(last.x-first.x)/dt*1000;
+const vy=(last.y-first.y)/dt*1000;
 
-No fake 360 or 720 after release.
-*/
+return{
+x:vx,
+y:vy,
+speed:Math.hypot(vx,vy)
+};
+}
 
-function begin(
-x,
-y,
-t=performance.now()
-){
-
+function begin(x,y,t=performance.now()){
 ++S.readToken;
-
 S.readable=false;
-
 stop();
 
 S.p0={
 x,
 y,
-t
+t,
+bx:S.x,
+by:S.y
 };
 
-S.p1={
-x,
-y,
-t
-};
-
+S.p1={x,y,t};
 S.moved=false;
 
-S.throwVX=0;
-S.throwVY=0;
-S.throwT=0;
+S.samples=[];
+recordGestureSample(x,y,t);
 
-S.rawVX=0;
-S.rawVY=0;
-
-S.angularPeak=0;
+S.gestureHeading=null;
+S.turnSigned=0;
+S.turnAbs=0;
+S.spinCharge=0;
+S.spinDir=0;
+S.spinOmega=0;
+S.spinLastT=0;
+S.spinFxLevel=0;
 
 S.curve=0;
 S.curveLife=0;
 
-bw.classList.remove(
-"spin",
-"max"
-);
-
+bw.classList.remove("spin-start","spin","max");
 }
 
-function move(
-x,
-y,
-t=performance.now()
-){
+function move(x,y,t=performance.now()){
+if(!S.p0||!S.p1)return;
 
-if(
-!S.p0 ||
-!S.p1
-)return;
+const dx=x-S.p1.x;
+const dy=y-S.p1.y;
+const segLen=Math.hypot(dx,dy);
+const dt=Math.max(8,t-S.p1.t);
 
-const dx=
-x-S.p1.x;
+const b=bounds();
 
-const dy=
-y-S.p1.y;
-
-const dt=
-Math.max(
-8,
-t-S.p1.t
-);
-
-const rawVX=
-dx/dt*1000;
-
-const rawVY=
-dy/dt*1000;
-
-if(
-
-Math.hypot(
-x-S.p0.x,
-y-S.p0.y
-)>7
-
-){
-
-S.moved=true;
-
-}
-
-const rect=
-bw.getBoundingClientRect();
-
-const cx=
-rect.left+
-rect.width/2;
-
-const cy=
-rect.top+
-rect.height/2;
-
-const rad=
-Math.max(
-1,
-rect.width/2
-);
-
-const px=
-S.p1.x-cx;
-
-const py=
-S.p1.y-cy;
-
-const cxv=
-x-cx;
-
-const cyv=
-y-cy;
-
-const rp=
-Math.hypot(
-px,
-py
-);
-
-const rc=
-Math.hypot(
-cxv,
-cyv
-);
-
-const ravg=
-Math.max(
-1,
-(rp+rc)/2
-);
-
-const a0=
-Math.atan2(
-py,
-px
-);
-
-const a1=
-Math.atan2(
-cyv,
-cxv
-);
-
-const da=
-normRad(
-a1-a0
-);
-
-const edge=
-clamp(
-
-(
-ravg/rad-.12
-)/.62,
-
-0,
-1
-
-);
-
-const spinCapture=
-edge*.96;
-
-const mid=
-a0+da/2;
-
-const tanDist=
-da*ravg;
-
-const tanX=
--Math.sin(mid)*
-tanDist;
-
-const tanY=
-Math.cos(mid)*
-tanDist;
-
-const moveX=
-dx-
-tanX*spinCapture;
-
-const moveY=
-dy-
-tanY*spinCapture;
-
-const spinDeg=
-da*
-180/Math.PI*
-edge;
-
-const b=
-bounds();
-
-S.x=
-clamp(
-S.x+
-moveX*.96,
+S.x=clamp(
+S.p0.bx+(x-S.p0.x),
 -b.x,
 b.x
 );
 
-S.y=
-clamp(
-S.y+
-moveY*.96,
+S.y=clamp(
+S.p0.by+(y-S.p0.y),
 -b.y,
 b.y
 );
 
+if(Math.hypot(x-S.p0.x,y-S.p0.y)>7){
+S.moved=true;
+}
+
+if(segLen>=2.2){
+
+const heading=Math.atan2(dy,dx);
+
+if(S.gestureHeading!==null){
+
+let turn=normRad(
+heading-S.gestureHeading
+);
+
+const absTurn=Math.abs(turn);
+
+if(
+absTurn>=.008 &&
+absTurn<=1.22
+){
+
+S.turnSigned=
+S.turnSigned*.94+
+turn;
+
+S.turnAbs=
+S.turnAbs*.94+
+absTurn;
+
+const consistency=
+S.turnAbs>.001
+?Math.abs(S.turnSigned)/S.turnAbs
+:0;
+
+const direction=
+Math.sign(S.turnSigned||turn);
+
+if(
+S.turnAbs>.20 &&
+consistency>.62
+){
+
+if(
+S.spinDir!==0 &&
+direction!==S.spinDir
+){
+
+S.spinCharge*=.72;
+
+}else{
+
+S.spinDir=direction;
+
+S.spinCharge=clamp(
+S.spinCharge+
+absTurn/(Math.PI*2)*1.38,
+0,
+1.15
+);
+
+}
+
+const turnRateDeg=
+turn*180/Math.PI/dt*1000;
+
+const targetOmega=
+clamp(
+turnRateDeg*1.08,
+-900,
+900
+);
+
+S.spinOmega=
+S.spinOmega*.70+
+targetOmega*.30;
+
+S.spinLastT=t;
+
 S.r+=
-spinDeg;
-
-const instVR=
-spinDeg/dt*1000;
-
-S.vr=
-S.vr*.58+
-instVR*.42;
-
-if(
-
-Math.abs(S.vr)>
-Math.abs(S.angularPeak)
-
-){
-
-S.angularPeak=
-S.vr;
+turn*180/Math.PI*1.05;
 
 }
 
-const transVX=
-moveX/dt*1000;
-
-const transVY=
-moveY/dt*1000;
-
-S.vx=
-transVX;
-
-S.vy=
-transVY;
-
-S.rawVX=
-rawVX;
-
-S.rawVY=
-rawVY;
-
-if(
-
-Math.hypot(
-transVX,
-transVY
-)>130
-
-){
-
-S.throwVX=
-transVX;
-
-S.throwVY=
-transVY;
-
-S.throwT=t;
+}
 
 }
 
-const charge=
-Math.abs(
-S.vr
+S.gestureHeading=heading;
+}
+
+if(
+S.spinLastT &&
+t-S.spinLastT>90
+){
+
+const idleDt=Math.min(
+40,
+t-S.p1.t
+);
+
+S.spinOmega*=
+Math.pow(
+.988,
+idleDt/16.67
+);
+
+}
+
+const liveOmega=Math.abs(S.spinOmega);
+const spinAgeNow=S.spinLastT?Math.max(0,t-S.spinLastT):9999;
+
+const activelySpinning=
+S.spinDir!==0 &&
+liveOmega>70 &&
+spinAgeNow<220;
+
+const starting=
+activelySpinning;
+
+const charged=
+activelySpinning &&
+S.spinCharge>=.20;
+
+const maxed=
+activelySpinning &&
+S.spinCharge>=.58;
+
+bw.style.setProperty(
+"--spin-fx-direction",
+S.spinDir<0
+?"reverse"
+:"normal"
+);
+
+const fxLevel=
+maxed
+?2
+:charged
+?1
+:0;
+
+if(fxLevel>S.spinFxLevel){
+S.spinFxLevel=fxLevel;
+spinFxPop(fxLevel);
+}
+
+if(!activelySpinning){
+S.spinFxLevel=0;
+}
+
+bw.classList.toggle(
+"spin-start",
+starting
 );
 
 bw.classList.toggle(
 "spin",
-charge>100
+charged
 );
 
 bw.classList.toggle(
 "max",
-charge>520
+maxed
 );
 
 setBall();
 
-S.p1={
-x,
-y,
-t
-};
-
+recordGestureSample(x,y,t);
+S.p1={x,y,t};
 }
 
-function end(
-x,
-y,
-t=performance.now()
-){
-
+function end(x,y,t=performance.now()){
 if(!S.p0)return;
 
-const dx=
-x-S.p0.x;
-
-const dy=
-y-S.p0.y;
-
-const dist=
-Math.hypot(
-dx,
-dy
-);
+const dx=x-S.p0.x;
+const dy=y-S.p0.y;
+const dist=Math.hypot(dx,dy);
 
 const tap=
-
-!S.moved &&
+!S.moved&&
 dist<10;
 
 if(tap){
-
 clearGesture();
-
 reveal("tap");
-
 return;
-
 }
 
-let vx=
-S.throwVX ||
-S.vx;
+const flick=
+getFlickVelocity(x,y,t);
 
-let vy=
-S.throwVY ||
-S.vy;
+let vx=flick.x;
+let vy=flick.y;
+let speed=flick.speed;
 
-let sp=
+if(speed<120){
+
+const fallbackDx=
+x-S.p1.x;
+
+const fallbackDy=
+y-S.p1.y;
+
+const fallbackMag=
 Math.hypot(
-vx,
-vy
+fallbackDx,
+fallbackDy
 );
 
-const rawSp=
-Math.hypot(
-S.rawVX,
-S.rawVY
-);
+if(fallbackMag>2){
 
-if(
-sp<120 &&
-rawSp>160
-){
+vx=fallbackDx/fallbackMag*360;
+vy=fallbackDy/fallbackMag*360;
 
-vx=
-S.rawVX;
-
-vy=
-S.rawVY;
-
-sp=
-rawSp;
-
-}
-
-if(sp<120){
+}else{
 
 const mag=
 Math.max(
@@ -2140,88 +1219,99 @@ Math.max(
 dist
 );
 
-vx=
-dx/mag*360;
-
-vy=
-dy/mag*360;
-
-sp=360;
+vx=dx/mag*360;
+vy=dy/mag*360;
 
 }
 
-const min=
-dist>100
+speed=360;
+}
+
+const minimumThrow=
+dist>110
 ?470
 :390;
 
-if(sp<min){
+if(speed<minimumThrow){
 
 vx=
-vx/sp*min;
+vx/speed*
+minimumThrow;
 
 vy=
-vy/sp*min;
+vy/speed*
+minimumThrow;
 
-sp=min;
-
+speed=
+minimumThrow;
 }
 
-if(sp>1000){
+const maxThrow=1000;
+
+if(speed>maxThrow){
 
 vx=
-vx/sp*1000;
+vx/speed*
+maxThrow;
 
 vy=
-vy/sp*1000;
+vy/speed*
+maxThrow;
 
+speed=maxThrow;
 }
 
-const releaseSpin=
+const spinAge=
+S.spinLastT
+?Math.max(0,t-S.spinLastT)
+:9999;
 
-Math.abs(S.angularPeak)>
-Math.abs(S.vr)
+const chargedCurve=
+S.spinCharge>=.24 &&
+S.spinDir!==0 &&
+spinAge<=720;
 
-?S.angularPeak
+const ageFade=
+spinAge<=260
+?1
+:spinAge<=720
+?1-(spinAge-260)/920
+:.5;
 
-:S.vr;
+const charge=
+chargedCurve
+?clamp(
+S.spinCharge*ageFade,
+.28,
+1.15
+)
+:0;
 
-S.vx=
-vx;
-
-S.vy=
-vy;
+S.vx=vx;
+S.vy=vy;
 
 S.vr=
-clamp(
-releaseSpin,
--900,
-900
-);
+chargedCurve
+?clamp(
+S.spinOmega*
+(.56+charge*.26),
+-680,
+680
+)
+:0;
 
 S.curve=
-
-Math.abs(S.vr)>80
-
-?clamp(
-S.vr/650,
--1.25,
-1.25
-)
-
+chargedCurve
+?S.spinDir*charge
 :0;
 
 S.curveLife=
-
-Math.abs(S.curve)>.02
+chargedCurve
 ?1
 :0;
 
 S.lastThrowSpeed=
-Math.hypot(
-vx,
-vy
-);
+Math.hypot(vx,vy);
 
 S.lastThrowSpin=
 S.vr;
@@ -2229,8 +1319,11 @@ S.vr;
 clearGesture(false);
 
 bw.classList.remove(
+"spin-start",
 "spin",
-"max"
+"max",
+"spin-pop",
+"spin-pop-max"
 );
 
 reveal("throw");
@@ -2240,590 +1333,341 @@ physics
 );
 
 showMtx();
-
 }
 
-function clearGesture(
-resetCurve=true
-){
-
+function clearGesture(resetCurve=true){
 S.p0=null;
 S.p1=null;
-
 S.moved=false;
 
-S.throwVX=0;
-S.throwVY=0;
-S.throwT=0;
+S.samples=[];
 
-S.rawVX=0;
-S.rawVY=0;
-
-S.angularPeak=0;
+S.gestureHeading=null;
+S.turnSigned=0;
+S.turnAbs=0;
+S.spinCharge=0;
+S.spinDir=0;
+S.spinOmega=0;
+S.spinLastT=0;
+S.spinFxLevel=0;
 
 bw.classList.remove(
+"spin-start",
 "spin",
-"max"
+"max",
+"spin-pop",
+"spin-pop-max"
 );
 
 if(resetCurve){
-
 S.curve=0;
 S.curveLife=0;
 S.vr=0;
-
+}
 }
 
+function enableShakeDetection(){
+if(!("DeviceMotionEvent" in window))return;
+
+const attach=()=>{
+if(enableShakeDetection.attached)return;
+enableShakeDetection.attached=true;
+
+let lastX=null,lastY=null,lastZ=null;
+
+window.addEventListener("devicemotion",e=>{
+const now=performance.now();
+
+if(now<S.shakeCooldownUntil)return;
+if(S.p0)return;
+
+const a=e.accelerationIncludingGravity||e.acceleration;
+if(!a)return;
+
+const x=Number(a.x)||0;
+const y=Number(a.y)||0;
+const z=Number(a.z)||0;
+
+if(lastX===null){
+lastX=x;
+lastY=y;
+lastZ=z;
+return;
 }
 
-const touch=
+const dx=x-lastX;
+const dy=y-lastY;
+const dz=z-lastZ;
 
-("ontouchstart" in window) ||
+lastX=x;
+lastY=y;
+lastZ=z;
 
-navigator.maxTouchPoints>0;
+const movement=Math.hypot(dx,dy,dz);
+
+if(movement>8.5){
+S.shakeActive=true;
+S.shakePeak=Math.max(S.shakePeak,movement);
+S.shakeLastMove=now;
+bw.classList.add("shake-live");
+}
+
+if(S.shakeActive&&movement>3.2){
+S.shakeLastMove=now;
+S.shakePeak=Math.max(S.shakePeak,movement);
+}
+
+if(
+S.shakeActive &&
+S.shakePeak>9.5 &&
+now-S.shakeLastMove>380
+){
+S.shakeActive=false;
+S.shakePeak=0;
+S.shakeCooldownUntil=now+1300;
+
+bw.classList.remove("shake-live");
+
+vib([12,35,14]);
+reveal("shake");
+}
+},{passive:true});
+};
+
+enableShakeDetection.attach=attach;
+
+if(
+typeof DeviceMotionEvent.requestPermission==="function"
+){
+
+if(!S.shakePermissionAsked){
+S.shakePermissionAsked=true;
+
+const ask=async()=>{
+try{
+const result=await DeviceMotionEvent.requestPermission();
+if(result==="granted")attach();
+}catch(_){}
+
+window.removeEventListener("pointerdown",ask);
+window.removeEventListener("touchstart",ask);
+};
+
+window.addEventListener("pointerdown",ask,{once:true,passive:true});
+window.addEventListener("touchstart",ask,{once:true,passive:true});
+}
+
+}else{
+attach();
+}
+}
+
+enableShakeDetection();
+
+const touch=("ontouchstart" in window)||navigator.maxTouchPoints>0;
 
 if(touch){
 
-bw.addEventListener(
-"touchstart",
-e=>{
-
-if(
-e.touches.length!==1
-)return;
-
+bw.addEventListener("touchstart",e=>{
+if(e.touches.length!==1)return;
 e.preventDefault();
+const q=e.touches[0];
+begin(q.clientX,q.clientY)
+},{passive:false});
 
-const q=
-e.touches[0];
-
-begin(
-q.clientX,
-q.clientY
-);
-
-},
-{passive:false}
-);
-
-bw.addEventListener(
-"touchmove",
-e=>{
-
-if(
-
-!S.p0 ||
-
-e.touches.length!==1
-
-)return;
-
+bw.addEventListener("touchmove",e=>{
+if(!S.p0||e.touches.length!==1)return;
 e.preventDefault();
+const q=e.touches[0];
+move(q.clientX,q.clientY)
+},{passive:false});
 
-const q=
-e.touches[0];
-
-move(
-q.clientX,
-q.clientY
-);
-
-},
-{passive:false}
-);
-
-bw.addEventListener(
-"touchend",
-e=>{
-
+bw.addEventListener("touchend",e=>{
 if(!S.p0)return;
-
 e.preventDefault();
+const q=e.changedTouches[0]||S.p1;
+end(q.clientX,q.clientY)
+},{passive:false});
 
-const q=
-
-e.changedTouches[0] ||
-
-S.p1;
-
-end(
-q.clientX,
-q.clientY
-);
-
-},
-{passive:false}
-);
-
-bw.addEventListener(
-"touchcancel",
-()=>{
-
-clearGesture();
-
-},
-{passive:false}
-);
+bw.addEventListener("touchcancel",()=>clearGesture(),{passive:false});
 
 }else{
 
-bw.addEventListener(
-"pointerdown",
-e=>{
-
+bw.addEventListener("pointerdown",e=>{
 if(e.button!==0)return;
-
 e.preventDefault();
+begin(e.clientX,e.clientY)
+});
 
-begin(
-e.clientX,
-e.clientY
-);
+addEventListener("pointermove",e=>{
+if(S.p0)move(e.clientX,e.clientY)
+});
 
-}
-);
+addEventListener("pointerup",e=>{
+if(S.p0)end(e.clientX,e.clientY)
+});
 
-addEventListener(
-"pointermove",
-e=>{
-
-if(S.p0){
-
-move(
-e.clientX,
-e.clientY
-);
-
+bw.addEventListener("click",()=>{
+if(!S.p0)reveal("tap")
+});
 }
 
-}
-);
+addEventListener("blur",()=>clearGesture());
 
-addEventListener(
-"pointerup",
-e=>{
+document.addEventListener("visibilitychange",()=>{
+if(document.hidden)clearGesture()
+});
 
-if(S.p0){
-
-end(
-e.clientX,
-e.clientY
-);
-
-}
-
-}
-);
-
-bw.addEventListener(
-"click",
-()=>{
-
-if(!S.p0){
-
-reveal("tap");
-
-}
-
-}
-);
-
-}
-
-addEventListener(
-"blur",
-()=>{
-
-clearGesture();
-
-}
-);
-
-document.addEventListener(
-"visibilitychange",
-()=>{
-
-if(document.hidden){
-
-clearGesture();
-
-}
-
-}
-);
-
-$("#settings").onclick=
-()=>{
-
-modal.classList.add(
-"open"
-);
-
-};
-
-$("#close").onclick=
-()=>{
-
-modal.classList.remove(
-"open"
-);
-
-};
+$("#settings").onclick=()=>modal.classList.add("open");
+$("#close").onclick=()=>modal.classList.remove("open");
 
 modal.onclick=e=>{
-
-if(e.target===modal){
-
-modal.classList.remove(
-"open"
-);
-
-}
-
+if(e.target===modal)modal.classList.remove("open")
 };
 
-sound.checked=
-S.sound;
+sound.checked=S.sound;
+haptic.checked=S.haptic;
+tilt.checked=S.tilt;
 
-haptic.checked=
-S.haptic;
-
-tilt.checked=
-S.tilt;
-
-sound.onchange=
-()=>{
-
-S.sound=
-sound.checked;
-
-localStorage.br8s=
-S.sound
-?"1"
-:"0";
-
-if(S.sound){
-
-snd("good");
-
-}
-
+sound.onchange=()=>{
+S.sound=sound.checked;
+localStorage.br8s=S.sound?"1":"0";
+if(S.sound)snd("good")
 };
 
-haptic.onchange=
-()=>{
-
-S.haptic=
-haptic.checked;
-
-localStorage.br8h=
-S.haptic
-?"1"
-:"0";
-
-vib(15);
-
+haptic.onchange=()=>{
+S.haptic=haptic.checked;
+localStorage.br8h=S.haptic?"1":"0";
+vib(15)
 };
 
 function orient(e){
-
 if(!S.tilt)return;
 
-const g=
-clamp(
-e.gamma||0,
--35,
-35
-);
+const g=clamp(e.gamma||0,-35,35);
+const b=clamp(e.beta||0,-35,35);
 
-const b=
-clamp(
-e.beta||0,
--35,
-35
-);
+S.tx=Math.abs(g)<2?0:g;
+S.ty=Math.abs(b)<2?0:b*.7;
 
-S.tx=
-Math.abs(g)<2
-?0
-:g;
-
-S.ty=
-Math.abs(b)<2
-?0
-:b*.7;
-
-if(
-
-!S.p0 &&
-
-(
-Math.abs(S.tx)>2 ||
-Math.abs(S.ty)>2
-)
-
-){
-
-physics();
-
+if(!S.p0&&(Math.abs(S.tx)>2||Math.abs(S.ty)>2)){
+physics()
 }
-
 }
 
 async function enableTilt(){
-
-if(
-!window.DeviceOrientationEvent
-){
-
+if(!window.DeviceOrientationEvent){
 tilt.checked=false;
-
-tiltText.textContent=
-"Tilt unavailable.";
-
-return false;
-
+tiltText.textContent="Tilt unavailable.";
+return false
 }
 
 try{
 
 if(
-
 typeof DeviceOrientationEvent.requestPermission==="function" &&
-
 await DeviceOrientationEvent.requestPermission()!=="granted"
-
 ){
-
-return false;
-
+return false
 }
 
 if(!S.orient){
-
-addEventListener(
-"deviceorientation",
-orient,
-{passive:true}
-);
-
-S.orient=true;
-
+addEventListener("deviceorientation",orient,{passive:true});
+S.orient=true
 }
 
-tiltText.textContent=
-"Enabled.";
-
+tiltText.textContent="Enabled.";
 return true;
 
 }catch{
-
-return false;
-
+return false
+}
 }
 
-}
-
-tilt.onchange=
-async()=>{
-
-S.tilt=
-tilt.checked;
-
-localStorage.br8t=
-S.tilt
-?"1"
-:"0";
+tilt.onchange=async()=>{
+S.tilt=tilt.checked;
+localStorage.br8t=S.tilt?"1":"0";
 
 if(
-
 S.tilt &&
-
 !await enableTilt()
-
 ){
-
 S.tilt=false;
-
 tilt.checked=false;
-
 }else if(S.tilt){
-
-physics();
-
+physics()
 }
-
 };
 
-function motionHandler(e){
-
-const a=
-e.accelerationIncludingGravity;
-
-if(!a)return;
-
-const m=
-Math.hypot(
-a.x||0,
-a.y||0,
-a.z||0
-);
-
-const n=
-performance.now();
-
-if(
-
-m>21.5 &&
-
-n-(motionHandler.last||0)>1200
-
-){
-
-motionHandler.last=n;
-
-reveal("shake");
-
-}
-
-}
-
 async function enableMotion(){
-
-if(
-!window.DeviceMotionEvent
-){
-
-motionText.textContent=
-"Unavailable.";
-
-return;
-
+if(!window.DeviceMotionEvent){
+motionText.textContent="Unavailable.";
+return
 }
 
 try{
 
-if(
+if(typeof DeviceMotionEvent.requestPermission==="function"){
+const permission=await DeviceMotionEvent.requestPermission();
 
-typeof DeviceMotionEvent.requestPermission==="function" &&
-
-await DeviceMotionEvent.requestPermission()!=="granted"
-
-){
-
-return;
-
+if(permission!=="granted"){
+motionText.textContent="Permission denied.";
+return
+}
 }
 
-if(!S.motion){
-
-addEventListener(
-"devicemotion",
-motionHandler,
-{passive:true}
-);
+if(enableShakeDetection.attach){
+enableShakeDetection.attach();
+}
 
 S.motion=true;
-
-}
-
-motion.textContent=
-"Enabled";
-
+motion.textContent="Enabled";
 motion.disabled=true;
-
-motionText.textContent=
-"Enabled.";
+motionText.textContent="Threshold + settle detection enabled.";
 
 }catch{
-
-motionText.textContent=
-"Could not enable.";
-
+motionText.textContent="Could not enable."
+}
 }
 
-}
-
-motion.onclick=
-enableMotion;
+motion.onclick=enableMotion;
 
 if(
-
 window.DeviceMotionEvent &&
-
 typeof DeviceMotionEvent.requestPermission!=="function"
-
 ){
-
 enableMotion();
-
 }else{
-
-motionText.textContent=
-
-window.DeviceMotionEvent
-
+motionText.textContent=window.DeviceMotionEvent
 ?"Tap Enable to allow motion."
-
 :"Unavailable.";
-
 }
 
-$("#testMtx").onclick=
-()=>{
-
-modal.classList.remove(
-"open"
-);
-
-showMtx(true);
-
+$("#testMtx").onclick=()=>{
+modal.classList.remove("open");
+showMtx(true)
 };
 
-$("#testChaos").onclick=
-()=>{
-
-modal.classList.remove(
-"open"
-);
-
+$("#testChaos").onclick=()=>{
+modal.classList.remove("open");
 S.forced=true;
-
-reveal("tap");
-
+reveal("tap")
 };
 
-$("#nope").onclick=
-()=>{
-
+$("#nope").onclick=()=>{
 hideMtx();
-
-showPop(
-"🏆 Financially Responsible"
-);
-
+showPop("🏆 Financially Responsible")
 };
 
-$("#buy").onclick=
-()=>{
-
+$("#buy").onclick=()=>{
 hideMtx();
-
 S.aura+=9999;
-
 power();
-
-showPop(
-"🏆 Pay-to-Win"
-);
-
+showPop("🏆 Pay-to-Win")
 };
 
-mtxBg.onclick=
-()=>{};
-
+mtxBg.onclick=()=>{};
 })();
 </script>
-
 </body>
 </html>
