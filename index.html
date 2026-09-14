@@ -1,3039 +1,1749 @@
-    }
-
-    .answer-text {
-      width: 100%;
-      max-width: 11em;
-      color: #eef1ff;
-      text-shadow: 0 1px 8px rgba(0,0,0,.7);
-      font-size: clamp(.78rem, 3.45vw, 1.12rem);
-      line-height: 1.02;
-      font-weight: 950;
-      letter-spacing: -.01em;
-      text-wrap: balance;
-      overflow-wrap: break-word;
-    }
-
-    .answer-text[data-size="lg"] { font-size: clamp(1rem, 4.8vw, 1.5rem); }
-    .answer-text[data-size="md"] { font-size: clamp(.9rem, 4vw, 1.28rem); }
-    .answer-text[data-size="sm"] { font-size: clamp(.78rem, 3.45vw, 1.08rem); }
-    .answer-text[data-size="xs"] { font-size: clamp(.68rem, 3vw, .92rem); line-height: 1; }
-
-    .ball-wrap.revealed .eight {
-      opacity: 0;
-      transform: scale(.66) rotate(7deg);
-    }
-
-    .ball-wrap.revealed .answer {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-    }
-
-    .ball-wrap.thinking .ball { animation: ballShake .72s cubic-bezier(.36,.07,.19,.97) both; }
-    .ball-wrap.thinking .window { animation: windowSlosh .72s ease-in-out both; }
-
-    /* During the shake the triangle "sinks" out of view, like a real 8 ball. */
-    .ball-wrap.thinking .answer {
-      opacity: 0;
-      transform: translateY(44%) scale(.64) rotate(7deg);
-      transition: none;
-    }
-
-    .ball-wrap.thinking .eight {
-      opacity: 0;
-      transform: scale(.70);
-      transition: none;
-    }
-
-    /* Then the triangle floats back up through the blue liquid. */
-    .ball-wrap.revealing .answer {
-      opacity: 1;
-      animation: triangleFloatUp 1.02s cubic-bezier(.16,.9,.26,1.04) both;
-    }
-
-    .ball-wrap.revealing .eight {
-      opacity: 0;
-      transform: scale(.66);
-    }
-
-    .ball-wrap.rare .window { box-shadow: inset 0 0 34px rgba(255,95,220,.42), 0 0 0 2px rgba(255,160,236,.15), 0 0 38px rgba(255,70,210,.16); }
-    .ball-wrap.night .window { box-shadow: inset 0 0 34px rgba(65,120,255,.45), 0 0 0 2px rgba(100,151,255,.12), 0 0 34px rgba(75,104,255,.12); }
-
-    @keyframes ballShake {
-      0%, 100% { transform: rotate(var(--roll-r, 0deg)) scale(1); }
-      10% { transform: translate3d(-8px, 2px, 0) rotate(calc(var(--roll-r, 0deg) - 3deg)) scale(.99); }
-      20% { transform: translate3d(8px, -3px, 0) rotate(calc(var(--roll-r, 0deg) + 3deg)) scale(.985); }
-      30% { transform: translate3d(-10px, 1px, 0) rotate(calc(var(--roll-r, 0deg) - 4deg)) scale(.99); }
-      40% { transform: translate3d(10px, 3px, 0) rotate(calc(var(--roll-r, 0deg) + 4deg)) scale(.985); }
-      50% { transform: translate3d(-7px, -2px, 0) rotate(calc(var(--roll-r, 0deg) - 3deg)) scale(.99); }
-      60% { transform: translate3d(7px, 2px, 0) rotate(calc(var(--roll-r, 0deg) + 3deg)) scale(.992); }
-      70% { transform: translate3d(-5px, 0, 0) rotate(calc(var(--roll-r, 0deg) - 2deg)) scale(.995); }
-      80% { transform: translate3d(5px, 1px, 0) rotate(calc(var(--roll-r, 0deg) + 2deg)) scale(.997); }
-      90% { transform: translate3d(-2px, 0, 0) rotate(calc(var(--roll-r, 0deg) - 1deg)) scale(.999); }
-    }
-
-    @keyframes windowSlosh {
-      0%, 100% { transform: translate(0,0) rotate(0deg); }
-      18% { transform: translate(3px,-2px) rotate(1deg); }
-      36% { transform: translate(-4px,3px) rotate(-1.5deg); }
-      54% { transform: translate(3px,2px) rotate(1.2deg); }
-      72% { transform: translate(-2px,-2px) rotate(-.8deg); }
-    }
-
-    @keyframes triangleFloatUp {
-      0% {
-        opacity: 0;
-        transform: translate3d(-3%,48%,0) scale(.62,.70) rotate(7deg);
-        filter: blur(4px);
-      }
-      22% {
-        opacity: .36;
-        transform: translate3d(3%,28%,0) scale(.76,.83) rotate(-3deg);
-        filter: blur(3px);
-      }
-      44% {
-        opacity: .88;
-        transform: translate3d(-2%,-4%,0) scale(1.045,.98) rotate(1.6deg);
-        filter: blur(1.2px);
-      }
-      62% {
-        opacity: 1;
-        transform: translate3d(1.2%,2.5%,0) scale(.985,1.018) rotate(-.7deg);
-        filter: blur(.35px);
-      }
-      78% {
-        transform: translate3d(-.6%,-1.2%,0) scale(1.008,.995) rotate(.25deg);
-        filter: blur(0);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0,0,0) scale(1) rotate(0deg);
-        filter: blur(0);
-      }
-    }
-
-    @keyframes liquidSheen {
-      0% {
-        opacity: 0;
-        transform: translate3d(-5%,22%,0) scale(1.08) skewX(-3deg);
-        filter: blur(9px);
-      }
-      30% {
-        opacity: .40;
-        transform: translate3d(4%,5%,0) scale(1.04) skewX(2deg);
-        filter: blur(7px);
-      }
-      58% {
-        opacity: .24;
-        transform: translate3d(-2%,-5%,0) scale(1.015) skewX(-1deg);
-        filter: blur(5px);
-      }
-      82% {
-        opacity: .09;
-        transform: translate3d(1%,0,0) scale(1.005);
-        filter: blur(3px);
-      }
-      100% {
-        opacity: 0;
-        transform: translate3d(0,0,0) scale(1);
-        filter: blur(2px);
-      }
-    }
-
-    .prompt {
-      text-align: center;
-      margin-top: 2px;
-    }
-
-    .prompt strong {
-      display: block;
-      font-size: 1rem;
-      letter-spacing: .015em;
-    }
-
-    .prompt span {
-      display: block;
-      color: var(--muted);
-      margin-top: 5px;
-      font-size: .79rem;
-    }
-
-    .status {
-      min-height: 25px;
-      display: grid;
-      place-items: center;
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: .72rem;
-      font-weight: 780;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .status[data-kind="positive"] { color: var(--good); }
-    .status[data-kind="neutral"] { color: var(--warn); }
-    .status[data-kind="negative"] { color: var(--bad); }
-    .status[data-special="rare"] { color: #ff9ae6; }
-    .status[data-special="night"] { color: #9db5ff; }
-
-    .hint-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: auto;
-    }
-
-    .hint {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.026);
-      border-radius: 14px;
-      padding: 10px 7px;
-      text-align: center;
-      color: var(--muted);
-      font-size: .71rem;
-      line-height: 1.2;
-    }
-
-    .hint b {
-      display: block;
-      color: #cdd1da;
-      font-size: .75rem;
-      margin-bottom: 2px;
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: calc(24px + env(safe-area-inset-bottom));
-      transform: translate(-50%, 16px);
-      width: min(calc(100% - 36px), 420px);
-      background: rgba(21,22,28,.92);
-      backdrop-filter: blur(18px);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      color: #f7f7fa;
-      padding: 13px 15px;
-      font-size: .82rem;
-      text-align: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: .2s ease;
-      z-index: 50;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      display: none;
-      place-items: end center;
-      background: rgba(0,0,0,.58);
-      backdrop-filter: blur(8px);
-      z-index: 30;
-    }
-
-    .modal-backdrop.open { display: grid; }
-
-    .sheet {
-      width: min(100%, 560px);
-      border-radius: 24px 24px 0 0;
-      border: 1px solid var(--line);
-      border-bottom: 0;
-      background: #0d0f14;
-      box-shadow: var(--shadow);
-      padding: 18px 18px max(22px, env(safe-area-inset-bottom));
-    }
-
-    .sheet-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .sheet-head h2 {
-      margin: 0;
-      font-size: 1rem;
-    }
-
-    .setting {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 13px 0;
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-
-    .setting:first-of-type { border-top: 0; }
-
-    .setting-copy strong {
-      display: block;
-      font-size: .88rem;
-    }
-
-    .setting-copy span {
-      display: block;
-      color: var(--muted);
-      margin-top: 3px;
-      font-size: .73rem;
-      line-height: 1.3;
-    }
-
-    .switch {
-      appearance: none;
-      width: 46px;
-      height: 27px;
-      flex: 0 0 auto;
-      border-radius: 999px;
-      background: #252831;
-      position: relative;
-      cursor: pointer;
-      outline: none;
-      transition: .18s ease;
-      border: 1px solid rgba(255,255,255,.06);
-    }
-
-    .switch::after {
-      content: "";
-      position: absolute;
-      width: 21px;
-      height: 21px;
-      top: 2px;
-      left: 2px;
-      border-radius: 50%;
-      background: #f5f5f7;
-      transition: .18s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,.35);
-    }
-
-    .switch:checked {
-      background: linear-gradient(90deg, #6b5bdf, #8f71ff);
-    }
-
-    .switch:checked::after { left: 21px; }
-
-    .action-btn {
-      border: 1px solid var(--line);
-      background: var(--panel-2);
-      color: var(--text);
-      min-height: 38px;
-      padding: 0 13px;
-      border-radius: 12px;
-      font-weight: 760;
-      font-size: .76rem;
-      cursor: pointer;
-    }
-
-    .fineprint {
-      margin: 12px 0 0;
-      color: #676d79;
-      font-size: .68rem;
-      line-height: 1.4;
-      text-align: center;
-    }
-
-
-
-    .ball-wrap.revealing .bubbles {
-      animation: revealBubbleLift .72s ease-out both;
-    }
-
-    @keyframes revealBubbleLift {
-      0%   { transform: translate3d(0,10px,0) scale(.98); opacity: .75; }
-      38%  { transform: translate3d(-3px,-5px,0) scale(1.02); opacity: 1; }
-      100% { transform: translate3d(0,0,0) scale(1); opacity: .86; }
-    }
-
-
-    /* Flick = instant response. The ball can still coast while the answer rises. */
-    .ball-wrap.revealing[data-source="flick"] .answer {
-      animation-duration: .62s;
-    }
-
-    .ball-wrap.revealing[data-source="flick"] .window::after {
-      animation-duration: .62s;
-    }
-
-    .ball-wrap.revealing[data-source="flick"] .bubbles {
-      animation-duration: .52s;
-    }
-
-    /* Mode personality: same toy, different menace. */
-    html[data-mode="normal"] .window {
-      background:
-        radial-gradient(circle at 50% 45%, rgba(45,30,100,.95), rgba(10,10,30,.95) 58%, #000 73%);
-    }
-
-    html[data-mode="normal"] .triangle {
-      background: linear-gradient(180deg, rgba(77,118,255,.98), rgba(69,34,189,.98));
-    }
-
-    html[data-mode="aggressive"] .window {
-      background:
-        radial-gradient(circle at 50% 45%, rgba(92,24,45,.96), rgba(28,8,20,.96) 58%, #000 73%);
-      box-shadow:
-        inset 0 0 34px rgba(255,73,111,.20),
-        0 0 0 2px rgba(255,255,255,.045),
-        0 6px 28px rgba(0,0,0,.8);
-    }
-
-    html[data-mode="aggressive"] .triangle {
-      background: linear-gradient(180deg, rgba(255,86,112,.98), rgba(148,28,80,.98));
-      filter: drop-shadow(0 0 14px rgba(255,78,118,.28));
-    }
-
-    html[data-mode="unhinged"] .window {
-      background:
-        radial-gradient(circle at 48% 43%, rgba(76,28,101,.98), rgba(15,8,31,.97) 57%, #000 74%);
-      box-shadow:
-        inset 0 0 38px rgba(220,83,255,.24),
-        0 0 0 2px rgba(255,255,255,.05),
-        0 6px 30px rgba(0,0,0,.82);
-    }
-
-    html[data-mode="unhinged"] .triangle {
-      background: linear-gradient(180deg, rgba(199,76,255,.98), rgba(67,64,225,.98));
-      filter: drop-shadow(0 0 16px rgba(196,77,255,.35));
-    }
-
-    /* The answer never sits perfectly dead in the liquid. */
-    .ball-wrap.revealed:not(.thinking):not(.revealing):not(.rolling) .triangle {
-      animation: idleTriangleDrift 5.8s ease-in-out infinite;
-    }
-
-    @keyframes idleTriangleDrift {
-      0%, 100% { transform: translate3d(0,0,0) rotate(0deg); }
-      25% { transform: translate3d(1.2px,-1.5px,0) rotate(.22deg); }
-      52% { transform: translate3d(-1px,.8px,0) rotate(-.18deg); }
-      76% { transform: translate3d(.7px,1px,0) rotate(.12deg); }
-    }
-
-    /* Rare pull: brief aura bloom, then back to normal readability. */
-    .ball-wrap.rare.revealing .window {
-      animation: rareWindowBloom .92s ease-out both;
-    }
-
-    .ball-wrap.rare.revealing .triangle {
-      animation: rareTriangleBloom .92s ease-out both;
-    }
-
-    @keyframes rareWindowBloom {
-      0%   { filter: brightness(1) saturate(1); }
-      18%  { filter: brightness(1.36) saturate(1.45); }
-      42%  { filter: brightness(1.12) saturate(1.22); }
-      100% { filter: brightness(1) saturate(1); }
-    }
-
-    @keyframes rareTriangleBloom {
-      0%   { filter: brightness(1) drop-shadow(0 0 8px rgba(255,125,231,.22)); }
-      20%  { filter: brightness(1.55) drop-shadow(0 0 22px rgba(255,125,231,.78)); }
-      48%  { filter: brightness(1.16) drop-shadow(0 0 14px rgba(168,122,255,.46)); }
-      100% { filter: brightness(1) drop-shadow(0 0 8px rgba(120,115,255,.20)); }
-    }
-
-    /* Flicks already had physical anticipation, so don't make them sit through a full shake. */
-    .ball-wrap.thinking[data-source="flick"] {
-      animation-duration: .28s;
-    }
-
-    .ball-wrap.thinking[data-source="flick"] .window {
-      animation-duration: .28s;
-    }
-
-
-    .mtx-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 88;
-      background: rgba(0,0,0,.58);
-      backdrop-filter: blur(5px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .16s ease;
-    }
-
-    .mtx-backdrop.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .mtx-banner {
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -46%) scale(.90) rotate(-1deg);
-      width: min(calc(100% - 34px), 420px);
-      z-index: 90;
-      opacity: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(28,29,38,.985), rgba(12,13,18,.985));
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 22px;
-      box-shadow:
-        0 28px 90px rgba(0,0,0,.68),
-        0 0 0 1px rgba(255,255,255,.03) inset;
-      padding: 18px;
-      transition:
-        opacity .16s ease,
-        transform .18s cubic-bezier(.2,.9,.25,1.14);
-    }
-
-    .mtx-banner.show {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1) rotate(0deg);
-      pointer-events: auto;
-      animation: mtxNag .52s ease-out both;
-    }
-
-    .mtx-kicker {
-      color: #b3b8c6;
-      font-size: .69rem;
-      font-weight: 900;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      text-align: center;
-    }
-
-    .mtx-title {
-      font-size: 1.15rem;
-      font-weight: 950;
-      line-height: 1.05;
-      margin: 0;
-      text-align: center;
-    }
-
-    .mtx-sub {
-      color: #b4bac6;
-      font-size: .79rem;
-      line-height: 1.35;
-      margin: 8px 0 14px;
-      text-align: center;
-    }
-
-    .mtx-actions {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 9px;
-    }
-
-    .mtx-btn {
-      width: 100%;
-      min-height: 44px;
-      border-radius: 13px;
-      border: 1px solid rgba(255,255,255,.11);
-      background: rgba(255,255,255,.065);
-      color: #f7f7fa;
-      font-weight: 900;
-      font-size: .78rem;
-      cursor: pointer;
-    }
-
-    .mtx-btn.primary {
-      background:
-        linear-gradient(135deg, rgba(177,106,255,.34), rgba(74,121,255,.30));
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.035);
-    }
-
-    .mtx-footnote {
-      margin-top: 10px;
-      color: #737986;
-      font-size: .62rem;
-      text-align: center;
-      line-height: 1.3;
-    }
-
-    @keyframes mtxNag {
-      0%   { transform: translate(-50%, -50%) scale(.84) rotate(-2deg); }
-      45%  { transform: translate(-50%, -50%) scale(1.045) rotate(1deg); }
-      72%  { transform: translate(-50%, -50%) scale(.99) rotate(-.4deg); }
-      100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-    }
-
-
-    .aura-burst {
-      position: absolute;
-      inset: -22%;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0;
-      border-radius: 50%;
-      transform: rotate(var(--roll-r, 0deg));
-      transform-origin: 50% 50%;
-      will-change: transform, opacity;
-    }
-
-    .ball-wrap.aura-powerup .aura-burst {
-      opacity: 1;
-      animation: auraBurstLife 7s ease-out both;
-    }
-
-    .aura-burst::before,
-    .aura-burst::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-    }
-
-    .aura-burst::before {
-      background:
-        radial-gradient(circle,
-          rgba(255,255,255,.92) 0 3%,
-          rgba(255,240,126,.70) 14%,
-          rgba(144,188,255,.34) 36%,
-          rgba(157,87,255,.15) 54%,
-          transparent 72%);
-      filter: blur(10px);
-      transform: scale(.78);
-      animation: auraPulse .18s ease-in-out infinite alternate;
-    }
-
-    .aura-burst::after {
-      inset: 8%;
-      border: 3px solid rgba(255,244,160,.48);
-      box-shadow:
-        0 0 18px rgba(255,237,113,.62),
-        0 0 44px rgba(121,164,255,.42),
-        inset 0 0 22px rgba(255,255,255,.18);
-      animation: auraRing 1.1s ease-out infinite;
-    }
-
-    .ball-wrap.aura-powerup .ball {
-      animation: powerupBall .16s ease-in-out infinite alternate;
-      filter:
-        brightness(1.12)
-        drop-shadow(0 0 14px rgba(255,242,136,.62))
-        drop-shadow(0 0 32px rgba(110,157,255,.38));
-    }
-
-    .ball-wrap.aura-powerup .window {
-      animation: powerupWindow .22s ease-in-out infinite alternate;
-    }
-
-    .ball-wrap.aura-powerup .bubbles {
-      animation: powerupBubbles .20s linear infinite alternate;
-    }
-
-    .energy-spark {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 3px;
-      height: 34%;
-      transform-origin: 50% 100%;
-      border-radius: 999px;
-      background: linear-gradient(
-        to top,
-        transparent,
-        rgba(255,255,255,.92) 48%,
-        rgba(255,233,113,.78) 68%,
-        transparent
-      );
-      opacity: 0;
-      filter: blur(.4px);
-    }
-
-    .ball-wrap.aura-powerup .energy-spark {
-      animation: sparkFlash .48s ease-out infinite;
-      animation-delay: var(--spark-delay, 0s);
-    }
-
-    /* Poké Ball-style charge-up while circling the ball. */
-    .ball-wrap.spin-charged .aura-burst {
-      opacity: .82;
-      animation: spinAuraOrbit .58s linear infinite;
-    }
-
-    .ball-wrap.spin-charged .aura-burst::before {
-      background:
-        radial-gradient(circle,
-          rgba(255,255,255,.88) 0 3%,
-          rgba(115,194,255,.66) 13%,
-          rgba(103,116,255,.30) 34%,
-          rgba(191,86,255,.17) 52%,
-          transparent 72%);
-      filter: blur(10px);
-      animation: spinAuraPulse .18s ease-in-out infinite alternate;
-    }
-
-    .ball-wrap.spin-charged .aura-burst::after {
-      inset: 9%;
-      border: 2px solid rgba(154,215,255,.56);
-      box-shadow:
-        0 0 18px rgba(112,202,255,.58),
-        0 0 42px rgba(106,101,255,.36),
-        inset 0 0 20px rgba(255,255,255,.14);
-      animation: spinAuraRing .56s ease-out infinite;
-    }
-
-    .ball-wrap.spin-charged .energy-spark {
-      opacity: 1;
-      animation: spinSpark .34s ease-out infinite;
-      animation-delay: var(--spark-delay, 0s);
-    }
-
-    .ball-wrap.spin-charged .ball {
-      filter:
-        brightness(1.08)
-        drop-shadow(0 0 12px rgba(108,206,255,.58))
-        drop-shadow(0 0 27px rgba(116,91,255,.34));
-    }
-
-    .ball-wrap.spin-maxed .aura-burst {
-      opacity: 1;
-      filter: brightness(1.25) saturate(1.2);
-    }
-
-    .ball-wrap.spin-maxed .ball {
-      filter:
-        brightness(1.16)
-        drop-shadow(0 0 18px rgba(172,234,255,.78))
-        drop-shadow(0 0 38px rgba(134,101,255,.55));
-    }
-
-    .ball-wrap.spin-maxed .energy-spark {
-      animation-duration: .20s;
-    }
-
-    @keyframes spinAuraOrbit {
-      from { transform: rotate(0deg) scale(.96); }
-      to   { transform: rotate(360deg) scale(1.03); }
-    }
-
-    @keyframes spinAuraPulse {
-      from { transform: scale(.84); opacity: .62; }
-      to   { transform: scale(1.04); opacity: .96; }
-    }
-
-    @keyframes spinAuraRing {
-      0%   { transform: scale(.72); opacity: .74; }
-      75%  { opacity: .26; }
-      100% { transform: scale(1.16); opacity: 0; }
-    }
-
-    @keyframes spinSpark {
-      0%   { opacity: 0; filter: blur(.5px); }
-      22%  { opacity: .98; }
-      68%  { opacity: .44; }
-      100% { opacity: 0; filter: blur(1px); }
-    }
-
-    .energy-spark:nth-child(1) { --spark-delay: -.08s; transform: translate(-50%,-100%) rotate(18deg); }
-    .energy-spark:nth-child(2) { --spark-delay: -.23s; transform: translate(-50%,-100%) rotate(77deg); }
-    .energy-spark:nth-child(3) { --spark-delay: -.31s; transform: translate(-50%,-100%) rotate(139deg); }
-    .energy-spark:nth-child(4) { --spark-delay: -.14s; transform: translate(-50%,-100%) rotate(211deg); }
-    .energy-spark:nth-child(5) { --spark-delay: -.37s; transform: translate(-50%,-100%) rotate(286deg); }
-    .energy-spark:nth-child(6) { --spark-delay: -.19s; transform: translate(-50%,-100%) rotate(336deg); }
-
-    @keyframes auraBurstLife {
-      0%   { opacity: 0; transform: rotate(var(--roll-r, 0deg)) scale(.72); }
-      8%   { opacity: 1; transform: rotate(var(--roll-r, 0deg)) scale(1.02); }
-      68%  { opacity: .92; transform: rotate(var(--roll-r, 0deg)) scale(1.06); }
-      88%  { opacity: .52; transform: rotate(var(--roll-r, 0deg)) scale(1.10); }
-      100% { opacity: 0; transform: rotate(var(--roll-r, 0deg)) scale(1.15); }
-    }
-
-    @keyframes auraPulse {
-      from { transform: scale(.88); filter: blur(12px) brightness(1); }
-      to   { transform: scale(1.02); filter: blur(16px) brightness(1.28); }
-    }
-
-    @keyframes auraRing {
-      0%   { transform: scale(.72); opacity: .72; }
-      70%  { opacity: .28; }
-      100% { transform: scale(1.20); opacity: 0; }
-    }
-
-    @keyframes powerupBall {
-      from {
-        transform:
-          rotate(calc(var(--roll-r, 0deg) - .55deg))
-          scale(1.012);
-      }
-      to {
-        transform:
-          rotate(calc(var(--roll-r, 0deg) + .55deg))
-          scale(1.025);
-      }
-    }
-
-    @keyframes powerupWindow {
-      from { filter: brightness(1.08) saturate(1.06); }
-      to   { filter: brightness(1.32) saturate(1.34); }
-    }
-
-    @keyframes powerupBubbles {
-      from { transform: translate3d(-4px,2px,0) scale(1.02); }
-      to   { transform: translate3d(5px,-5px,0) scale(1.06); }
-    }
-
-    @keyframes sparkFlash {
-      0%   { opacity: 0; transform-origin: 50% 100%; }
-      20%  { opacity: .92; }
-      70%  { opacity: .34; }
-      100% { opacity: 0; }
-    }
-
-
-    .achievement-pop {
-      position: fixed;
-      left: 50%;
-      top: max(18px, env(safe-area-inset-top));
-      transform: translate(-50%, -18px) scale(.96);
-      width: min(calc(100% - 32px), 430px);
-      z-index: 95;
-      opacity: 0;
-      pointer-events: none;
-      background: rgba(15,16,22,.96);
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 18px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.55);
-      backdrop-filter: blur(16px);
-      padding: 12px 14px;
-      transition: opacity .18s ease, transform .2s ease;
-    }
-
-    .achievement-pop.show { opacity: 1; transform: translate(-50%, 0) scale(1); }
-    .achievement-kicker { color:#ffd979; font-size:.62rem; font-weight:950; letter-spacing:.13em; text-transform:uppercase; margin-bottom:3px; }
-    .achievement-title { margin:0; font-size:.91rem; font-weight:950; line-height:1.08; }
-    .achievement-sub { margin:4px 0 0; color:#9da4b2; font-size:.70rem; line-height:1.28; }
-
-    .sponsor-pop {
-      position: fixed;
-      left: 50%;
-      bottom: calc(18px + env(safe-area-inset-bottom));
-      transform: translate(-50%, 18px) scale(.97);
-      width: min(calc(100% - 30px), 440px);
-      z-index: 92;
-      opacity: 0;
-      pointer-events: none;
-      background: rgba(18,19,25,.97);
-      border: 1px solid rgba(255,255,255,.11);
-      border-radius: 17px;
-      box-shadow: 0 18px 54px rgba(0,0,0,.5);
-      padding: 11px 13px;
-      transition: opacity .18s ease, transform .2s ease;
-    }
-
-    .sponsor-pop.show { opacity:1; transform:translate(-50%,0) scale(1); }
-    .sponsor-label { color:#777e8c; font-size:.58rem; font-weight:900; letter-spacing:.12em; text-transform:uppercase; margin-bottom:3px; }
-    .sponsor-copy { margin:0; font-size:.77rem; line-height:1.24; font-weight:800; }
-
-    .ball-wrap.curse-gold .ball {
-      filter: sepia(.55) saturate(1.65) brightness(1.16) drop-shadow(0 0 18px rgba(255,220,96,.46));
-    }
-    .ball-wrap.curse-upside .triangle { transform:rotate(180deg) !important; }
-    .ball-wrap.curse-glitch .window { animation:curseGlitch .14s steps(2,end) 4; }
-    .ball-wrap.curse-glitch .answer-text { text-shadow:2px 0 rgba(255,65,120,.55), -2px 0 rgba(75,190,255,.55); }
-    .ball-wrap.orb-mad .ball { filter:brightness(1.05) drop-shadow(0 0 16px rgba(255,61,95,.26)); }
-
-    @keyframes curseGlitch {
-      0%,100% { transform:translate(0,0); }
-      25% { transform:translate(2px,-1px); }
-      50% { transform:translate(-2px,1px); }
-      75% { transform:translate(1px,2px); }
-    }
-
-    .ball-wrap.extreme-good .window {
-      animation: goodFlash .75s ease-out both;
-    }
-
-    .ball-wrap.extreme-bad .window {
-      animation: badDrain .9s ease-out both;
-    }
-
-    .ball-wrap.extreme-good .triangle {
-      filter:
-        brightness(1.45)
-        drop-shadow(0 0 18px rgba(255,235,120,.65))
-        drop-shadow(0 0 34px rgba(107,173,255,.42));
-    }
-
-    .ball-wrap.extreme-bad .triangle {
-      filter:
-        saturate(.55)
-        brightness(.72)
-        drop-shadow(0 0 16px rgba(255,54,78,.35));
-    }
-
-    @keyframes goodFlash {
-      0% { filter: brightness(1) saturate(1); }
-      25% { filter: brightness(1.55) saturate(1.35); }
-      100% { filter: brightness(1) saturate(1); }
-    }
-
-    @keyframes badDrain {
-      0% { filter: brightness(1) saturate(1); }
-      35% { filter: brightness(.72) saturate(.65); }
-      100% { filter: brightness(1) saturate(1); }
-    }
-
-    @media (max-height: 720px) {
-      .stage { min-height: 340px; padding: 18px 0 10px; }
-      .ball-wrap { width: min(67vh, 330px, 80vw); }
-      .modes { margin-top: 14px; }
-      .prompt span { margin-top: 2px; }
-      .hint-row { margin-top: 8px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .001ms !important;
-      }
-    }
-  </style>
+<!doctype html>
+<html lang="en" data-mode="normal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#07080b">
+<title>Brain Rot 8 Ball</title>
+<style>
+:root{color-scheme:dark;--bg:#07080b;--panel:#12141b;--line:#ffffff1a;--text:#f6f7fb;--muted:#9097a7;--good:#75efb2;--warn:#ffd073;--bad:#ff7d90}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;overflow-x:hidden;background:radial-gradient(circle at 50% 22%,#a98cff16,transparent 30rem),var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;overscroll-behavior:none}
+body{min-height:100svh;display:flex;justify-content:center}
+.app{width:min(100%,560px);min-height:100svh;display:flex;flex-direction:column;padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom))}
+.top{display:flex;justify-content:space-between;align-items:center}
+.brand h1{font-size:1.2rem;margin:0;letter-spacing:.08em;text-transform:uppercase}
+.brand p{font-size:.76rem;color:var(--muted);margin:3px 0 0}
+.btn{border:1px solid var(--line);background:#ffffff0e;color:var(--text);border-radius:13px;min-height:40px;padding:0 13px;font-weight:800}
+.gear{width:42px;padding:0;font-size:1rem}
+.modes{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;margin-top:20px;padding:4px;border:1px solid var(--line);border-radius:15px;background:#ffffff08}
+.mode{border:0;border-radius:11px;background:transparent;color:var(--muted);min-height:40px;font-weight:800}
+.mode.active{background:#ffffff12;color:white}
+.mode.unhinged{color:#ffc0f6}
+.stage{flex:1;display:grid;place-items:center;min-height:430px;padding:26px 0 18px;overflow:visible}
+.center{text-align:center}
+.ball-wrap{--x:0px;--y:0px;--r:0deg;width:min(82vw,390px);aspect-ratio:1;position:relative;touch-action:none;user-select:none;transform:translate3d(var(--x),var(--y),0);will-change:transform;filter:drop-shadow(0 28px 38px #0008)}
+.ball{position:absolute;inset:0;border-radius:50%;overflow:hidden;transform:rotate(var(--r));will-change:transform;background:radial-gradient(circle at 32% 23%,#ffffff29,transparent 11%),radial-gradient(circle at 37% 29%,#30333b,#17191f 24%,#090a0d 57%,#020203 77%);border:1px solid #ffffff18;box-shadow:inset -34px -38px 80px #000e,inset 20px 18px 46px #ffffff0b}
+.window{position:absolute;inset:19%;border-radius:50%;display:grid;place-items:center;overflow:hidden;border:10px solid #050506;background:radial-gradient(circle at 50% 45%,#2d1e64f2,#0a0a1ef2 58%,#000 73%);box-shadow:inset 0 0 30px #5644ff3d,0 0 0 2px #ffffff0c,0 6px 28px #000c}
+.bubbles{position:absolute;inset:4%;border-radius:50%;overflow:hidden;pointer-events:none}
+.bubble{position:absolute;bottom:-20px;border:1px solid #e0e8ff88;border-radius:50%;background:#b9ceff25;box-shadow:inset 2px 2px 3px #fff6;animation:bubble var(--d) linear infinite;animation-delay:var(--delay)}
+.bubble:nth-child(1){left:12%;width:13px;height:13px;--d:8s;--delay:-2s}
+.bubble:nth-child(2){left:30%;width:8px;height:8px;--d:6s;--delay:-4s}
+.bubble:nth-child(3){left:55%;width:17px;height:17px;--d:10s;--delay:-7s}
+.bubble:nth-child(4){left:75%;width:9px;height:9px;--d:7s;--delay:-3s}
+.bubble:nth-child(5){left:43%;width:6px;height:6px;--d:5.5s;--delay:-1s}
+@keyframes bubble{0%{transform:translateY(0);opacity:0}10%{opacity:.75}100%{transform:translate(5px,-215px);opacity:0}}
+.eight{position:relative;z-index:2;width:58%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#f7f7f8;color:#08090c;font-size:clamp(3rem,14vw,5.4rem);font-weight:950;transition:.2s}
+.answer{position:absolute;inset:5%;display:grid;place-items:center;opacity:0;transform:translateY(38%) scale(.68);z-index:3}
+.triangle{width:95%;height:91%;clip-path:polygon(50% 0,100% 100%,0 100%);display:flex;align-items:flex-end;justify-content:center;padding:0 10% 12%;background:linear-gradient(#4d76ff,#4522bd);filter:drop-shadow(0 0 14px #5664ff6b)}
+.answer-text{width:100%;color:#f2f4ff;font-weight:950;line-height:1.02;text-wrap:balance;overflow-wrap:anywhere;text-shadow:0 1px 8px #000b;font-size:clamp(.78rem,3.4vw,1.1rem)}
+.answer-text[data-s="lg"]{font-size:clamp(1rem,4.8vw,1.48rem)}
+.answer-text[data-s="md"]{font-size:clamp(.9rem,4vw,1.26rem)}
+.answer-text[data-s="xs"]{font-size:clamp(.66rem,2.9vw,.9rem)}
+.revealed .eight{opacity:0;transform:scale(.7)}
+.revealed .answer{opacity:1;animation:rise .68s cubic-bezier(.16,.9,.26,1.04) both}
+@keyframes rise{0%{opacity:0;transform:translateY(44%) scale(.62);filter:blur(4px)}55%{opacity:1;transform:translateY(-3%) scale(1.03);filter:blur(.7px)}100%{opacity:1;transform:none;filter:none}}
+.thinking .ball{animation:shake .65s ease both}
+@keyframes shake{20%{transform:translate(-8px,2px) rotate(calc(var(--r) - 3deg))}40%{transform:translate(8px,-2px) rotate(calc(var(--r) + 3deg))}60%{transform:translate(-6px,2px) rotate(calc(var(--r) - 2deg))}80%{transform:translate(5px,-1px) rotate(calc(var(--r) + 2deg))}}
+html[data-mode=aggressive] .window{background:radial-gradient(circle,#5c182df5,#1c0814f5 58%,#000 73%)}
+html[data-mode=aggressive] .triangle{background:linear-gradient(#ff5670,#941c50)}
+html[data-mode=unhinged] .window{background:radial-gradient(circle,#4c1c65fa,#0f081ffa 58%,#000 73%)}
+html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
+.aura{position:absolute;inset:-22%;border-radius:50%;opacity:0;pointer-events:none;z-index:-1;background:radial-gradient(circle,#fff8 0 5%,#73c2ffaa 16%,#756fff55 36%,transparent 68%);filter:blur(10px)}
+.spin .aura{opacity:.9;animation:aura .22s ease-in-out infinite alternate}
+.spin.max .aura{opacity:1;filter:blur(8px) brightness(1.35)}
+@keyframes aura{from{transform:scale(.87)}to{transform:scale(1.04)}}
+.spark{position:absolute;left:50%;top:50%;width:3px;height:34%;transform-origin:50% 100%;background:linear-gradient(transparent,#fff,#8bd8ff,transparent);opacity:0}
+.spin .spark{opacity:1;animation:spark .28s ease-out infinite}
+.spark:nth-child(2){transform:translate(-50%,-100%) rotate(60deg);animation-delay:-.1s}
+.spark:nth-child(3){transform:translate(-50%,-100%) rotate(120deg);animation-delay:-.18s}
+.spark:nth-child(4){transform:translate(-50%,-100%) rotate(180deg);animation-delay:-.06s}
+.spark:nth-child(5){transform:translate(-50%,-100%) rotate(240deg);animation-delay:-.16s}
+.spark:nth-child(6){transform:translate(-50%,-100%) rotate(300deg);animation-delay:-.22s}
+@keyframes spark{0%,100%{opacity:0}35%{opacity:1}}
+.power .aura{opacity:1;animation:power 7s ease-out both;background:radial-gradient(circle,#fff 0 4%,#fff07ebf 16%,#90bcff70 38%,transparent 70%)}
+@keyframes power{0%{transform:scale(.7);opacity:0}8%{transform:scale(1);opacity:1}80%{opacity:.8}100%{transform:scale(1.18);opacity:0}}
+.prompt{margin-top:4px}
+.prompt strong{display:block}
+.prompt span,.status{color:var(--muted);font-size:.76rem}
+.status{height:24px;margin-top:8px;font-weight:850;text-transform:uppercase;letter-spacing:.07em}
+.status.good{color:var(--good)}
+.status.bad{color:var(--bad)}
+.status.neutral{color:var(--warn)}
+.hints{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hint{border:1px solid var(--line);border-radius:13px;padding:9px 6px;background:#ffffff07;color:var(--muted);font-size:.7rem}
+.hint b{display:block;color:#d7d9df}
+.modal{position:fixed;inset:0;background:#0009;display:none;place-items:end center;z-index:50}
+.modal.open{display:grid}
+.sheet{width:min(100%,560px);background:#0d0f14;border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;padding:18px 18px max(22px,env(safe-area-inset-bottom))}
+.sheet-head{display:flex;justify-content:space-between;align-items:center}
+.setting{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #ffffff0d}
+.setting strong{font-size:.86rem}
+.setting small{display:block;color:var(--muted);font-size:.7rem;margin-top:3px}
+.switch{width:46px;height:27px}
+.toast,.pop{position:fixed;left:50%;transform:translateX(-50%);z-index:90;background:#15161cef;border:1px solid var(--line);border-radius:15px;box-shadow:0 20px 60px #0009;opacity:0;pointer-events:none;transition:.18s;padding:12px 14px;text-align:center}
+.toast{bottom:calc(22px + env(safe-area-inset-bottom));width:min(calc(100% - 36px),420px)}
+.pop{top:max(18px,env(safe-area-inset-top));width:min(calc(100% - 32px),430px)}
+.show{opacity:1!important}
+.mtx-bg{position:fixed;inset:0;background:#000a;backdrop-filter:blur(5px);z-index:80;display:none}
+.mtx-bg.show{display:block}
+.mtx{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:81;width:min(calc(100% - 34px),420px);background:#11131af7;border:1px solid #ffffff26;border-radius:22px;padding:18px;display:none;text-align:center}
+.mtx.show{display:block}
+.mtx h2{font-size:1.1rem}
+.mtx p{color:#b5bbc8;font-size:.78rem}
+.mtx .btn{width:100%;margin-top:8px}
+.mtx .buy{background:linear-gradient(135deg,#b16aff55,#4a79ff4d)}
+.fine{color:#777;font-size:.63rem;margin-top:9px}
+@media(max-height:720px){.stage{min-height:340px;padding:15px 0}.ball-wrap{width:min(67vh,330px,80vw)}}
+</style>
 </head>
 <body>
-  <main class="app">
-    <header class="topbar">
-      <div class="brand" id="secretBrand" aria-label="Brain Rot 8 Ball">
-        <h1>Brain Rot 8 Ball</h1>
-        <p>ask ts. accept the consequences.</p>
-      </div>
-      <button class="icon-btn" id="settingsBtn" aria-label="Settings" title="Settings">⚙</button>
-    </header>
-
-    <nav class="modes" id="modes" aria-label="Answer mode">
-      <button class="mode-btn active" data-mode="normal">Normal</button>
-      <button class="mode-btn" data-mode="aggressive">Aggressive</button>
-    </nav>
-
-    <section class="stage">
-      <div>
-        <div class="ball-wrap" id="ballWrap" role="button" tabindex="0" aria-label="Ask the Brain Rot 8 Ball">
-          <div class="aura-burst" aria-hidden="true">
-            <span class="energy-spark"></span>
-            <span class="energy-spark"></span>
-            <span class="energy-spark"></span>
-            <span class="energy-spark"></span>
-            <span class="energy-spark"></span>
-            <span class="energy-spark"></span>
-          </div>
-          <div class="ball">
-            <div class="window">
-              <div class="bubbles" aria-hidden="true">
-                <span class="bubble"></span>
-                <span class="bubble"></span>
-                <span class="bubble"></span>
-                <span class="bubble"></span>
-                <span class="bubble"></span>
-                <span class="bubble"></span>
-                <span class="bubble"></span>
-              </div>
-              <div class="eight">8</div>
-              <div class="answer">
-                <div class="triangle">
-                  <div class="answer-text" id="answerText">ASK AGAIN</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="prompt">
-          <strong id="promptTitle">ask ts. accept the consequences.</strong>
-          <span id="promptSub">tap, flick, or shake. orb knows ball.</span>
-        </div>
-        <div class="status" id="status" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <div class="hint-row">
-      <div class="hint"><b>Tap</b>instant bad advice</div>
-      <div class="hint"><b>Flick</b>for dramatic effect</div>
-      <div class="hint"><b>Shake</b>actual commitment</div>
-    </div>
-  </main>
-
-  <div class="modal-backdrop" id="settingsModal" aria-hidden="true">
-    <section class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
-      <div class="sheet-head">
-        <h2>Settings</h2>
-        <button class="icon-btn" id="closeSettings" aria-label="Close settings">×</button>
-      </div>
-
-      <div class="setting">
-        <div class="setting-copy">
-          <strong>Sound</strong>
-          <span>Small UI/answer sounds. Nothing obnoxious.</span>
-        </div>
-        <input class="switch" id="soundToggle" type="checkbox" checked />
-      </div>
-
-      <div class="setting">
-        <div class="setting-copy">
-          <strong>Haptics</strong>
-          <span>Uses vibration when the browser/device allows it.</span>
-        </div>
-        <input class="switch" id="hapticToggle" type="checkbox" checked />
-      </div>
-
-      <div class="setting">
-        <div class="setting-copy">
-          <strong>Shake control</strong>
-          <span id="motionStatus">Checking device support…</span>
-        </div>
-        <button class="action-btn" id="motionBtn">Enable</button>
-      </div>
-
-      <div class="setting">
-        <div class="setting-copy">
-          <strong>Tilt physics</strong>
-          <span id="tiltStatus">Uses phone tilt to roll the ball.</span>
-        </div>
-        <input class="switch" id="tiltToggle" type="checkbox" />
-      </div>
-
-      <div class="setting">
-        <div class="setting-copy">
-          <strong>Test fake MTX</strong>
-          <span>Temporary dev button so you can spawn the annoying modal on demand.</span>
-        </div>
-        <button class="action-btn" id="testMtxBtn">Spawn it</button>
-      </div>
-
-      <div class="setting">
-        <div class="setting-copy">
-          <strong>Test chaos</strong>
-          <span>Temporary dev buttons for achievements, cursed events, and fake sponsors.</span>
-        </div>
-        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end">
-          <button class="action-btn" id="testAchievementBtn">Achievement</button>
-          <button class="action-btn" id="testChaosBtn">Cursed</button>
-          <button class="action-btn" id="testSponsorBtn">Sponsor</button>
-        </div>
-      </div>
-
-
-      <p class="fineprint">V1 stores only your basic settings and whether the secret mode is unlocked. No history, accounts, or custom answer editor.</p>
-    </section>
-  </div>
-
-  <div class="mtx-backdrop" id="mtxBackdrop" aria-hidden="true"></div>
-
-  <div class="mtx-banner" id="mtxBanner" role="dialog" aria-modal="true" aria-live="polite" aria-hidden="true">
-    <div class="mtx-kicker">Limited Time Opportunity</div>
-    <p class="mtx-title" id="mtxTitle">Premium Oracle DLC</p>
-    <p class="mtx-sub" id="mtxSub">Unlock 3% more certainty for only $4.99.</p>
-    <div class="mtx-actions">
-      <button class="mtx-btn primary" id="mtxBuyBtn">BUY AURA, COWARD</button>
-      <button class="mtx-btn" id="mtxNoBtn">nah I'm broke</button>
-    </div>
-    <div class="mtx-footnote">This is fake. No money is collected. The orb is just being annoying.</div>
-  </div>
-
-  <div class="achievement-pop" id="achievementPop" aria-live="polite" aria-hidden="true">
-    <div class="achievement-kicker">Achievement Unlocked</div>
-    <p class="achievement-title" id="achievementTitle">Bro Is Spiraling</p>
-    <p class="achievement-sub" id="achievementSub">Asked the orb 5 times like the answer was gonna improve.</p>
-  </div>
-
-  <div class="sponsor-pop" id="sponsorPop" aria-live="polite" aria-hidden="true">
-    <div class="sponsor-label">Definitely Sponsored</div>
-    <p class="sponsor-copy" id="sponsorCopy">OrbVPN — hide your search history from your ancestors.</p>
-  </div>
-
-  <div class="toast" id="toast"></div>
-
-  <script>
-    (() => {
-      "use strict";
-
-      const $ = (sel) => document.querySelector(sel);
-
-      const ballWrap = $("#ballWrap");
-      const answerText = $("#answerText");
-      const status = $("#status");
-      const modesEl = $("#modes");
-      const secretBrand = $("#secretBrand");
-      const promptTitle = $("#promptTitle");
-      const promptSub = $("#promptSub");
-      const settingsModal = $("#settingsModal");
-      const soundToggle = $("#soundToggle");
-      const hapticToggle = $("#hapticToggle");
-      const motionBtn = $("#motionBtn");
-      const motionStatus = $("#motionStatus");
-      const tiltToggle = $("#tiltToggle");
-      const tiltStatus = $("#tiltStatus");
-      const testMtxBtn = $("#testMtxBtn");
-      const testAchievementBtn = $("#testAchievementBtn");
-      const testChaosBtn = $("#testChaosBtn");
-      const testSponsorBtn = $("#testSponsorBtn");
-      const achievementPop = $("#achievementPop");
-      const achievementTitle = $("#achievementTitle");
-      const achievementSub = $("#achievementSub");
-      const sponsorPop = $("#sponsorPop");
-      const sponsorCopy = $("#sponsorCopy");
-      const toast = $("#toast");
-      const mtxBackdrop = $("#mtxBackdrop");
-      const mtxBanner = $("#mtxBanner");
-      const mtxTitle = $("#mtxTitle");
-      const mtxSub = $("#mtxSub");
-      const mtxBuyBtn = $("#mtxBuyBtn");
-      const mtxNoBtn = $("#mtxNoBtn");
-
-      const STORAGE = {
-        mode: "brainrot8.mode",
-        unhinged: "brainrot8.unhinged",
-        sound: "brainrot8.sound",
-        haptic: "brainrot8.haptic",
-        tilt: "brainrot8.tilt"
-      };
-
-      const state = {
-        mode: localStorage.getItem(STORAGE.mode) || "normal",
-        unhingedUnlocked: localStorage.getItem(STORAGE.unhinged) === "1",
-        sound: localStorage.getItem(STORAGE.sound) !== "0",
-        haptic: localStorage.getItem(STORAGE.haptic) !== "0",
-        motionEnabled: false,
-        busy: false,
-        lastTrigger: 0,
-        secretTaps: [],
-        pointerStart: null,
-        pointerLast: null,
-        pointerSamples: [],
-        pointerMoved: false,
-        throwVX: 0,
-        throwVY: 0,
-        throwT: 0,
-        spinGesture: false,
-        spinCenterX: 0,
-        spinCenterY: 0,
-        spinLastAngle: 0,
-        spinAccum: 0,
-        spinVR: 0,
-        spinT: 0,
-        curveSpin: 0,
-        curveLife: 0,
-        rollX: 0,
-        rollY: 0,
-        rollR: 0,
-        vx: 0,
-        vy: 0,
-        vr: 0,
-        lastThrowSpeed: 0,
-        lastThrowSpin: 0,
-        readableSpinToken: 0,
-        physicsRAF: 0,
-        physicsRunning: false,
-        pendingFlickAnswer: false,
-        lastPhysicsT: 0,
-        tiltEnabled: localStorage.getItem(STORAGE.tilt) === "1",
-        tiltX: 0,
-        tiltY: 0,
-        orientationEnabled: false,
-        audioCtx: null,
-        lastMotion: 0,
-        questionCount: 0,
-        recentQuestions: [],
-        negativeStreak: 0,
-        aura: 0,
-        rizz: 67,
-        financiallyResponsible: 0,
-        fakePurchases: 0,
-        sponsorCount: 0,
-        achievementsSeen: new Set(),
-        lastOverShake: 0,
-        lastAnswerKind: "",
-        forcedCurse: null
-      };
-
-      const ANSWERS = {
-        normal: {
-          positive: [
-            "you cooked",
-            "let him cook",
-            "big W",
-            "bet",
-            "send it",
-            "hell yeah brother",
-            "yolo",
-            "based",
-            "slay",
-            "ate, no crumbs",
-            "it's giving yes",
-            "lowkey genius",
-            "we're so back",
-            "sigma behavior",
-            "W rizz",
-            "no cap, yes",
-            "valid af",
-            "that's hot",
-            "certified banger",
-            "do it for the plot",
-            "hell yeah dude",
-            "we love to see it",
-            "certified dub",
-            "goated",
-            "real recognize real",
-            "periodt",
-            "you understood the vibe",
-            "this passes the vibe check",
-            "absolute cinema",
-            "chef's kiss"
-          ],
-          neutral: [
-            "idk fam",
-            "bro...",
-            "it's giving maybe",
-            "ask again bestie",
-            "the math ain't mathing",
-            "kinda sus",
-            "weird flex but okay",
-            "bruh moment",
-            "touch grass first",
-            "orb buffering",
-            "ask your group chat",
-            "meh",
-            "not enough lore",
-            "main character decision",
-            "YOLO had no notes",
-            "dial-up noises",
-            "lowkey maybe",
-            "chat divided",
-            "let him cook... maybe",
-            "¯\\_(ツ)_/¯",
-            "idk chief",
-            "ask me after coffee",
-            "jury's still out",
-            "big maybe energy",
-            "hmmm. concerning.",
-            "the vibes are weird",
-            "coin toss behavior",
-            "bro needs context",
-            "could go either way",
-            "manifest harder"
-          ],
-          negative: [
-            "you're cooked",
-            "hard no",
-            "cringe",
-            "L + ratio",
-            "nah fam",
-            "skill issue",
-            "delete this",
-            "goofy ahh plan",
-            "that ain't it chief",
-            "major ick",
-            "bro thought he cooked",
-            "take the L",
-            "no ❤️",
-            "put the fries in the bag",
-            "negative aura",
-            "this pmo",
-            "it's joever",
-            "stop the cap",
-            "absolutely chopped",
-            "pack it up",
-            "nah dawg",
-            "that's gonna be a no from me",
-            "absolutely cooked",
-            "not the move",
-            "you hate to see it",
-            "this ain't bussin",
-            "bad vibes only",
-            "delete and restart",
-            "generational fumble",
-            "brother eugh"
-          ]
-        },
-
-        aggressive: {
-          positive: [
-            "YES. LOCK TF IN",
-            "you actually cooked",
-            "bet. quit yapping",
-            "FULL SEND",
-            "rare sigma W",
-            "go off king",
-            "ate that shit up",
-            "fucking yolo",
-            "W rizz decision",
-            "based. next.",
-            "understood the assignment",
-            "run it",
-            "we are so fucking back",
-            "no cap, do it",
-            "main character pass granted",
-            "slay, unfortunately",
-            "certified hood classic",
-            "send it, unc",
-            "finally some good fucking food",
-            "do it before you overthink it",
-            "YES NOW MOVE",
-            "COOK THEN",
-            "RARE GOOD TAKE",
-            "W DECISION DETECTED",
-            "DO IT YOU COWARD",
-            "AURA RESTORED",
-            "COMMON YOU W",
-            "LET BRO COOK",
-            "THIS ACTUALLY SLAPS",
-            "GET AFTER IT"
-          ],
-          neutral: [
-            "bro WHAT",
-            "50/50. cope.",
-            "orb is buffering",
-            "mid question",
-            "touch grass and reboot",
-            "idk ask Jeeves",
-            "maybe, you absolute walnut",
-            "the vibes failed QA",
-            "could slap. could flop.",
-            "not enough lore",
-            "stop yapping and flip a coin",
-            "the council left you on read",
-            "bruhhhhh",
-            "it's complicated bestie",
-            "go consult Reddit",
-            "millennial pause...",
-            "no thoughts, head empty",
-            "ask ur frontal lobe",
-            "decision making DLC missing",
-            "bro I literally don't know",
-            "I NEED AN ADULT",
-            "BRO GIVE ME SOMETHING",
-            "WHY ARE YOU LIKE THIS",
-            "MAYBE. DON'T MAKE IT WEIRD.",
-            "I'M NOT YOUR MANAGER",
-            "TRY AGAIN WITH FEELING",
-            "THIS QUESTION IS MID",
-            "GO ASK THE GROUP CHAT",
-            "THE ORB DECLINES",
-            "UNCLEAR. ANNOYINGLY."
-          ],
-          negative: [
-            "SYBAU",
-            "HELL NAH",
-            "ts is ASS",
-            "bro is cooked",
-            "delete the thought",
-            "negative infinity aura",
-            "put the fries in the bag",
-            "u are NOT him",
-            "crashout incoming",
-            "generational L",
-            "it's joever",
-            "take several seats",
-            "absolute clownery",
-            "goofy ahh decision",
-            "the ick is catastrophic",
-            "touch grass immediately",
-            "you fumbled before kickoff",
-            "stop. get some help.",
-            "that's cringe bro",
-            "the orb is embarrassed",
-            "FUCK NO",
-            "ABORT THE MISSION",
-            "UNINSTALL THE THOUGHT",
-            "DO NOT PASS GO",
-            "PUT IT BACK",
-            "AURA REPOSSESSED",
-            "YOUR COOKING LICENSE IS REVOKED",
-            "BROTHER PLEASE",
-            "THIS IS WHY WE CAN'T HAVE NICE THINGS",
-            "STRAIGHT TO JAIL"
-          ]
-        },
-
-        unhinged: {
-          positive: [
-            "SIGMA MODE ACTIVATED",
-            "MANGO MANGO YES",
-            "67. DO IT.",
-            "the ohio prophecy says yes",
-            "skibidi approval granted",
-            "fuck it we ball",
-            "W rizz from the abyss",
-            "the mewing council approves",
-            "you cooked beyond comprehension",
-            "based and orb-pilled",
-            "the gyatt oracle has spoken",
-            "slay queen, destroy chronology",
-            "YOLO 2: electric boogaloo",
-            "the vibes are bussin fr fr",
-            "goated with the sauce",
-            "the timeline said bet",
-            "big chungus energy",
-            "this is peak cinema",
-            "brainrot jackpot",
-            "those who know 💀",
-            "MAXIMUM AURA OVERDRIVE",
-            "THE ANCIENTS SAID SEND IT",
-            "ULTRA INSTINCT RIZZ",
-            "THE LORE DEMANDS IT",
-            "COSMIC W DETECTED",
-            "GO FORTH LITTLE GREMLIN",
-            "THE PROPHECY IS BUSSIN",
-            "RIZZLER BLESSING ACQUIRED",
-            "ABSOLUTE PEAK FICTION",
-            "WE'RE SO BACK x1000"
-          ],
-          neutral: [
-            "still water detected",
-            "german stare",
-            "balkan rage pending",
-            "the ohio servers are down",
-            "sigma council in recess",
-            "ask the skibidi toilet",
-            "mew harder and ask again",
-            "the gyattometer is inconclusive",
-            "67? maybe 68.",
-            "npc dialogue unavailable",
-            "the void said k",
-            "brainrot levels critical",
-            "the rizzler declined comment",
-            "orb.exe stopped responding",
-            "millennial core memory unlocked",
-            "Gen Z stare engaged",
-            "alpha patch notes unavailable",
-            "Subway Surfers clip loading",
-            "Family Guy clip loading",
-            "the voices are debating",
-            "THE ORB IS IN A MEETING",
-            "COSMIC BUFFERING...",
-            "THE WIFI OF DESTINY IS WEAK",
-            "CONSULT THE NEAREST RACCOON",
-            "THE GOBLIN BOARD IS SPLIT",
-            "AURA CALCULATION PENDING",
-            "LORE INSUFFICIENT",
-            "THE VOID SAID MAYBE BRO",
-            "DESTINY LEFT YOU ON READ",
-            "SKIBIDI JURY DELIBERATING"
-          ],
-          negative: [
-            "ABSOLUTELY COOKED",
-            "SKIBIDI DENIED",
-            "generational aura debt",
-            "67 YEARS OF BAD RIZZ",
-            "the ohio council banished you",
-            "sigma license revoked",
-            "german stare intensifies",
-            "balkan rage initiated",
-            "negative gyatt",
-            "mewing cannot save you",
-            "L rizz detected",
-            "fanum taxed by destiny",
-            "those who know are disappointed 💀",
-            "the timeline said SYBAU",
-            "straight to ohio",
-            "this is anti-cinema",
-            "yassn't",
-            "epic fail, 2009 edition",
-            "rawr XD but derogatory",
-            "the orb said uninstall",
-            "THE TIMELINE FILED A RESTRAINING ORDER",
-            "AURA FORECLOSURE",
-            "THE PROPHECY SAID LOL NO",
-            "COSMIC SKILL ISSUE",
-            "YOUR RIZZ HAS BEEN GARNISHED",
-            "THE GOBLINS VOTED NO",
-            "ABSOLUTE LORE FAILURE",
-            "DESTINY SAID UNFOLLOW",
-            "THE VOID JUST BLOCKED YOU",
-            "NEGATIVE INFINITY SIGMA"
-          ]
-        }
-      };
-
-      const NIGHT = {
-        normal: [
-          { kind: "positive", text: "late-night yolo says yes" },
-          { kind: "neutral", text: "go to bed bestie" },
-          { kind: "negative", text: "3 AM brain is cooked" },
-          { kind: "neutral", text: "night vibes are sus" },
-          { kind: "positive", text: "after-hours W" },
-          { kind: "negative", text: "sleep on it chief" }
-        ],
-        aggressive: [
-          { kind: "positive", text: "fine. send it before sunrise" },
-          { kind: "neutral", text: "GO THE FUCK TO SLEEP" },
-          { kind: "negative", text: "sleep-deprived L" },
-          { kind: "negative", text: "3 AM you has zero rizz" },
-          { kind: "neutral", text: "midnight brainrot detected" },
-          { kind: "positive", text: "night shift sigma says bet" }
-        ],
-        unhinged: [
-          { kind: "positive", text: "THE WITCHING HOUR IS BUSSIN" },
-          { kind: "neutral", text: "sleep paralysis sigma is thinking" },
-          { kind: "negative", text: "the moon said SYBAU" },
-          { kind: "neutral", text: "3 AM ohio server maintenance" },
-          { kind: "positive", text: "nocturnal rizz unlocked" },
-          { kind: "negative", text: "still water after midnight 💀" }
-        ]
-      };
-
-      const RARE = {
-        normal: [
-          { kind: "positive", text: "RARE W: trust the bit" },
-          { kind: "neutral", text: "RARE DROP: ask your mom" },
-          { kind: "negative", text: "RARE L: hard reset" },
-          { kind: "positive", text: "LEGENDARY: yolo responsibly" }
-        ],
-        aggressive: [
-          { kind: "positive", text: "LEGENDARY W. DON'T FUMBLE" },
-          { kind: "neutral", text: "RARE DROP: USE YOUR FRONTAL LOBE" },
-          { kind: "negative", text: "LEGENDARY L. LOG OFF" },
-          { kind: "positive", text: "MYTHIC SIGMA PULL" }
-        ],
-        unhinged: [
-          { kind: "positive", text: "MYTHIC: MAXIMUM RIZZ" },
-          { kind: "neutral", text: "MYTHIC: THE ORB FORGOT THE QUESTION" },
-          { kind: "negative", text: "MYTHIC: AURA BANKRUPTCY" },
-          { kind: "positive", text: "ULTRA RARE: THOSE WHO KNOW 💀" }
-        ]
-      };
-
-      const WEIGHTS = {
-        normal: { positive: .42, neutral: .35, negative: .23 },
-        aggressive: { positive: .31, neutral: .24, negative: .45 },
-        unhinged: { positive: .34, neutral: .29, negative: .37 }
-      };
-
-      function pick(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-      }
-
-      function weightedKind(mode) {
-        const r = Math.random();
-        const w = WEIGHTS[mode];
-        if (r < w.positive) return "positive";
-        if (r < w.positive + w.neutral) return "neutral";
-        return "negative";
-      }
-
-      function isNight() {
-        const hour = new Date().getHours();
-        return hour >= 22 || hour < 5;
-      }
-
-      function getAnswer() {
-        const mode = state.mode;
-
-        // Rare answers stay genuinely rare.
-        if (Math.random() < 0.022) {
-          return { ...pick(RARE[mode]), special: "rare" };
-        }
-
-        // Night pool has a noticeable but not constant chance from 10 PM–4:59 AM.
-        if (isNight() && Math.random() < 0.16) {
-          return { ...pick(NIGHT[mode]), special: "night" };
-        }
-
-        const kind = weightedKind(mode);
-        return { kind, text: pick(ANSWERS[mode][kind]), special: "" };
-      }
-
-      function setStatus(result) {
-        status.dataset.kind = result.kind || "";
-        status.dataset.special = result.special || "";
-
-        if (result.special === "rare") {
-          status.textContent = "∞ aura pull";
-        } else if (result.special === "night") {
-          status.textContent = "3am debuff";
-        } else if (result.special === "irritated") {
-          status.textContent = "orb is pmo";
-        } else if (result.special === "cursed") {
-          status.textContent = "cursed pull";
-        } else {
-          status.textContent =
-            result.kind === "positive" ? "we up" :
-            result.kind === "neutral" ? "orb buffering" :
-            "it's over";
-        }
-      }
-
-      function resetBallClasses() {
-        ballWrap.classList.remove("thinking", "revealing", "rare", "night");
-      }
-
-      function triggerAnswer(source = "tap") {
-        const now = performance.now();
-        if (state.busy || now - state.lastTrigger < 650) return;
-        state.lastTrigger = now;
-        state.busy = true;
-        trackQuestion();
-
-        unlockAudio();
-        doHaptic(
-          source === "shake" ? [16, 24, 26] :
-          source === "flick" ? [8, 14, 12] :
-          14
-        );
-        playSound(source === "flick" ? "liquid" : "start");
-
-        resetBallClasses();
-        clearCurseClasses();
-        ballWrap.classList.remove("rolling", "settling");
-
-        // Flick readings begin immediately on release while the ball keeps
-        // coasting/bouncing. Tap and shake still recenter first.
-        if (source !== "flick") {
-          stopPhysics();
-          state.lastThrowSpeed = 0;
-          state.lastThrowSpin = 0;
-          setBallRoll(0, 0, 0, 1);
-        }
-
-        ballWrap.classList.remove("revealed");
-        ballWrap.dataset.source = source;
-        void ballWrap.offsetWidth;
-
-        if (source !== "flick") {
-          ballWrap.classList.add("thinking");
-        } else {
-          // Flicks reveal immediately on release. No fake shake.
-          ballWrap.classList.remove("thinking");
-        }
-
-        status.textContent = "";
-        status.dataset.kind = "";
-        status.dataset.special = "";
-
-        const anticipation =
-          source === "flick" ? 0 :
-          source === "tap" ? 420 :
-          620;
-
-        window.setTimeout(() => {
-          let result = getAnswer();
-          result = applyChaos(result);
-          answerText.textContent = result.text;
-          const len = result.text.length;
-          answerText.dataset.size = len <= 11 ? "lg" : len <= 18 ? "md" : len <= 27 ? "sm" : "xs";
-
-          ballWrap.classList.remove("thinking");
-          if (result.special) ballWrap.classList.add(result.special);
-          ballWrap.classList.add("revealed", "revealing");
-          applyCurseVisual(result);
-
-          // Let translation keep drifting, but gently unwind rotation so the
-          // answer becomes readable instead of staying sideways/upside down.
-          rotateBallReadable(source === "flick" ? 1050 : 850, source);
-
-          setStatus(result);
-          updateSessionStats(result);
-          triggerExtremeDrawEffect(result);
-          showSponsor();
-          doHaptic(
-            result.special === "rare"
-              ? [22, 28, 22, 28, 42]
-              : result.kind === "positive"
-                ? [15, 20, 24]
-                : result.kind === "negative"
-                  ? [24, 16, 30]
-                  : [13, 18, 17]
-          );
-          playSound(result.special === "rare" ? "rare" : result.kind);
-
-          window.setTimeout(() => {
-            ballWrap.classList.remove("revealing");
-            state.busy = false;
-
-            // If the ball is still coasting from a flick, leave it alone.
-            // Tilt resumes only when no other physics run is active.
-            if (!state.physicsRunning &&
-                state.tiltEnabled &&
-                state.orientationEnabled &&
-                !state.pointerStart) {
-              startPhysics();
-            }
-          }, source === "flick" ? 640 : 1020);
-        }, anticipation);
-      }
-
-      function doHaptic(pattern) {
-        if (!state.haptic || !("vibrate" in navigator)) return;
-        try { navigator.vibrate(pattern); } catch (_) {}
-      }
-
-      function unlockAudio() {
-        if (!state.sound) return;
-        const Ctx = window.AudioContext || window.webkitAudioContext;
-        if (!Ctx) return;
-        if (!state.audioCtx) state.audioCtx = new Ctx();
-        if (state.audioCtx.state === "suspended") state.audioCtx.resume();
-      }
-
-      function playTone(freq, duration = .07, type = "sine", gain = .035, delay = 0) {
-        if (!state.sound) return;
-        unlockAudio();
-        const ctx = state.audioCtx;
-        if (!ctx) return;
-
-        const osc = ctx.createOscillator();
-        const amp = ctx.createGain();
-        const t = ctx.currentTime + delay;
-
-        osc.type = type;
-        osc.frequency.setValueAtTime(freq, t);
-        amp.gain.setValueAtTime(.0001, t);
-        amp.gain.exponentialRampToValueAtTime(gain, t + .008);
-        amp.gain.exponentialRampToValueAtTime(.0001, t + duration);
-
-        osc.connect(amp);
-        amp.connect(ctx.destination);
-        osc.start(t);
-        osc.stop(t + duration + .02);
-      }
-
-      function playSlideTone(startFreq, endFreq, duration = .3, type = "sawtooth", gain = .026, delay = 0) {
-        if (!state.sound) return;
-        unlockAudio();
-        const ctx = state.audioCtx;
-        if (!ctx) return;
-
-        const osc = ctx.createOscillator();
-        const amp = ctx.createGain();
-        const t = ctx.currentTime + delay;
-
-        osc.type = type;
-        osc.frequency.setValueAtTime(startFreq, t);
-        osc.frequency.exponentialRampToValueAtTime(Math.max(20, endFreq), t + duration);
-
-        amp.gain.setValueAtTime(.0001, t);
-        amp.gain.exponentialRampToValueAtTime(gain, t + .012);
-        amp.gain.setValueAtTime(gain * .78, t + duration * .55);
-        amp.gain.exponentialRampToValueAtTime(.0001, t + duration);
-
-        osc.connect(amp);
-        amp.connect(ctx.destination);
-        osc.start(t);
-        osc.stop(t + duration + .03);
-      }
-
-      function playSadHorn() {
-        if (!state.sound) return;
-
-        // Full-on "wah wah waaah" sad trombone.
-        // Each note droops downward instead of stepping cleanly like a game-over jingle.
-        playSlideTone(350, 292, .30, "sawtooth", .030, 0.00);
-        playSlideTone(320, 262, .32, "sawtooth", .031, 0.26);
-        playSlideTone(286, 218, .38, "sawtooth", .032, 0.54);
-
-        // The last pathetic note hangs much longer and falls into the floor.
-        playSlideTone(245, 138, .78, "sawtooth", .036, 0.84);
-
-        // Low brass-ish undertone to make the final "waaah" feel heavier.
-        playSlideTone(122, 82, .72, "triangle", .018, 0.88);
-      }
-
-      function playVictorySting() {
-        if (!state.sound) return;
-        // Tiny obnoxious arcade/anime win sting.
-        playTone(523, .08, "square", .020, 0);
-        playTone(659, .08, "square", .020, .07);
-        playTone(784, .09, "square", .022, .14);
-        playTone(1047, .20, "sawtooth", .026, .21);
-        playTone(784, .12, "square", .016, .23);
-      }
-
-      function playSound(type) {
-        if (!state.sound) return;
-        if (type === "start") {
-          playTone(145, .055, "sine", .025);
-        } else if (type === "wall") {
-          playTone(105, .045, "sine", .032);
-          playTone(72, .055, "triangle", .018, .018);
-        } else if (type === "liquid") {
-          playTone(235, .045, "sine", .018);
-          playTone(185, .065, "sine", .014, .028);
-        } else if (type === "positive") {
-          playTone(420, .08, "sine", .035);
-          playTone(620, .11, "sine", .03, .055);
-        } else if (type === "neutral") {
-          playTone(255, .08, "triangle", .027);
-        } else if (type === "negative") {
-          playTone(190, .10, "sawtooth", .022);
-          playTone(135, .11, "sine", .025, .055);
-        } else if (type === "rare") {
-          playTone(420, .08, "sine", .03);
-          playTone(620, .09, "sine", .03, .055);
-          playTone(880, .14, "sine", .028, .11);
-        }
-      }
-
-      const ACHIEVEMENTS = {
-        spiral: { title: "Bro Is Spiraling", sub: "Asked the orb 5 times in 20 seconds like the answer was gonna improve." },
-        grass: { title: "Touch Grass", sub: "10 questions. Zero personal growth." },
-        sigma: { title: "Sigma Certified", sub: "Pulled a rare positive answer. This means absolutely nothing." },
-        bankrupt: { title: "Aura Bankruptcy", sub: "Three Ls in a row. Your aura has entered collections." },
-        responsible: { title: "Financially Responsible", sub: "Rejected a fake microtransaction. Incredible restraint." },
-        paytowin: { title: "Pay-to-Win", sub: "Bought fake aura with fake money. Peak capitalism." },
-        thosewhoknow: { title: "Those Who Know 💀", sub: "You found something the orb probably should not have said." },
-        chips: { title: "All That + A Bag of Chips", sub: "Unlocked the most nutritionally irrelevant achievement." }
-      };
-
-      const SPONSORS = [
-        "OrbVPN — hide your search history from your ancestors.",
-        "BetterOrb™ — therapy, except the therapist is a plastic triangle.",
-        "Temu Aura — shop like a billionaire with negative rizz.",
-        "Raid: Shadow Orbs — 600 free aura if you ignore the disclaimer.",
-        "NordRizz — military-grade protection from embarrassing DMs.",
-        "Bag of Chips DLC — now with 12% more crunch and zero gameplay.",
-        "Oracle Prime — same answers, faster shipping.",
-        "LinkedIn Premium Sigma — announce your aura promotion to recruiters."
-      ];
-
-      const IRRITATED_ANSWERS = [
-        "bro I JUST answered", "are you dense", "ask me one more fucking time",
-        "I am an orb not your therapist", "this is becoming a you problem",
-        "the answer did not patch itself", "please develop object permanence",
-        "bro is refreshing destiny", "I'm literally plastic", "go make a decision"
-      ];
-
-      const CURSED_EVENTS = [
-        { id:"error67", text:"ERROR 67: TOO MUCH AURA", kind:"neutral", curse:"glitch" },
-        { id:"redacted", text:"[ R E D A C T E D ]", kind:"neutral", curse:"glitch" },
-        { id:"chatgpt", text:"bro idk ask ChatGPT", kind:"neutral", curse:"gold" },
-        { id:"critical", text:"CRITICAL HIT: FUCK IT WE BALL", kind:"positive", curse:"gold" },
-        { id:"upside", text:"ɹǝʌo ʇᴉ dᴉlɟ 'ɥɐu", kind:"negative", curse:"upside" },
-        { id:"server", text:"ORACLE SERVERS UNAVAILABLE", kind:"neutral", curse:"glitch" },
-        { id:"chips", text:"BAG OF CHIPS DLC INSTALLED", kind:"positive", curse:"gold" }
-      ];
-
-      const FAKE_MTX = [
-        {
-          title: "Premium Oracle DLC — $4.99",
-          sub: "Unlock 3% more certainty and one (1) additional vibe."
-        },
-        {
-          title: "Sigma Pass — $2.99/month",
-          sub: "Includes priority rizz processing and zero actual benefits."
-        },
-        {
-          title: "Remove Ads* — $7.99",
-          sub: "*There are no ads. This is just financial damage."
-        },
-        {
-          title: "Aura Booster Pack — $1.99",
-          sub: "+15 imaginary aura. Non-refundable. Probably cursed."
-        },
-        {
-          title: "Oracle Plus Ultra — $9.99",
-          sub: "Answers arrive exactly as wrong, but with premium confidence."
-        },
-        {
-          title: "Skibidi Expansion Pack — $3.67",
-          sub: "Adds nothing. Literally nothing. Incredible value."
-        }
-,
-        {
-          title: "Bag of Chips DLC — $1.49",
-          sub: "All that, plus a legally distinct bag of chips. Crunch not guaranteed."
-        }
-      ];
-
-      function showAchievement(key, force = false) {
-        const item = ACHIEVEMENTS[key];
-        if (!item) return;
-        if (!force && state.achievementsSeen.has(key)) return;
-        state.achievementsSeen.add(key);
-        achievementTitle.textContent = item.title;
-        achievementSub.textContent = item.sub;
-        achievementPop.classList.add("show");
-        achievementPop.setAttribute("aria-hidden", "false");
-        playTone(740, .07, "sine", .022);
-        playTone(980, .10, "sine", .020, .05);
-        clearTimeout(showAchievement._timer);
-        showAchievement._timer = setTimeout(() => {
-          achievementPop.classList.remove("show");
-          achievementPop.setAttribute("aria-hidden", "true");
-        }, 2800);
-      }
-
-      function showSponsor(force = false) {
-        if (!force && Math.random() >= .027) return;
-        if (sponsorPop.classList.contains("show")) return;
-        sponsorCopy.textContent = pick(SPONSORS);
-        sponsorPop.classList.add("show");
-        sponsorPop.setAttribute("aria-hidden", "false");
-        state.sponsorCount += 1;
-        clearTimeout(showSponsor._timer);
-        showSponsor._timer = setTimeout(() => {
-          sponsorPop.classList.remove("show");
-          sponsorPop.setAttribute("aria-hidden", "true");
-        }, 3300);
-      }
-
-      function cleanRecentQuestions(now = Date.now()) {
-        state.recentQuestions = state.recentQuestions.filter(t => now - t < 20000);
-      }
-
-      function irritationLevel() {
-        cleanRecentQuestions();
-        const n = state.recentQuestions.length;
-        if (n >= 8) return 3;
-        if (n >= 5) return 2;
-        if (n >= 3) return 1;
-        return 0;
-      }
-
-      function trackQuestion() {
-        const now = Date.now();
-        state.questionCount += 1;
-        state.recentQuestions.push(now);
-        cleanRecentQuestions(now);
-        if (state.recentQuestions.length >= 5) showAchievement("spiral");
-        if (state.questionCount >= 10) showAchievement("grass");
-      }
-
-      function applyChaos(result) {
-        const level = irritationLevel();
-        const irritationChance = level === 3 ? .62 : level === 2 ? .40 : level === 1 ? .18 : 0;
-        if (irritationChance && Math.random() < irritationChance) {
-          ballWrap.classList.add("orb-mad");
-          return { kind:"negative", text:pick(IRRITATED_ANSWERS), special:"irritated", curse:"" };
-        }
-        if (Math.random() < .003) {
-          return { kind:"neutral", text:"bro idk ask ChatGPT", special:"cursed", curse:"gold", eventId:"chatgpt" };
-        }
-        if (state.forcedCurse || Math.random() < .022) {
-          const event = state.forcedCurse ? CURSED_EVENTS.find(x => x.id === state.forcedCurse) || pick(CURSED_EVENTS) : pick(CURSED_EVENTS);
-          state.forcedCurse = null;
-          return { kind:event.kind, text:event.text, special:"cursed", curse:event.curse, eventId:event.id };
-        }
-        return result;
-      }
-
-      function clearCurseClasses() {
-        ballWrap.classList.remove("curse-gold", "curse-upside", "curse-glitch", "orb-mad");
-      }
-
-      function applyCurseVisual(result) {
-        clearCurseClasses();
-        if (result.curse) ballWrap.classList.add(`curse-${result.curse}`);
-      }
-
-      function extremeDrawType(result) {
-        if (!result) return "";
-
-        const textValue = (result.text || "").toLowerCase();
-
-        const hardGood =
-          result.kind === "positive" &&
-          (
-            result.special === "rare" ||
-            result.special === "cursed" ||
-            textValue.includes("maximum aura") ||
-            textValue.includes("critical hit") ||
-            textValue.includes("mythic") ||
-            textValue.includes("legendary") ||
-            textValue.includes("brainrot jackpot")
-          );
-
-        const hardBad =
-          result.kind === "negative" &&
-          (
-            result.special === "rare" ||
-            result.special === "cursed" ||
-            state.negativeStreak >= 2 ||
-            textValue.includes("aura debt") ||
-            textValue.includes("aura foreclosure") ||
-            textValue.includes("straight to jail") ||
-            textValue.includes("absolutely cooked") ||
-            textValue.includes("timeline filed")
-          );
-
-        return hardGood ? "good" : hardBad ? "bad" : "";
-      }
-
-      function triggerExtremeDrawEffect(result) {
-        ballWrap.classList.remove("extreme-good", "extreme-bad");
-
-        const type = extremeDrawType(result);
-        if (!type) return;
-
-        if (type === "good") {
-          ballWrap.classList.add("extreme-good");
-          playVictorySting();
-          doHaptic([12, 18, 12, 18, 26]);
-          showToast("+420 aura • certified banger", 1700);
-          state.aura += 420;
-          state.rizz += 6;
-        } else {
-          ballWrap.classList.add("extreme-bad");
-          doHaptic([28, 22, 34]);
-          showToast("-420 aura • absolutely devastating", 2300);
-          state.aura -= 420;
-          state.rizz -= 6;
-        }
-
-        clearTimeout(triggerExtremeDrawEffect._timer);
-        triggerExtremeDrawEffect._timer = setTimeout(() => {
-          ballWrap.classList.remove("extreme-good", "extreme-bad");
-        }, 1550);
-      }
-
-      function updateSessionStats(result) {
-        state.lastAnswerKind = result.kind;
-        if (result.kind === "negative") { state.negativeStreak += 1; state.aura -= 67; state.rizz -= 3; }
-        else if (result.kind === "positive") { state.negativeStreak = 0; state.aura += 100; state.rizz += 2; }
-        else { state.negativeStreak = 0; state.aura += 7; }
-
-        if (state.negativeStreak >= 3) showAchievement("bankrupt");
-        if (result.special === "rare" && result.kind === "positive") showAchievement("sigma");
-        if (result.eventId === "chips") showAchievement("chips");
-        if (result.text.toLowerCase().includes("those who know")) showAchievement("thosewhoknow");
-
-        if (Math.random() < .055) {
-          const fakeStats = [
-            `AURA: ${state.aura.toLocaleString()}`,
-            `RIZZ: ${state.rizz}`,
-            `ORB TRUST SCORE: ${Math.max(1, 99 - state.questionCount * 3)}%`,
-            `QUESTIONS WITHOUT LEARNING: ${state.questionCount}`,
-            `FINANCIAL DAMAGE AVOIDED: $${(state.financiallyResponsible * 4.99).toFixed(2)}`
-          ];
-          showToast(pick(fakeStats), 1800);
-        }
-      }
-
-      function triggerAuraPowerup() {
-        ballWrap.classList.remove("aura-powerup");
-        void ballWrap.offsetWidth;
-        ballWrap.classList.add("aura-powerup");
-
-        playSound("rare");
-        doHaptic([16, 22, 18, 22, 34]);
-
-        showToast("+9999 imaginary aura");
-
-        clearTimeout(triggerAuraPowerup._timer);
-        triggerAuraPowerup._timer = setTimeout(() => {
-          ballWrap.classList.remove("aura-powerup");
-        }, 7000);
-      }
-
-      function hideFakeMtx() {
-        mtxBanner.classList.remove("show");
-        mtxBackdrop.classList.remove("show");
-        mtxBanner.setAttribute("aria-hidden", "true");
-        mtxBackdrop.setAttribute("aria-hidden", "true");
-      }
-
-      function showFakeMtxNow() {
-        if (mtxBanner.classList.contains("show")) return;
-
-        const offer = pick(FAKE_MTX);
-        mtxTitle.textContent = offer.title;
-        mtxSub.textContent = offer.sub;
-
-        mtxBackdrop.classList.add("show");
-        mtxBanner.classList.add("show");
-        mtxBackdrop.setAttribute("aria-hidden", "false");
-        mtxBanner.setAttribute("aria-hidden", "false");
-
-        playSound("wall");
-        doHaptic([10, 16, 10]);
-      }
-
-      function maybeShowFakeMtx() {
-        // Rare enough to surprise, obnoxious enough to be funny.
-        if (Math.random() >= 0.085 || mtxBanner.classList.contains("show")) return;
-        showFakeMtxNow();
-      }
-
-      function showToast(message, ms = 1800) {
-        toast.textContent = message;
-        toast.classList.add("show");
-        clearTimeout(showToast._timer);
-        showToast._timer = setTimeout(() => toast.classList.remove("show"), ms);
-      }
-
-      function addUnhingedButton() {
-        if ($("#unhingedBtn")) return;
-        const btn = document.createElement("button");
-        btn.className = "mode-btn unhinged";
-        btn.id = "unhingedBtn";
-        btn.dataset.mode = "unhinged";
-        btn.textContent = "Unhinged";
-        modesEl.appendChild(btn);
-      }
-
-      function unlockUnhinged() {
-        if (state.unhingedUnlocked) return;
-        state.unhingedUnlocked = true;
-        localStorage.setItem(STORAGE.unhinged, "1");
-        addUnhingedButton();
-        doHaptic([18, 30, 18, 30, 38]);
-        playSound("rare");
-        showToast("UNHINGED UNLOCKED. aura consequences are now your problem.", 2400);
-      }
-
-      function setMode(mode) {
-        if (mode === "unhinged" && !state.unhingedUnlocked) return;
-        state.mode = mode;
-        localStorage.setItem(STORAGE.mode, mode);
-        document.querySelectorAll(".mode-btn").forEach(btn => {
-          btn.classList.toggle("active", btn.dataset.mode === mode);
-        });
-
-        resetBallClasses();
-        ballWrap.classList.remove("rolling", "settling");
-        stopPhysics();
-        setBallRoll(0, 0, 0, 1);
-        document.documentElement.dataset.mode = mode;
-        ballWrap.classList.remove("revealed");
-        status.textContent = "";
-
-        if (mode === "normal") {
-          promptTitle.textContent = "ask ts. accept the consequences.";
-          promptSub.textContent = "tap, flick, or shake. orb knows ball.";
-        } else if (mode === "aggressive") {
-          promptTitle.textContent = "ask ts then. don't fold.";
-          promptSub.textContent = "orb is already pmo.";
-        } else {
-          promptTitle.textContent = "u found the lobotomy timeline.";
-          promptSub.textContent = "those who know 💀";
-        }
-
-        doHaptic(12);
-        playSound("start");
-      }
-
-      function syncModeUI() {
-        if (state.unhingedUnlocked) addUnhingedButton();
-        if (state.mode === "unhinged" && !state.unhingedUnlocked) {
-          state.mode = "normal";
-        }
-        setMode(state.mode);
-      }
-
-      function setBallRoll(x, y, rotation, scale = 1) {
-        state.rollX = x;
-        state.rollY = y;
-        state.rollR = rotation;
-        ballWrap.style.setProperty("--roll-x", `${x}px`);
-        ballWrap.style.setProperty("--roll-y", `${y}px`);
-        ballWrap.style.setProperty("--roll-r", `${rotation}deg`);
-        ballWrap.style.setProperty("--roll-s", scale);
-      }
-
-      function getPhysicsBounds() {
-        const diameter = ballWrap.offsetWidth;
-        const radius = diameter / 2;
-        const viewportW = window.innerWidth;
-        const stageH = $(".stage").clientHeight;
-
-        // The ball may partially disappear beyond the screen edge.
-        // That creates a virtual gutter and gives a large ball room to move.
-        const sideGutter = radius * .52;
-        const verticalGutter = radius * .24;
-
-        const maxX = Math.max(42, viewportW / 2 - radius + sideGutter);
-        const maxY = Math.max(34, stageH / 2 - radius + verticalGutter);
-
-        return { maxX, maxY };
-      }
-
-      function wallHit() {
-        ballWrap.classList.remove("wall-hit");
-        void ballWrap.offsetWidth;
-        ballWrap.classList.add("wall-hit");
-        if (state.haptic) doHaptic(6);
-        playSound("wall");
-        window.setTimeout(() => ballWrap.classList.remove("wall-hit"), 150);
-
-      }
-
-      function stopPhysics({ center = false } = {}) {
-        if (state.physicsRAF) cancelAnimationFrame(state.physicsRAF);
-        state.physicsRAF = 0;
-        state.physicsRunning = false;
-        state.lastPhysicsT = 0;
-        state.vx = 0;
-        state.vy = 0;
-        state.vr = 0;
-
-        if (center) {
-          ballWrap.classList.remove("rolling");
-          ballWrap.classList.add("settling");
-          setBallRoll(0, 0, 0, 1);
-          window.setTimeout(() => ballWrap.classList.remove("settling"), 440);
-        }
-      }
-
-      function maybeRevealAfterFlick() {
-        // Legacy safety hook. Flicks now reveal immediately on pointer release.
-        if (!state.pendingFlickAnswer || state.busy) return;
-        state.pendingFlickAnswer = false;
-        triggerAnswer("flick");
-      }
-
-      function startPhysics() {
-        if (state.physicsRunning || state.pointerStart) return;
-        state.physicsRunning = true;
-        state.lastPhysicsT = performance.now();
-
-        const step = (now) => {
-          if (!state.physicsRunning) return;
-
-          const dt = Math.min(.032, Math.max(.008, (now - state.lastPhysicsT) / 1000));
-          state.lastPhysicsT = now;
-
-          // Phone tilt becomes a gentle acceleration, not a teleport.
-          if (state.tiltEnabled && state.orientationEnabled) {
-            state.vx += state.tiltX * 18 * dt;
-            state.vy += state.tiltY * 18 * dt;
-          }
-
-          // Curveball: finger-built spin applies sideways acceleration
-          // perpendicular to the current flight direction.
-          const curveSpeed = Math.hypot(state.vx, state.vy);
-          if (state.curveLife > .01 && Math.abs(state.curveSpin) > .02 && curveSpeed > 80) {
-            const nx = -state.vy / curveSpeed;
-            const ny =  state.vx / curveSpeed;
-
-            // Strong enough to visibly arc, but not so strong it loops in circles.
-            const curveAccel = 255 * state.curveSpin * state.curveLife;
-            state.vx += nx * curveAccel * dt;
-            state.vy += ny * curveAccel * dt;
-
-            // Let the curve gradually bleed off during the coast.
-            state.curveLife *= Math.pow(.972, dt * 60);
-          } else if (state.curveLife > 0) {
-            state.curveLife *= Math.pow(.94, dt * 60);
-          }
-
-          state.rollX += state.vx * dt;
-          state.rollY += state.vy * dt;
-
-          // Before the answer appears, physics owns rotation.
-          // Once revealed, rotateBallReadable() owns it exclusively so the
-          // two systems cannot fight each other.
-          if (!ballWrap.classList.contains("revealed")) {
-            state.rollR += state.vr * dt;
-          }
-
-          const { maxX, maxY } = getPhysicsBounds();
-          let hit = false;
-
-          if (state.rollX > maxX) {
-            state.rollX = maxX;
-            state.vx = -Math.abs(state.vx) * .36;
-            state.vr *= .86;
-            hit = true;
-          } else if (state.rollX < -maxX) {
-            state.rollX = -maxX;
-            state.vx = Math.abs(state.vx) * .36;
-            state.vr *= .86;
-            hit = true;
-          }
-
-          if (state.rollY > maxY) {
-            state.rollY = maxY;
-            state.vy = -Math.abs(state.vy) * .36;
-            state.vr *= .86;
-            hit = true;
-          } else if (state.rollY < -maxY) {
-            state.rollY = -maxY;
-            state.vy = Math.abs(state.vy) * .36;
-            state.vr *= .86;
-            hit = true;
-          }
-
-          if (hit) {
-            wallHit();
-            state.curveLife *= .62;
-            state.curveSpin *= .88;
-          }
-
-          // Friction. Tilt can keep it moving, otherwise it coasts to a stop.
-          const friction = Math.pow(.978, dt * 60);
-          state.vx *= friction;
-          state.vy *= friction;
-          state.vr *= Math.pow(.958, dt * 60);
-
-          // Rolling rotation based partly on horizontal velocity.
-          // Once an answer is revealing, translation can keep coasting but
-          // rotation is handed off to rotateBallReadable().
-          if (!ballWrap.classList.contains("revealed")) {
-            state.rollR += state.vx * .032 * dt;
-          }
-
-          setBallRoll(state.rollX, state.rollY, state.rollR, 1);
-
-          const speed = Math.hypot(state.vx, state.vy);
-          const tiltHolding = state.tiltEnabled && state.orientationEnabled &&
-                              (Math.abs(state.tiltX) > .8 || Math.abs(state.tiltY) > .8);
-
-          const angularSettled =
-            ballWrap.classList.contains("revealed") || Math.abs(state.vr) < 13;
-
-          if (speed < 24 && angularSettled && !tiltHolding) {
-            state.physicsRunning = false;
-            state.physicsRAF = 0;
-            state.vx = state.vy = state.vr = 0;
-            state.curveSpin = 0;
-            state.curveLife = 0;
-            maybeRevealAfterFlick();
-            return;
-          }
-
-          state.physicsRAF = requestAnimationFrame(step);
-        };
-
-        state.physicsRAF = requestAnimationFrame(step);
-      }
-
-      function settleBall() {
-        stopPhysics({ center: true });
-      }
-
-      function normalizeDegrees(deg) {
-        let value = deg % 360;
-        if (value > 180) value -= 360;
-        if (value < -180) value += 360;
-        return value;
-      }
-
-      function rotateBallReadable(baseDuration = 1450, source = "tap") {
-        const spinToken = ++state.readableSpinToken;
-        // Keep the ball where it landed, but use real throw energy to decide
-        // how much spin remains before the answer settles upright.
-        const start = performance.now();
-
-        // Translation can keep coasting, but angular physics hands off here.
-        state.vr = 0;
-
-        const startR = state.rollR;
-        const nearestUpright = Math.round(startR / 360) * 360;
-        const correction = normalizeDegrees(nearestUpright - startR);
-
-        let fullTurns = 0;
-        let direction = correction < 0 ? -1 : 1;
-
-        if (source === "flick") {
-          const speed = state.lastThrowSpeed || Math.hypot(state.vx, state.vy);
-          const spin = state.lastThrowSpin || state.vr;
-
-          // Release velocity controls how many complete laps it gets.
-          if (speed >= 900) {
-            fullTurns = 3;      // ~1080°
-          } else if (speed >= 680) {
-            fullTurns = 2;      // ~720°
-          } else if (speed >= 430) {
-            fullTurns = 1;      // ~360°
-          } else {
-            fullTurns = 0;      // just unwind naturally
-          }
-
-          // Spin direction follows actual release angular momentum when useful.
-          if (Math.abs(spin) > 8) {
-            direction = spin < 0 ? -1 : 1;
-          } else if (Math.abs(state.vx) > 20) {
-            direction = state.vx < 0 ? -1 : 1;
-          }
-
-        } else {
-          // Tap/shake can still get a modest mystical half-second-ish settle,
-          // but they don't pretend they were physically thrown.
-          fullTurns = 0;
-        }
-
-        const delta = correction + direction * 360 * fullTurns;
-        const targetR = startR + delta;
-
-        // Faster throws earn more rotations, but duration doesn't scale linearly
-        // so a hard launch doesn't take forever.
-        const duration =
-          source === "flick"
-            ? baseDuration + fullTurns * 330
-            : baseDuration;
-
-        const ease = (t) => {
-          // One continuous curve: starts moving immediately, then naturally
-          // decelerates into the readable position with no mid-animation snap.
-          return 1 - Math.pow(1 - t, 3.15);
-        };
-
-        // If the throw was extremely gentle and already almost upright, don't
-        // manufacture motion that wasn't there.
-        if (Math.abs(delta) < 1.5) {
-          state.rollR = nearestUpright;
-          setBallRoll(state.rollX, state.rollY, state.rollR, 1);
-          return;
-        }
-
-        const step = (now) => {
-          if (spinToken !== state.readableSpinToken) return;
-
-          const t = Math.min(1, (now - start) / duration);
-          const eased = ease(t);
-
-          state.rollR = startR + delta * eased;
-          setBallRoll(state.rollX, state.rollY, state.rollR, 1);
-
-          if (t < 1) {
-            requestAnimationFrame(step);
-          } else {
-            state.rollR = nearestUpright;
-            setBallRoll(state.rollX, state.rollY, state.rollR, 1);
-          }
-        };
-
-        requestAnimationFrame(step);
-      }
-
-      // Input system:
-      // - phones/tablets use raw Touch Events only
-      // - desktop/mouse uses Pointer Events only
-      // This avoids Android firing two competing gesture systems.
-      const useTouchControls =
-        ("ontouchstart" in window) ||
-        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
-
-      let suppressNextClick = false;
-
-      function beginBallGesture(x, y, time = performance.now()) {
-        state.readableSpinToken += 1;
-        stopPhysics();
-        state.pendingFlickAnswer = false;
-
-        state.pointerStart = {
-          x,
-          y,
-          t: time,
-          rollX: state.rollX,
-          rollY: state.rollY
-        };
-        state.pointerLast = { x, y, t: time };
-        state.pointerSamples = [];
-        recordPointerSample(x, y, time);
-        state.pointerMoved = false;
-
-        state.throwVX = 0;
-        state.throwVY = 0;
-        state.throwT = 0;
-
-        const rect = ballWrap.getBoundingClientRect();
-        state.spinCenterX = rect.left + rect.width / 2;
-        state.spinCenterY = rect.top + rect.height / 2;
-        state.spinLastAngle = Math.atan2(
-          y - state.spinCenterY,
-          x - state.spinCenterX
-        );
-        state.spinAccum = 0;
-        state.spinGesture = false;
-        state.spinVR = 0;
-        state.spinT = 0;
-
-        ballWrap.classList.remove("settling");
-        ballWrap.classList.add("rolling");
-      }
-
-      function updateSpinChargeVisual() {
-        if (!state.spinGesture) {
-          ballWrap.classList.remove("spin-charged", "spin-maxed");
-          return;
-        }
-
-        const power = Math.min(1.35, Math.abs(state.spinVR) / 850);
-        ballWrap.classList.add("spin-charged");
-        ballWrap.classList.toggle("spin-maxed", power >= .92);
-      }
-
-      function moveBallGesture(x, y, time = performance.now()) {
-        if (!state.pointerStart) return;
-
-        const dx = x - state.pointerStart.x;
-        const dy = y - state.pointerStart.y;
-        const distance = Math.hypot(dx, dy);
-
-        if (distance > 7) state.pointerMoved = true;
-
-        const dt = Math.max(8, time - state.pointerLast.t);
-        const linearVX = (x - state.pointerLast.x) / dt * 1000;
-        const linearVY = (y - state.pointerLast.y) / dt * 1000;
-        const instantSpeed = Math.hypot(linearVX, linearVY);
-
-        // Poké Ball-style spin detection:
-        // circular motion around the ball's center builds real angular momentum.
-        const angle = Math.atan2(
-          y - state.spinCenterY,
-          x - state.spinCenterX
-        );
-
-        let angleDelta = angle - state.spinLastAngle;
-        if (angleDelta > Math.PI) angleDelta -= Math.PI * 2;
-        if (angleDelta < -Math.PI) angleDelta += Math.PI * 2;
-
-        const deltaDeg = angleDelta * 180 / Math.PI;
-        state.spinAccum += Math.abs(deltaDeg);
-
-        const radius = Math.hypot(
-          x - state.spinCenterX,
-          y - state.spinCenterY
-        );
-        const ballRadius = Math.max(1, ballWrap.getBoundingClientRect().width / 2);
-
-        // Once you've traced enough of an arc near the ball, enter spin mode.
-        if (
-          !state.spinGesture &&
-          state.spinAccum > 16 &&
-          radius > ballRadius * .22 &&
-          radius < ballRadius * 1.18
-        ) {
-          state.spinGesture = true;
-          ballWrap.classList.add("spin-charged");
-        }
-
-        if (state.spinGesture) {
-          // Rotate directly with the finger and build angular velocity.
-          state.rollR += deltaDeg * 1.12;
-
-          const angularVelocity = deltaDeg / dt * 1000; // deg/sec
-          state.spinVR = state.spinVR * .72 + angularVelocity * .28;
-          state.spinT = time;
-          updateSpinChargeVisual();
-
-          // Let the ball wobble/creep a little, but don't drag it around the
-          // whole screen while the user is spinning it in circles.
-          const { maxX, maxY } = getPhysicsBounds();
-          const nextX = Math.max(
-            -maxX,
-            Math.min(maxX, state.rollX + linearVX * .0008)
-          );
-          const nextY = Math.max(
-            -maxY,
-            Math.min(maxY, state.rollY + linearVY * .0008)
-          );
-
-          // If the user suddenly whips outward, start translating again while
-          // preserving the accumulated spin for the eventual throw.
-          const radialChange =
-            Math.abs(radius - Math.hypot(
-              state.pointerLast.x - state.spinCenterX,
-              state.pointerLast.y - state.spinCenterY
-            ));
-
-          if (instantSpeed > 420 && radialChange > 10) {
-            const { maxX, maxY } = getPhysicsBounds();
-            const nextX = Math.max(
-              -maxX,
-              Math.min(maxX, state.rollX + (x - state.pointerLast.x) * .92)
-            );
-            const nextY = Math.max(
-              -maxY,
-              Math.min(maxY, state.rollY + (y - state.pointerLast.y) * .92)
-            );
-            setBallRoll(nextX, nextY, state.rollR, 1);
-          } else {
-            setBallRoll(nextX, nextY, state.rollR, 1);
-          }
-
-        } else {
-          // Normal drag behavior before a circular spin is detected.
-          const { maxX, maxY } = getPhysicsBounds();
-          const nextX = Math.max(
-            -maxX,
-            Math.min(maxX, state.pointerStart.rollX + dx * .94)
-          );
-          const nextY = Math.max(
-            -maxY,
-            Math.min(maxY, state.pointerStart.rollY + dy * .90)
-          );
-
-          state.rollR += (nextX - state.rollX) * .18;
-          setBallRoll(nextX, nextY, state.rollR, 1);
-        }
-
-        state.vx = linearVX;
-        state.vy = linearVY;
-
-        if (instantSpeed > 235) {
-          state.throwVX = state.vx;
-          state.throwVY = state.vy;
-          state.throwT = time;
-        }
-
-        recordPointerSample(x, y, time);
-
-        state.pointerLast = { x, y, t: time };
-        state.spinLastAngle = angle;
-      }
-
-      function clearGestureState() {
-        ballWrap.classList.remove("rolling");
-        state.pointerStart = null;
-        state.pointerLast = null;
-        state.pointerSamples = [];
-        state.pointerMoved = false;
-        state.throwVX = 0;
-        state.throwVY = 0;
-        state.throwT = 0;
-        state.spinGesture = false;
-        state.spinAccum = 0;
-      }
-
-      function endBallGesture(x, y, time = performance.now()) {
-        if (!state.pointerStart || !state.pointerLast) return;
-
-        const dx = x - state.pointerStart.x;
-        const dy = y - state.pointerStart.y;
-        const distance = Math.hypot(dx, dy);
-
-        const wasTap = !state.pointerMoved && distance < 10;
-
-        ballWrap.classList.remove("rolling");
-
-        if (!wasTap) {
-          // Reliability mode: ANY real drag becomes a throw on release.
-          // Prefer the most recent measured velocity, but if the browser gives
-          // us junk, use the drag direction itself.
-          let vx = state.vx || state.throwVX || 0;
-          let vy = state.vy || state.throwVY || 0;
-          let speed = Math.hypot(vx, vy);
-
-          if (speed < 120) {
-            const mag = Math.max(1, distance);
-            vx = dx / mag * 360;
-            vy = dy / mag * 360;
-            speed = 360;
-          }
-
-          const minimumThrow =
-            distance > 110 ? 470 :
-            distance > 65 ? 420 :
-            360;
-
-          if (speed < minimumThrow) {
-            const mag = Math.max(1, speed);
-            vx = vx / mag * minimumThrow;
-            vy = vy / mag * minimumThrow;
-          }
-
-          const cap = 1000;
-          speed = Math.hypot(vx, vy);
-          if (speed > cap) {
-            vx = vx / speed * cap;
-            vy = vy / speed * cap;
-          }
-
-          state.vx = vx;
-          state.vy = vy;
-
-          const recentSpin =
-            state.spinT > 0 &&
-            (time - state.spinT) <= 700 &&
-            Math.abs(state.spinVR) > 40;
-
-          // Store spin separately as a curveball force. Positive/negative
-          // angular velocity bends the path in opposite directions.
-          state.curveSpin = recentSpin
-            ? Math.max(-1.25, Math.min(1.25, state.spinVR / 850))
-            : 0;
-          state.curveLife = recentSpin ? 1 : 0;
-
-          // Preserve real finger-built spin when present; otherwise fall back
-          // to the old linear-motion-derived rotation.
-          state.vr = recentSpin
-            ? Math.max(-900, Math.min(900, state.spinVR * .018))
-            : state.vx * .28 - state.vy * .06;
-
-          state.lastThrowSpeed = Math.hypot(state.vx, state.vy);
-          state.lastThrowSpin = state.vr;
-
-          suppressNextClick = true;
-          clearGestureState();
-          state.spinVR = 0;
-          state.spinT = 0;
-          ballWrap.classList.remove("spin-charged", "spin-maxed");
-
-          triggerAnswer("flick");
-          requestAnimationFrame(() => startPhysics());
-          maybeShowFakeMtx();
-
-        } else {
-          suppressNextClick = true;
-          clearGestureState();
-          state.spinVR = 0;
-          state.spinT = 0;
-          state.curveSpin = 0;
-          state.curveLife = 0;
-          ballWrap.classList.remove("spin-charged", "spin-maxed");
-          triggerAnswer("tap");
-        }
-
-        window.setTimeout(() => {
-          suppressNextClick = false;
-        }, 300);
-      }
-
-      function cancelBallGesture() {
-        clearGestureState();
-        state.spinVR = 0;
-        state.spinT = 0;
-        state.curveSpin = 0;
-        state.curveLife = 0;
-        ballWrap.classList.remove("spin-charged", "spin-maxed");
-      }
-
-      if (useTouchControls) {
-        ballWrap.addEventListener("touchstart", (e) => {
-          if (!e.touches || e.touches.length !== 1) return;
-          e.preventDefault();
-
-          const t = e.touches[0];
-          beginBallGesture(t.clientX, t.clientY, performance.now());
-        }, { passive: false });
-
-        ballWrap.addEventListener("touchmove", (e) => {
-          if (!state.pointerStart || !e.touches || e.touches.length !== 1) return;
-          e.preventDefault();
-
-          const t = e.touches[0];
-          moveBallGesture(t.clientX, t.clientY, performance.now());
-        }, { passive: false });
-
-        ballWrap.addEventListener("touchend", (e) => {
-          if (!state.pointerStart) return;
-          e.preventDefault();
-
-          const t =
-            e.changedTouches && e.changedTouches.length
-              ? e.changedTouches[0]
-              : null;
-
-          const x = t ? t.clientX : state.pointerLast.x;
-          const y = t ? t.clientY : state.pointerLast.y;
-
-          endBallGesture(x, y, performance.now());
-        }, { passive: false });
-
-        ballWrap.addEventListener("touchcancel", (e) => {
-          e.preventDefault();
-          cancelBallGesture();
-        }, { passive: false });
-
-      } else {
-        ballWrap.addEventListener("pointerdown", (e) => {
-          if (e.button !== undefined && e.button !== 0) return;
-          e.preventDefault();
-          beginBallGesture(e.clientX, e.clientY, performance.now());
-        });
-
-        window.addEventListener("pointermove", (e) => {
-          if (!state.pointerStart) return;
-          e.preventDefault();
-          moveBallGesture(e.clientX, e.clientY, performance.now());
-        }, { passive: false });
-
-        window.addEventListener("pointerup", (e) => {
-          if (!state.pointerStart) return;
-          e.preventDefault();
-          endBallGesture(e.clientX, e.clientY, performance.now());
-        }, { passive: false });
-
-        window.addEventListener("pointercancel", cancelBallGesture);
-
-        // Desktop click fallback.
-        ballWrap.addEventListener("click", () => {
-          if (suppressNextClick || state.pointerStart) return;
-          triggerAnswer("tap");
-        });
-      }
-
-      // Never allow an interrupted app/browser gesture to permanently wedge input.
-      window.addEventListener("blur", cancelBallGesture);
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) cancelBallGesture();
-      });
-
-      ballWrap.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          triggerAnswer("tap");
-        }
-      });
-
-      // Secret: five taps on the brand within ~2.4 seconds.
-      secretBrand.addEventListener("pointerup", () => {
-        const now = Date.now();
-        state.secretTaps = state.secretTaps.filter(t => now - t < 2400);
-        state.secretTaps.push(now);
-        if (state.secretTaps.length >= 5) {
-          state.secretTaps = [];
-          unlockUnhinged();
-        }
-      });
-
-      modesEl.addEventListener("click", (e) => {
-        const btn = e.target.closest(".mode-btn");
-        if (!btn) return;
-        setMode(btn.dataset.mode);
-      });
-
-      function orientationHandler(e) {
-        if (!state.tiltEnabled) return;
-
-        // gamma: left/right tilt, beta: front/back tilt.
-        const gamma = Math.max(-35, Math.min(35, e.gamma || 0));
-        const beta = Math.max(-35, Math.min(35, e.beta || 0));
-
-        // Dead zone prevents tiny sensor noise from making the ball creep forever.
-        const dead = 2.2;
-        state.tiltX = Math.abs(gamma) < dead ? 0 : gamma;
-        state.tiltY = Math.abs(beta) < dead ? 0 : beta * .72;
-
-        ballWrap.style.setProperty("--tilt-x", `${gamma}%`);
-        ballWrap.style.setProperty("--tilt-y", `${beta}%`);
-        ballWrap.classList.toggle("tilt-active", Math.abs(gamma) > dead || Math.abs(beta) > dead);
-
-        if (!state.pointerStart && !state.busy &&
-            (Math.abs(state.tiltX) > dead || Math.abs(state.tiltY) > dead)) {
-          startPhysics();
-        }
-      }
-
-      async function enableOrientation() {
-        if (!("DeviceOrientationEvent" in window)) {
-          tiltStatus.textContent = "Tilt sensors are not available in this browser.";
-          tiltToggle.checked = false;
-          state.tiltEnabled = false;
-          localStorage.setItem(STORAGE.tilt, "0");
-          return false;
-        }
-
-        try {
-          if (typeof DeviceOrientationEvent.requestPermission === "function") {
-            const result = await DeviceOrientationEvent.requestPermission();
-            if (result !== "granted") {
-              tiltStatus.textContent = "Tilt permission was not granted.";
-              tiltToggle.checked = false;
-              state.tiltEnabled = false;
-              localStorage.setItem(STORAGE.tilt, "0");
-              return false;
-            }
-          }
-
-          if (!state.orientationEnabled) {
-            window.addEventListener("deviceorientation", orientationHandler, { passive: true });
-            state.orientationEnabled = true;
-          }
-
-          tiltStatus.textContent = "Enabled. Tilt the phone and the ball will roll.";
-          return true;
-        } catch (_) {
-          tiltStatus.textContent = "Could not enable tilt in this browser.";
-          tiltToggle.checked = false;
-          state.tiltEnabled = false;
-          localStorage.setItem(STORAGE.tilt, "0");
-          return false;
-        }
-      }
-
-      // Shake control.
-      function motionHandler(e) {
-        const acc = e.accelerationIncludingGravity;
-        if (!acc) return;
-
-        const x = acc.x || 0;
-        const y = acc.y || 0;
-        const z = acc.z || 0;
-        const magnitude = Math.sqrt(x*x + y*y + z*z);
-
-        const now = performance.now();
-
-        if (magnitude > 34 && now - state.lastOverShake > 1800) {
-          state.lastOverShake = now;
-          state.lastMotion = now;
-          state.pendingFlickAnswer = false;
-          stopPhysics();
-          answerText.textContent = "CALM DOWN BRO I'M THINKING";
-          answerText.dataset.size = "sm";
-          ballWrap.classList.remove("thinking");
-          ballWrap.classList.add("revealed", "revealing", "orb-mad");
-          status.textContent = "physical violence detected";
-          status.dataset.kind = "negative";
-          status.dataset.special = "irritated";
-          doHaptic([32,20,32,20,44]);
-          playSound("negative");
-          window.setTimeout(() => ballWrap.classList.remove("revealing", "orb-mad"), 850);
-          return;
-        }
-
-        if (magnitude > 21.5 && now - state.lastMotion > 1200) {
-          state.lastMotion = now;
-          state.pendingFlickAnswer = false;
-          stopPhysics();
-          triggerAnswer("shake");
-        }
-      }
-
-      function activateMotion() {
-        if (state.motionEnabled) return;
-        window.addEventListener("devicemotion", motionHandler, { passive: true });
-        state.motionEnabled = true;
-        motionStatus.textContent = "Enabled. Shake threshold is tuned to avoid normal walking.";
-        motionBtn.textContent = "Enabled";
-        motionBtn.disabled = true;
-      }
-
-      async function requestMotion() {
-        if (!("DeviceMotionEvent" in window)) {
-          motionStatus.textContent = "Motion sensors are not available in this browser.";
-          motionBtn.textContent = "Unavailable";
-          motionBtn.disabled = true;
-          return;
-        }
-
-        try {
-          if (typeof DeviceMotionEvent.requestPermission === "function") {
-            const result = await DeviceMotionEvent.requestPermission();
-            if (result === "granted") {
-              activateMotion();
-              showToast("Shake control enabled.");
-            } else {
-              motionStatus.textContent = "Permission was not granted.";
-            }
-          } else {
-            activateMotion();
-            showToast("Shake control enabled.");
-          }
-        } catch (err) {
-          motionStatus.textContent = "Could not enable motion in this browser.";
-        }
-      }
-
-      function initMotionUI() {
-        if (!("DeviceMotionEvent" in window)) {
-          motionStatus.textContent = "Motion sensors are not available here.";
-          motionBtn.textContent = "Unavailable";
-          motionBtn.disabled = true;
-          return;
-        }
-
-        if (typeof DeviceMotionEvent.requestPermission === "function") {
-          motionStatus.textContent = "Needs one tap to allow motion access.";
-          motionBtn.textContent = "Enable";
-        } else {
-          activateMotion();
-        }
-      }
-
-      mtxNoBtn.addEventListener("click", () => {
-        hideFakeMtx();
-        state.financiallyResponsible += 1;
-        showToast("financially responsible behavior detected");
-        showAchievement("responsible");
-      });
-
-      mtxBuyBtn.addEventListener("click", () => {
-        hideFakeMtx();
-        state.fakePurchases += 1;
-        state.aura += 9999;
-        triggerAuraPowerup();
-        showAchievement("paytowin");
-      });
-
-      testMtxBtn.addEventListener("click", () => {
-        closeSettings();
-        window.setTimeout(showFakeMtxNow, 120);
-      });
-
-      testAchievementBtn.addEventListener("click", () => {
-        closeSettings();
-        window.setTimeout(() => showAchievement("chips", true), 120);
-      });
-
-      testSponsorBtn.addEventListener("click", () => {
-        closeSettings();
-        window.setTimeout(() => showSponsor(true), 120);
-      });
-
-      testChaosBtn.addEventListener("click", () => {
-        closeSettings();
-        state.forcedCurse = pick(CURSED_EVENTS).id;
-        window.setTimeout(() => triggerAnswer("tap"), 120);
-      });
-
-      // Settings.
-      function openSettings() {
-        settingsModal.classList.add("open");
-        settingsModal.setAttribute("aria-hidden", "false");
-      }
-
-      function closeSettings() {
-        settingsModal.classList.remove("open");
-        settingsModal.setAttribute("aria-hidden", "true");
-      }
-
-      $("#settingsBtn").addEventListener("click", openSettings);
-      $("#closeSettings").addEventListener("click", closeSettings);
-      settingsModal.addEventListener("pointerdown", (e) => {
-        if (e.target === settingsModal) closeSettings();
-      });
-
-      motionBtn.addEventListener("click", requestMotion);
-
-      soundToggle.checked = state.sound;
-      hapticToggle.checked = state.haptic;
-      tiltToggle.checked = state.tiltEnabled;
-
-      if (!("DeviceOrientationEvent" in window)) {
-        tiltStatus.textContent = "Tilt sensors are not available here.";
-        tiltToggle.disabled = true;
-        tiltToggle.checked = false;
-        state.tiltEnabled = false;
-      } else if (state.tiltEnabled) {
-        tiltStatus.textContent = "Tap once to re-enable tilt for this session.";
-      }
-
-      soundToggle.addEventListener("change", () => {
-        state.sound = soundToggle.checked;
-        localStorage.setItem(STORAGE.sound, state.sound ? "1" : "0");
-        if (state.sound) {
-          unlockAudio();
-          playSound("positive");
-        }
-      });
-
-      hapticToggle.addEventListener("change", () => {
-        state.haptic = hapticToggle.checked;
-        localStorage.setItem(STORAGE.haptic, state.haptic ? "1" : "0");
-        if (state.haptic) doHaptic(20);
-      });
-
-      tiltToggle.addEventListener("change", async () => {
-        state.tiltEnabled = tiltToggle.checked;
-        localStorage.setItem(STORAGE.tilt, state.tiltEnabled ? "1" : "0");
-
-        if (state.tiltEnabled) {
-          const ok = await enableOrientation();
-          if (ok) {
-            showToast("Tilt physics enabled.");
-            startPhysics();
-          }
-        } else {
-          state.tiltX = 0;
-          state.tiltY = 0;
-          ballWrap.classList.remove("tilt-active");
-          tiltStatus.textContent = "Uses phone tilt to roll the ball.";
-          showToast("Tilt physics off.");
-        }
-      });
-
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden && "vibrate" in navigator) {
-          try { navigator.vibrate(0); } catch (_) {}
-        }
-      });
-
-      syncModeUI();
-      initMotionUI();
-    })();
-  </script>
+<main class="app">
+<header class="top">
+<div class="brand" id="brand">
+<h1>Brain Rot 8 Ball</h1>
+<p>ask ts. accept the consequences.</p>
+</div>
+<button class="btn gear" id="settings">⚙</button>
+</header>
+
+<nav class="modes" id="modes">
+<button class="mode active" data-mode="normal">Normal</button>
+<button class="mode" data-mode="aggressive">Aggressive</button>
+</nav>
+
+<section class="stage">
+<div class="center">
+<div class="ball-wrap" id="bw" tabindex="0">
+<div class="aura">
+<i class="spark"></i>
+<i class="spark"></i>
+<i class="spark"></i>
+<i class="spark"></i>
+<i class="spark"></i>
+<i class="spark"></i>
+</div>
+
+<div class="ball">
+<div class="window">
+<div class="bubbles">
+<i class="bubble"></i>
+<i class="bubble"></i>
+<i class="bubble"></i>
+<i class="bubble"></i>
+<i class="bubble"></i>
+</div>
+
+<div class="eight">8</div>
+
+<div class="answer">
+<div class="triangle">
+<div class="answer-text" id="answer">ASK AGAIN</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="prompt">
+<strong id="pt">ask ts. accept the consequences.</strong>
+<span id="ps">tap, drag, throw, spin, or shake. orb knows ball.</span>
+</div>
+
+<div class="status" id="status"></div>
+</div>
+</section>
+
+<div class="hints">
+<div class="hint"><b>Tap</b>instant bad advice</div>
+<div class="hint"><b>Throw</b>any drag + release</div>
+<div class="hint"><b>Spin</b>circle it like a Poké Ball</div>
+</div>
+</main>
+
+<div class="modal" id="settingsModal">
+<section class="sheet">
+<div class="sheet-head">
+<h2>Settings</h2>
+<button class="btn" id="close">×</button>
+</div>
+
+<div class="setting">
+<div><strong>Sound</strong><small>Small answer/UI sounds.</small></div>
+<input class="switch" id="sound" type="checkbox">
+</div>
+
+<div class="setting">
+<div><strong>Haptics</strong><small>Vibration when supported.</small></div>
+<input class="switch" id="haptic" type="checkbox">
+</div>
+
+<div class="setting">
+<div><strong>Shake control</strong><small id="motionText">Checking support…</small></div>
+<button class="btn" id="motion">Enable</button>
+</div>
+
+<div class="setting">
+<div><strong>Tilt physics</strong><small id="tiltText">Rolls the ball with phone tilt.</small></div>
+<input class="switch" id="tilt" type="checkbox">
+</div>
+
+<div class="setting">
+<div><strong>Test fake MTX</strong><small>Spawn the annoying paywall.</small></div>
+<button class="btn" id="testMtx">Spawn</button>
+</div>
+
+<div class="setting">
+<div><strong>Test chaos</strong><small>Force a cursed answer.</small></div>
+<button class="btn" id="testChaos">Cursed</button>
+</div>
+</section>
+</div>
+
+<div class="mtx-bg" id="mtxBg"></div>
+
+<div class="mtx" id="mtx">
+<small>LIMITED TIME OPPORTUNITY</small>
+<h2 id="mtxTitle">Premium Oracle DLC</h2>
+<p id="mtxSub">Unlock 3% more certainty for only $4.99.</p>
+<button class="btn buy" id="buy">BUY AURA, COWARD</button>
+<button class="btn" id="nope">nah I'm broke</button>
+<div class="fine">This is fake. No money is collected. The orb is just being annoying.</div>
+</div>
+
+<div class="pop" id="pop"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(()=>{
+"use strict";
+
+const $=s=>document.querySelector(s);
+
+const bw=$("#bw");
+const ans=$("#answer");
+const status=$("#status");
+const modes=$("#modes");
+const brand=$("#brand");
+const toast=$("#toast");
+const pop=$("#pop");
+const modal=$("#settingsModal");
+const sound=$("#sound");
+const haptic=$("#haptic");
+const tilt=$("#tilt");
+const motion=$("#motion");
+const motionText=$("#motionText");
+const tiltText=$("#tiltText");
+const mtx=$("#mtx");
+const mtxBg=$("#mtxBg");
+const mtxTitle=$("#mtxTitle");
+const mtxSub=$("#mtxSub");
+
+const S={
+mode:localStorage.br8mode||"normal",
+unhinged:localStorage.br8u==="1",
+sound:localStorage.br8s!=="0",
+haptic:localStorage.br8h!=="0",
+tilt:localStorage.br8t==="1",
+motion:false,
+orient:false,
+busy:false,
+last:0,
+taps:[],
+x:0,
+y:0,
+r:0,
+vx:0,
+vy:0,
+vr:0,
+raf:0,
+running:false,
+lastT:0,
+tx:0,
+ty:0,
+p0:null,
+p1:null,
+moved:false,
+gmode:"pending",
+path:0,
+turnAbs:0,
+turnSigned:0,
+heading:null,
+cx:0,
+cy:0,
+lastAngle:0,
+spinV:0,
+spinPeak:0,
+spinT:0,
+curve:0,
+curveLife:0,
+throwVX:0,
+throwVY:0,
+throwT:0,
+lastThrowSpeed:0,
+lastThrowSpin:0,
+readToken:0,
+readable:false,
+audio:null,
+q:0,
+neg:0,
+aura:0,
+rizz:67,
+forced:false
+};
+
+const A={
+normal:{
+positive:[
+"you cooked",
+"let him cook",
+"big W",
+"bet",
+"send it",
+"hell yeah brother",
+"YOLO",
+"based",
+"slay",
+"ate, no crumbs",
+"we're so back",
+"sigma behavior",
+"W rizz",
+"certified dub",
+"goated",
+"absolute cinema",
+"chef's kiss",
+"do it for the plot",
+"valid af",
+"hell yeah dude"
+],
+neutral:[
+"idk fam",
+"bro...",
+"it's giving maybe",
+"ask again bestie",
+"the math ain't mathing",
+"kinda sus",
+"weird flex but okay",
+"bruh moment",
+"orb buffering",
+"ask your group chat",
+"not enough lore",
+"idk chief",
+"jury's still out",
+"big maybe energy",
+"the vibes are weird",
+"coin toss behavior",
+"could go either way",
+"manifest harder"
+],
+negative:[
+"you're cooked",
+"hard no",
+"cringe",
+"L + ratio",
+"nah fam",
+"skill issue",
+"delete this",
+"goofy ahh plan",
+"that ain't it chief",
+"major ick",
+"bro thought he cooked",
+"take the L",
+"no ❤️",
+"put the fries in the bag",
+"negative aura",
+"it's joever",
+"generational fumble",
+"brother eugh"
+]
+},
+
+aggressive:{
+positive:[
+"YES. LOCK TF IN",
+"you actually cooked",
+"FULL SEND",
+"rare sigma W",
+"go off king",
+"fucking yolo",
+"W rizz decision",
+"based. next.",
+"run it",
+"we are so fucking back",
+"YES NOW MOVE",
+"COOK THEN",
+"W DECISION DETECTED",
+"DO IT YOU COWARD",
+"AURA RESTORED",
+"LET BRO COOK",
+"THIS ACTUALLY SLAPS"
+],
+neutral:[
+"bro WHAT",
+"50/50. cope.",
+"orb is buffering",
+"mid question",
+"touch grass and reboot",
+"idk ask Jeeves",
+"the vibes failed QA",
+"could slap. could flop.",
+"go consult Reddit",
+"millennial pause...",
+"I NEED AN ADULT",
+"WHY ARE YOU LIKE THIS",
+"THIS QUESTION IS MID",
+"GO ASK THE GROUP CHAT",
+"THE ORB DECLINES"
+],
+negative:[
+"SYBAU",
+"HELL NAH",
+"ts is ASS",
+"bro is cooked",
+"delete the thought",
+"negative infinity aura",
+"put the fries in the bag",
+"u are NOT him",
+"generational L",
+"it's joever",
+"absolute clownery",
+"touch grass immediately",
+"FUCK NO",
+"ABORT THE MISSION",
+"AURA REPOSSESSED",
+"YOUR COOKING LICENSE IS REVOKED",
+"STRAIGHT TO JAIL"
+]
+},
+
+unhinged:{
+positive:[
+"SIGMA MODE ACTIVATED",
+"MANGO MANGO YES",
+"67. DO IT.",
+"skibidi approval granted",
+"fuck it we ball",
+"W rizz from the abyss",
+"the mewing council approves",
+"based and orb-pilled",
+"the gyatt oracle has spoken",
+"YOLO 2: electric boogaloo",
+"big chungus energy",
+"brainrot jackpot",
+"those who know 💀",
+"MAXIMUM AURA OVERDRIVE",
+"ULTRA INSTINCT RIZZ",
+"COSMIC W DETECTED",
+"THE PROPHECY IS BUSSIN",
+"WE'RE SO BACK x1000"
+],
+neutral:[
+"still water detected",
+"german stare",
+"balkan rage pending",
+"the ohio servers are down",
+"sigma council in recess",
+"ask the skibidi toilet",
+"mew harder and ask again",
+"67? maybe 68.",
+"npc dialogue unavailable",
+"orb.exe stopped responding",
+"Subway Surfers clip loading",
+"THE ORB IS IN A MEETING",
+"COSMIC BUFFERING...",
+"AURA CALCULATION PENDING",
+"DESTINY LEFT YOU ON READ"
+],
+negative:[
+"ABSOLUTELY COOKED",
+"SKIBIDI DENIED",
+"generational aura debt",
+"67 YEARS OF BAD RIZZ",
+"sigma license revoked",
+"german stare intensifies",
+"balkan rage initiated",
+"negative gyatt",
+"mewing cannot save you",
+"fanum taxed by destiny",
+"straight to ohio",
+"this is anti-cinema",
+"THE TIMELINE FILED A RESTRAINING ORDER",
+"AURA FORECLOSURE",
+"COSMIC SKILL ISSUE",
+"YOUR RIZZ HAS BEEN GARNISHED",
+"NEGATIVE INFINITY SIGMA"
+]
+}
+};
+
+const W={
+normal:[.42,.35],
+aggressive:[.31,.24],
+unhinged:[.34,.29]
+};
+
+const rare=[
+"MYTHIC: MAXIMUM RIZZ",
+"ULTRA RARE: THOSE WHO KNOW 💀",
+"LEGENDARY W. DON'T FUMBLE",
+"RARE DROP: USE YOUR FRONTAL LOBE",
+"MYTHIC: AURA BANKRUPTCY"
+];
+
+const night=[
+"go to bed bestie",
+"3 AM brain is cooked",
+"night shift sigma says bet",
+"THE WITCHING HOUR IS BUSSIN",
+"the moon said SYBAU"
+];
+
+const cursed=[
+"ERROR 67: TOO MUCH AURA",
+"[ R E D A C T E D ]",
+"bro idk ask ChatGPT",
+"CRITICAL HIT: FUCK IT WE BALL",
+"ORACLE SERVERS UNAVAILABLE",
+"BAG OF CHIPS DLC INSTALLED"
+];
+
+const sponsors=[
+"OrbVPN — hide your search history from your ancestors.",
+"BetterOrb™ — therapy, except the therapist is a plastic triangle.",
+"Temu Aura — shop like a billionaire with negative rizz.",
+"NordRizz — military-grade protection from embarrassing DMs.",
+"Bag of Chips DLC — zero gameplay, maximum crunch."
+];
+
+const offers=[
+["Premium Oracle DLC — $4.99","Unlock 3% more certainty and one additional vibe."],
+["Sigma Pass — $2.99/month","Priority rizz processing and zero actual benefits."],
+["Remove Ads* — $7.99","There are no ads. This is just financial damage."],
+["Aura Booster Pack — $1.99","+15 imaginary aura. Probably cursed."],
+["Bag of Chips DLC — $1.49","All that, plus a legally distinct bag of chips."]
+];
+
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+
+function showToast(t,ms=1700){
+toast.textContent=t;
+toast.classList.add("show");
+clearTimeout(showToast.t);
+showToast.t=setTimeout(()=>toast.classList.remove("show"),ms);
+}
+
+function showPop(t,ms=2500){
+pop.textContent=t;
+pop.classList.add("show");
+clearTimeout(showPop.t);
+showPop.t=setTimeout(()=>pop.classList.remove("show"),ms);
+}
+
+function vib(p){
+if(S.haptic&&navigator.vibrate){
+try{navigator.vibrate(p)}catch{}
+}
+}
+
+function audio(){
+if(!S.sound)return null;
+const C=window.AudioContext||window.webkitAudioContext;
+if(!C)return null;
+if(!S.audio)S.audio=new C;
+if(S.audio.state==="suspended")S.audio.resume();
+return S.audio;
+}
+
+function tone(f,d=.08,type="sine",g=.025,delay=0){
+const c=audio();
+if(!c)return;
+const o=c.createOscillator();
+const a=c.createGain();
+const t=c.currentTime+delay;
+o.type=type;
+o.frequency.value=f;
+a.gain.setValueAtTime(.0001,t);
+a.gain.exponentialRampToValueAtTime(g,t+.008);
+a.gain.exponentialRampToValueAtTime(.0001,t+d);
+o.connect(a);
+a.connect(c.destination);
+o.start(t);
+o.stop(t+d+.02);
+}
+
+function snd(k){
+if(k==="good"){
+tone(430,.08);
+tone(660,.1,"sine",.025,.06);
+}else if(k==="bad"){
+tone(170,.11,"sawtooth",.018);
+tone(125,.12,"sine",.02,.06);
+}else if(k==="rare"){
+tone(420,.07);
+tone(620,.08,"sine",.028,.05);
+tone(900,.14,"sine",.024,.11);
+}else{
+tone(220,.05,"sine",.018);
+}
+}
+
+function setBall(x=S.x,y=S.y,r=S.r){
+S.x=x;
+S.y=y;
+S.r=r;
+bw.style.setProperty("--x",x+"px");
+bw.style.setProperty("--y",y+"px");
+bw.style.setProperty("--r",r+"deg");
+}
+
+function bounds(){
+const rad=bw.offsetWidth/2;
+const st=$(".stage");
+return{
+x:Math.max(42,innerWidth/2-rad+rad*.52),
+y:Math.max(34,st.clientHeight/2-rad+rad*.24)
+};
+}
+
+function stop(){
+if(S.raf)cancelAnimationFrame(S.raf);
+S.raf=0;
+S.running=false;
+S.vx=S.vy=S.vr=0;
+S.lastT=0;
+}
+
+function hit(){
+vib(6);
+tone(95,.04,"sine",.018);
+}
+
+function physics(){
+if(S.running||S.p0)return;
+
+S.running=true;
+S.lastT=performance.now();
+
+const step=n=>{
+if(!S.running)return;
+
+const dt=clamp((n-S.lastT)/1000,.008,.032);
+S.lastT=n;
+
+if(S.tilt&&S.orient){
+S.vx+=S.tx*17*dt;
+S.vy+=S.ty*17*dt;
+}
+
+const sp=Math.hypot(S.vx,S.vy);
+
+if(S.curveLife>.01&&Math.abs(S.curve)>.02&&sp>65){
+const turn=170*S.curve*S.curveLife*Math.PI/180*dt;
+const c=Math.cos(turn);
+const s=Math.sin(turn);
+const vx=S.vx;
+const vy=S.vy;
+
+S.vx=vx*c-vy*s;
+S.vy=vx*s+vy*c;
+
+S.curveLife*=Math.pow(.989,dt*60);
+}
+
+S.x+=S.vx*dt;
+S.y+=S.vy*dt;
+
+if(!S.readable){
+S.r+=S.vr*dt;
+}
+
+const b=bounds();
+let h=false;
+
+if(S.x>b.x){
+S.x=b.x;
+S.vx=-Math.abs(S.vx)*.38;
+h=true;
+}else if(S.x<-b.x){
+S.x=-b.x;
+S.vx=Math.abs(S.vx)*.38;
+h=true;
+}
+
+if(S.y>b.y){
+S.y=b.y;
+S.vy=-Math.abs(S.vy)*.38;
+h=true;
+}else if(S.y<-b.y){
+S.y=-b.y;
+S.vy=Math.abs(S.vy)*.38;
+h=true;
+}
+
+if(h){
+hit();
+S.curveLife*=.65;
+}
+
+const fr=Math.pow(.979,dt*60);
+S.vx*=fr;
+S.vy*=fr;
+S.vr*=Math.pow(.96,dt*60);
+
+setBall();
+
+if(
+Math.hypot(S.vx,S.vy)<22 &&
+!((S.tilt&&S.orient)&&(Math.abs(S.tx)>1||Math.abs(S.ty)>1))
+){
+S.running=false;
+S.raf=0;
+S.vx=S.vy=S.vr=0;
+S.curve=S.curveLife=0;
+return;
+}
+
+S.raf=requestAnimationFrame(step);
+};
+
+S.raf=requestAnimationFrame(step);
+}
+
+function normDeg(d){
+d%=360;
+if(d>180)d-=360;
+if(d<-180)d+=360;
+return d;
+}
+
+function readable(delay=0){
+const token=++S.readToken;
+
+setTimeout(()=>{
+if(token!==S.readToken)return;
+
+S.readable=true;
+S.vr=0;
+
+const start=performance.now();
+const r0=S.r;
+const nearest=Math.round(r0/360)*360;
+const corr=normDeg(nearest-r0);
+const speed=S.lastThrowSpeed;
+const turns=speed>850?2:speed>430?1:0;
+const dir=Math.abs(S.lastThrowSpin)>20?Math.sign(S.lastThrowSpin):1;
+const delta=corr+dir*360*turns;
+const dur=900+turns*300;
+
+const step=n=>{
+if(token!==S.readToken)return;
+
+const t=Math.min(1,(n-start)/dur);
+const e=1-Math.pow(1-t,3.1);
+
+setBall(S.x,S.y,r0+delta*e);
+
+if(t<1){
+requestAnimationFrame(step);
+}else{
+setBall(S.x,S.y,nearest);
+S.readable=false;
+}
+};
+
+requestAnimationFrame(step);
+},delay);
+}
+
+function result(){
+const m=S.mode;
+const h=new Date().getHours();
+
+if(S.forced){
+S.forced=false;
+return{
+kind:"neutral",
+text:pick(cursed),
+special:"cursed"
+};
+}
+
+if(Math.random()<.022){
+const t=pick(rare);
+return{
+kind:t.includes("BANKRUPTCY")?"bad":"good",
+text:t,
+special:"rare"
+};
+}
+
+if((h>=22||h<5)&&Math.random()<.13){
+return{
+kind:"neutral",
+text:pick(night),
+special:"night"
+};
+}
+
+const r=Math.random();
+const w=W[m];
+const kind=
+r<w[0]
+?"positive"
+:r<w[0]+w[1]
+?"neutral"
+:"negative";
+
+return{
+kind,
+text:pick(A[m][kind]),
+special:""
+};
+}
+
+function reveal(src="tap"){
+const now=performance.now();
+
+if(S.busy||now-S.last<500)return;
+
+S.last=now;
+S.busy=true;
+S.q++;
+
+audio();
+
+vib(
+src==="shake"
+?[16,22,28]
+:src==="throw"
+?[8,14,12]
+:14
+);
+
+bw.classList.remove("revealed");
+
+if(src!=="throw"){
+stop();
+setBall(0,0,0);
+bw.classList.add("thinking");
+}
+
+status.textContent="";
+
+setTimeout(()=>{
+const z=result();
+
+ans.textContent=z.text;
+
+ans.dataset.s=
+z.text.length<12
+?"lg"
+:z.text.length<20
+?"md"
+:z.text.length>29
+?"xs"
+:"sm";
+
+bw.classList.remove("thinking");
+bw.classList.add("revealed");
+
+status.className=
+"status "+
+(
+z.kind==="positive"||z.kind==="good"
+?"good"
+:z.kind==="negative"||z.kind==="bad"
+?"bad"
+:"neutral"
+);
+
+status.textContent=
+z.special==="rare"
+?"∞ aura pull"
+:z.special==="cursed"
+?"cursed pull"
+:z.kind==="positive"
+?"we up"
+:z.kind==="negative"
+?"it's over"
+:"orb buffering";
+
+if(z.kind==="negative"||z.kind==="bad"){
+S.neg++;
+S.aura-=67;
+snd("bad");
+}else if(z.kind==="positive"||z.kind==="good"){
+S.neg=0;
+S.aura+=100;
+snd(z.special==="rare"?"rare":"good");
+}else{
+S.neg=0;
+S.aura+=7;
+snd("neutral");
+}
+
+if(S.neg>=3){
+showPop("🏆 Aura Bankruptcy — three Ls in a row.");
+}
+
+if(z.text.includes("THOSE WHO KNOW")){
+showPop("🏆 Those Who Know 💀");
+}
+
+if(Math.random()<.03){
+setTimeout(()=>{
+showPop("Definitely Sponsored: "+pick(sponsors));
+},500);
+}
+
+readable(
+src==="throw"&&Math.abs(S.lastThrowSpin)>80
+?430
+:0
+);
+
+setTimeout(()=>{
+S.busy=false;
+},700);
+
+},src==="throw"?0:420);
+}
+
+function power(){
+bw.classList.remove("power");
+void bw.offsetWidth;
+bw.classList.add("power");
+
+snd("rare");
+vib([16,20,18,24,34]);
+
+showToast("+9999 imaginary aura");
+
+setTimeout(()=>{
+bw.classList.remove("power");
+},7000);
+}
+
+function showMtx(force=false){
+if(!force&&Math.random()>.085)return;
+
+const o=pick(offers);
+
+mtxTitle.textContent=o[0];
+mtxSub.textContent=o[1];
+
+mtx.classList.add("show");
+mtxBg.classList.add("show");
+
+vib([10,16,10]);
+}
+
+function hideMtx(){
+mtx.classList.remove("show");
+mtxBg.classList.remove("show");
+}
+
+function mode(m){
+if(m==="unhinged"&&!S.unhinged)return;
+
+S.mode=m;
+localStorage.br8mode=m;
+
+document.documentElement.dataset.mode=m;
+
+document.querySelectorAll(".mode").forEach(b=>{
+b.classList.toggle("active",b.dataset.mode===m);
+});
+
+$("#pt").textContent=
+m==="normal"
+?"ask ts. accept the consequences."
+:m==="aggressive"
+?"ask ts then. don't fold."
+:"u found the lobotomy timeline.";
+
+$("#ps").textContent=
+m==="unhinged"
+?"those who know 💀"
+:"tap, drag, throw, spin, or shake. orb knows ball.";
+
+stop();
+setBall(0,0,0);
+bw.classList.remove("revealed");
+}
+
+function addU(){
+if($("#u"))return;
+
+const b=document.createElement("button");
+
+b.id="u";
+b.className="mode unhinged";
+b.dataset.mode="unhinged";
+b.textContent="Unhinged";
+
+modes.appendChild(b);
+}
+
+if(S.unhinged)addU();
+
+mode(
+S.mode==="unhinged"&&!S.unhinged
+?"normal"
+:S.mode
+);
+
+modes.onclick=e=>{
+const b=e.target.closest(".mode");
+if(b)mode(b.dataset.mode);
+};
+
+brand.addEventListener("pointerup",()=>{
+const n=Date.now();
+
+S.taps=S.taps.filter(t=>n-t<2400);
+S.taps.push(n);
+
+if(S.taps.length>=5&&!S.unhinged){
+S.unhinged=true;
+localStorage.br8u="1";
+
+addU();
+
+showToast("UNHINGED UNLOCKED");
+vib([18,30,18,30,38]);
+snd("rare");
+}
+});
+
+function angleNorm(a){
+while(a>Math.PI)a-=Math.PI*2;
+while(a<-Math.PI)a+=Math.PI*2;
+return a;
+}
+
+function begin(x,y,t=performance.now()){
+++S.readToken;
+
+S.readable=false;
+
+stop();
+
+S.p0={
+x,
+y,
+t,
+bx:S.x,
+by:S.y
+};
+
+S.p1={x,y,t};
+
+S.moved=false;
+S.gmode="pending";
+
+S.path=0;
+S.turnAbs=0;
+S.turnSigned=0;
+S.heading=null;
+
+S.spinV=0;
+S.spinPeak=0;
+S.spinT=0;
+
+S.throwVX=0;
+S.throwVY=0;
+S.throwT=0;
+
+const r=bw.getBoundingClientRect();
+
+S.cx=r.left+r.width/2;
+S.cy=r.top+r.height/2;
+
+S.lastAngle=Math.atan2(
+y-S.cy,
+x-S.cx
+);
+
+S.curve=0;
+S.curveLife=0;
+
+bw.classList.remove("spin","max");
+}
+
+function move(x,y,t=performance.now()){
+if(!S.p0)return;
+
+const sx=x-S.p1.x;
+const sy=y-S.p1.y;
+
+const seg=Math.hypot(sx,sy);
+
+const dt=Math.max(
+8,
+t-S.p1.t
+);
+
+const vx=sx/dt*1000;
+const vy=sy/dt*1000;
+const spd=Math.hypot(vx,vy);
+
+if(
+Math.hypot(
+x-S.p0.x,
+y-S.p0.y
+)>7
+){
+S.moved=true;
+}
+
+if(seg>1.5){
+const h=Math.atan2(sy,sx);
+
+if(S.heading!==null){
+const td=
+angleNorm(
+h-S.heading
+)*180/Math.PI;
+
+if(Math.abs(td)<100){
+S.turnAbs+=Math.abs(td);
+S.turnSigned+=td;
+}
+}
+
+S.heading=h;
+S.path+=seg;
+}
+
+if(S.gmode==="pending"){
+const cons=
+S.turnAbs
+?Math.abs(S.turnSigned)/S.turnAbs
+:0;
+
+if(
+S.path>=18 &&
+S.turnAbs>=20 &&
+cons>.55
+){
+S.gmode="spin";
+
+S.lastAngle=Math.atan2(
+y-S.cy,
+x-S.cx
+);
+
+S.spinV=
+Math.sign(
+S.turnSigned||1
+)*180;
+
+S.spinPeak=S.spinV;
+S.spinT=t;
+
+bw.classList.add("spin");
+
+}else if(S.path>=34){
+S.gmode="drag";
+}
+}
+
+if(S.gmode==="spin"){
+const a=Math.atan2(
+y-S.cy,
+x-S.cx
+);
+
+const dd=
+angleNorm(
+a-S.lastAngle
+)*180/Math.PI;
+
+const rad=Math.hypot(
+x-S.cx,
+y-S.cy
+);
+
+const br=bw.offsetWidth/2;
+
+if(
+rad>br*.1 &&
+Math.abs(dd)<75
+){
+S.r+=dd*1.35;
+
+const av=dd/dt*1000;
+
+S.spinV=
+S.spinV*.62 +
+av*.38;
+
+if(
+Math.abs(S.spinV)>
+Math.abs(S.spinPeak)
+){
+S.spinPeak=S.spinV;
+}
+
+S.spinT=t;
+
+bw.classList.toggle(
+"max",
+Math.abs(S.spinPeak)>500
+);
+
+setBall(
+S.p0.bx,
+S.p0.by,
+S.r
+);
+}
+
+S.lastAngle=a;
+
+}else if(S.gmode==="drag"){
+const b=bounds();
+
+setBall(
+clamp(
+S.p0.bx+(x-S.p0.x)*.94,
+-b.x,
+b.x
+),
+clamp(
+S.p0.by+(y-S.p0.y)*.9,
+-b.y,
+b.y
+),
+S.r+(x-S.p1.x)*.15
+);
+}
+
+S.vx=vx;
+S.vy=vy;
+
+if(spd>150){
+S.throwVX=vx;
+S.throwVY=vy;
+S.throwT=t;
+}
+
+S.p1={x,y,t};
+}
+
+function end(x,y,t=performance.now()){
+if(!S.p0)return;
+
+const dx=x-S.p0.x;
+const dy=y-S.p0.y;
+const dist=Math.hypot(dx,dy);
+
+const tap=
+!S.moved &&
+dist<10;
+
+const spinSource=
+Math.abs(S.spinPeak)>
+Math.abs(S.spinV)
+?S.spinPeak
+:S.spinV;
+
+const hadSpin=
+S.spinT &&
+t-S.spinT<900 &&
+Math.abs(spinSource)>90;
+
+const modeWas=S.gmode;
+
+if(tap){
+clearGesture();
+reveal("tap");
+return;
+}
+
+let vx=
+S.throwVX||
+S.vx;
+
+let vy=
+S.throwVY||
+S.vy;
+
+let sp=Math.hypot(vx,vy);
+
+if(sp<120){
+if(hadSpin&&modeWas==="spin"){
+const a=
+S.lastAngle +
+(
+spinSource>0
+?Math.PI/2
+:-Math.PI/2
+);
+
+vx=Math.cos(a)*390;
+vy=Math.sin(a)*390;
+
+}else{
+const mag=Math.max(1,dist);
+
+vx=dx/mag*390;
+vy=dy/mag*390;
+}
+
+sp=390;
+}
+
+const min=
+dist>100
+?470
+:390;
+
+if(sp<min){
+vx=vx/sp*min;
+vy=vy/sp*min;
+}
+
+sp=Math.hypot(vx,vy);
+
+if(sp>1000){
+vx=vx/sp*1000;
+vy=vy/sp*1000;
+}
+
+S.vx=vx;
+S.vy=vy;
+
+S.curve=
+hadSpin
+?clamp(
+spinSource/500,
+-1.4,
+1.4
+)
+:0;
+
+S.curveLife=
+hadSpin
+?1
+:0;
+
+S.vr=
+hadSpin
+?clamp(
+spinSource,
+-800,
+800
+)
+:vx*.28-vy*.06;
+
+S.lastThrowSpeed=
+Math.hypot(vx,vy);
+
+S.lastThrowSpin=S.vr;
+
+clearGesture(false);
+
+bw.classList.remove(
+"spin",
+"max"
+);
+
+reveal("throw");
+
+requestAnimationFrame(
+physics
+);
+
+showMtx();
+}
+
+function clearGesture(resetCurve=true){
+S.p0=null;
+S.p1=null;
+
+S.moved=false;
+S.gmode="pending";
+
+S.path=0;
+S.turnAbs=0;
+S.turnSigned=0;
+S.heading=null;
+
+S.spinV=0;
+S.spinPeak=0;
+S.spinT=0;
+
+S.throwVX=0;
+S.throwVY=0;
+S.throwT=0;
+
+bw.classList.remove(
+"spin",
+"max"
+);
+
+if(resetCurve){
+S.curve=0;
+S.curveLife=0;
+}
+}
+
+const touch=
+("ontouchstart" in window) ||
+navigator.maxTouchPoints>0;
+
+if(touch){
+
+bw.addEventListener(
+"touchstart",
+e=>{
+if(e.touches.length!==1)return;
+
+e.preventDefault();
+
+const q=e.touches[0];
+
+begin(
+q.clientX,
+q.clientY
+);
+},
+{passive:false}
+);
+
+bw.addEventListener(
+"touchmove",
+e=>{
+if(
+!S.p0 ||
+e.touches.length!==1
+)return;
+
+e.preventDefault();
+
+const q=e.touches[0];
+
+move(
+q.clientX,
+q.clientY
+);
+},
+{passive:false}
+);
+
+bw.addEventListener(
+"touchend",
+e=>{
+if(!S.p0)return;
+
+e.preventDefault();
+
+const q=
+e.changedTouches[0]||
+S.p1;
+
+end(
+q.clientX,
+q.clientY
+);
+},
+{passive:false}
+);
+
+bw.addEventListener(
+"touchcancel",
+()=>{
+clearGesture();
+},
+{passive:false}
+);
+
+}else{
+
+bw.addEventListener(
+"pointerdown",
+e=>{
+if(e.button!==0)return;
+
+e.preventDefault();
+
+begin(
+e.clientX,
+e.clientY
+);
+}
+);
+
+addEventListener(
+"pointermove",
+e=>{
+if(S.p0){
+move(
+e.clientX,
+e.clientY
+);
+}
+}
+);
+
+addEventListener(
+"pointerup",
+e=>{
+if(S.p0){
+end(
+e.clientX,
+e.clientY
+);
+}
+}
+);
+
+bw.addEventListener(
+"click",
+()=>{
+if(!S.p0){
+reveal("tap");
+}
+}
+);
+}
+
+addEventListener(
+"blur",
+()=>{
+clearGesture();
+}
+);
+
+document.addEventListener(
+"visibilitychange",
+()=>{
+if(document.hidden){
+clearGesture();
+}
+}
+);
+
+$("#settings").onclick=()=>{
+modal.classList.add("open");
+};
+
+$("#close").onclick=()=>{
+modal.classList.remove("open");
+};
+
+modal.onclick=e=>{
+if(e.target===modal){
+modal.classList.remove("open");
+}
+};
+
+sound.checked=S.sound;
+haptic.checked=S.haptic;
+tilt.checked=S.tilt;
+
+sound.onchange=()=>{
+S.sound=sound.checked;
+localStorage.br8s=S.sound?"1":"0";
+
+if(S.sound){
+snd("good");
+}
+};
+
+haptic.onchange=()=>{
+S.haptic=haptic.checked;
+localStorage.br8h=S.haptic?"1":"0";
+
+vib(15);
+};
+
+function orient(e){
+if(!S.tilt)return;
+
+const g=clamp(
+e.gamma||0,
+-35,
+35
+);
+
+const b=clamp(
+e.beta||0,
+-35,
+35
+);
+
+S.tx=
+Math.abs(g)<2
+?0
+:g;
+
+S.ty=
+Math.abs(b)<2
+?0
+:b*.7;
+
+if(
+!S.p0 &&
+(
+Math.abs(S.tx)>2 ||
+Math.abs(S.ty)>2
+)
+){
+physics();
+}
+}
+
+async function enableTilt(){
+if(!window.DeviceOrientationEvent){
+tilt.checked=false;
+tiltText.textContent="Tilt unavailable.";
+return false;
+}
+
+try{
+
+if(
+typeof DeviceOrientationEvent.requestPermission==="function" &&
+await DeviceOrientationEvent.requestPermission()!=="granted"
+){
+return false;
+}
+
+if(!S.orient){
+addEventListener(
+"deviceorientation",
+orient,
+{passive:true}
+);
+
+S.orient=true;
+}
+
+tiltText.textContent="Enabled.";
+
+return true;
+
+}catch{
+return false;
+}
+}
+
+tilt.onchange=async()=>{
+S.tilt=tilt.checked;
+localStorage.br8t=S.tilt?"1":"0";
+
+if(
+S.tilt &&
+!await enableTilt()
+){
+S.tilt=false;
+tilt.checked=false;
+
+}else if(S.tilt){
+physics();
+}
+};
+
+function motionHandler(e){
+const a=e.accelerationIncludingGravity;
+
+if(!a)return;
+
+const m=Math.hypot(
+a.x||0,
+a.y||0,
+a.z||0
+);
+
+const n=performance.now();
+
+if(
+m>21.5 &&
+n-(motionHandler.last||0)>1200
+){
+motionHandler.last=n;
+reveal("shake");
+}
+}
+
+async function enableMotion(){
+if(!window.DeviceMotionEvent){
+motionText.textContent="Unavailable.";
+return;
+}
+
+try{
+
+if(
+typeof DeviceMotionEvent.requestPermission==="function" &&
+await DeviceMotionEvent.requestPermission()!=="granted"
+){
+return;
+}
+
+if(!S.motion){
+addEventListener(
+"devicemotion",
+motionHandler,
+{passive:true}
+);
+
+S.motion=true;
+}
+
+motion.textContent="Enabled";
+motion.disabled=true;
+motionText.textContent="Enabled.";
+
+}catch{
+motionText.textContent="Could not enable.";
+}
+}
+
+motion.onclick=enableMotion;
+
+if(
+window.DeviceMotionEvent &&
+typeof DeviceMotionEvent.requestPermission!=="function"
+){
+enableMotion();
+}else{
+motionText.textContent=
+window.DeviceMotionEvent
+?"Tap Enable to allow motion."
+:"Unavailable.";
+}
+
+$("#testMtx").onclick=()=>{
+modal.classList.remove("open");
+showMtx(true);
+};
+
+$("#testChaos").onclick=()=>{
+modal.classList.remove("open");
+S.forced=true;
+reveal("tap");
+};
+
+$("#nope").onclick=()=>{
+hideMtx();
+showPop("🏆 Financially Responsible");
+};
+
+$("#buy").onclick=()=>{
+hideMtx();
+S.aura+=9999;
+power();
+showPop("🏆 Pay-to-Win");
+};
+
+mtxBg.onclick=()=>{};
+
+})();
+</script>
 </body>
 </html>
