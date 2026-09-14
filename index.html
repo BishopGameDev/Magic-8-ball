@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#07080b">
 <title>Brain Rot 8 Ball</title>
 <style>
-:root{color-scheme:dark;--bg:#07080b;--panel:#12141b;--line:#ffffff1a;--text:#f6f7fb;--muted:#9097a7;--good:#75efb2;--warn:#ffd073;--bad:#ff7d90}
+:root{color-scheme:dark;--bg:#07080b;--line:#ffffff1a;--text:#f6f7fb;--muted:#9097a7;--good:#75efb2;--warn:#ffd073;--bad:#ff7d90}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;min-height:100%;overflow-x:hidden;background:radial-gradient(circle at 50% 22%,#a98cff16,transparent 30rem),var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;overscroll-behavior:none}
 body{min-height:100svh;display:flex;justify-content:center}
@@ -50,8 +50,8 @@ html[data-mode=aggressive] .triangle{background:linear-gradient(#ff5670,#941c50)
 html[data-mode=unhinged] .window{background:radial-gradient(circle,#4c1c65fa,#0f081ffa 58%,#000 73%)}
 html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
 .aura{position:absolute;inset:-22%;border-radius:50%;opacity:0;pointer-events:none;z-index:-1;background:radial-gradient(circle,#fff8 0 5%,#73c2ffaa 16%,#756fff55 36%,transparent 68%);filter:blur(10px)}
-.spin .aura{opacity:.9;animation:aura .22s ease-in-out infinite alternate}
-.spin.max .aura{opacity:1;filter:blur(8px) brightness(1.35)}
+.spin .aura{opacity:.92;animation:aura .22s ease-in-out infinite alternate}
+.spin.max .aura{opacity:1;filter:blur(8px) brightness(1.4)}
 @keyframes aura{from{transform:scale(.87)}to{transform:scale(1.04)}}
 .spark{position:absolute;left:50%;top:50%;width:3px;height:34%;transform-origin:50% 100%;background:linear-gradient(transparent,#fff,#8bd8ff,transparent);opacity:0}
 .spin .spark{opacity:1;animation:spark .28s ease-out infinite}
@@ -97,8 +97,10 @@ html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
 @media(max-height:720px){.stage{min-height:340px;padding:15px 0}.ball-wrap{width:min(67vh,330px,80vw)}}
 </style>
 </head>
+
 <body>
 <main class="app">
+
 <header class="top">
 <div class="brand" id="brand">
 <h1>Brain Rot 8 Ball</h1>
@@ -114,7 +116,9 @@ html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
 
 <section class="stage">
 <div class="center">
+
 <div class="ball-wrap" id="bw" tabindex="0">
+
 <div class="aura">
 <i class="spark"></i>
 <i class="spark"></i>
@@ -126,6 +130,7 @@ html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
 
 <div class="ball">
 <div class="window">
+
 <div class="bubbles">
 <i class="bubble"></i>
 <i class="bubble"></i>
@@ -141,6 +146,7 @@ html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
 <div class="answer-text" id="answer">ASK AGAIN</div>
 </div>
 </div>
+
 </div>
 </div>
 </div>
@@ -151,52 +157,74 @@ html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
 </div>
 
 <div class="status" id="status"></div>
+
 </div>
 </section>
 
 <div class="hints">
 <div class="hint"><b>Tap</b>instant bad advice</div>
-<div class="hint"><b>Throw</b>any drag + release</div>
-<div class="hint"><b>Spin</b>circle it like a Poké Ball</div>
+<div class="hint"><b>Throw</b>drag + release</div>
+<div class="hint"><b>Spin</b>circle the edge, then throw</div>
 </div>
+
 </main>
 
 <div class="modal" id="settingsModal">
 <section class="sheet">
+
 <div class="sheet-head">
 <h2>Settings</h2>
 <button class="btn" id="close">×</button>
 </div>
 
 <div class="setting">
-<div><strong>Sound</strong><small>Small answer/UI sounds.</small></div>
+<div>
+<strong>Sound</strong>
+<small>Small answer/UI sounds.</small>
+</div>
 <input class="switch" id="sound" type="checkbox">
 </div>
 
 <div class="setting">
-<div><strong>Haptics</strong><small>Vibration when supported.</small></div>
+<div>
+<strong>Haptics</strong>
+<small>Vibration when supported.</small>
+</div>
 <input class="switch" id="haptic" type="checkbox">
 </div>
 
 <div class="setting">
-<div><strong>Shake control</strong><small id="motionText">Checking support…</small></div>
+<div>
+<strong>Shake control</strong>
+<small id="motionText">Checking support…</small>
+</div>
 <button class="btn" id="motion">Enable</button>
 </div>
 
 <div class="setting">
-<div><strong>Tilt physics</strong><small id="tiltText">Rolls the ball with phone tilt.</small></div>
+<div>
+<strong>Tilt physics</strong>
+<small id="tiltText">Rolls the ball with phone tilt.</small>
+</div>
 <input class="switch" id="tilt" type="checkbox">
 </div>
 
 <div class="setting">
-<div><strong>Test fake MTX</strong><small>Spawn the annoying paywall.</small></div>
+<div>
+<strong>Test fake MTX</strong>
+<small>Spawn the annoying paywall.</small>
+</div>
 <button class="btn" id="testMtx">Spawn</button>
 </div>
 
 <div class="setting">
-<div><strong>Test chaos</strong><small>Force a cursed answer.</small></div>
+<div>
+<strong>Test chaos</strong>
+<small>Force a cursed answer.</small>
+</div>
 <button class="btn" id="testChaos">Cursed</button>
 </div>
+
 </section>
 </div>
 
@@ -208,7 +236,9 @@ html[data-mode=unhinged] .triangle{background:linear-gradient(#c74cff,#4340e1)}
 <p id="mtxSub">Unlock 3% more certainty for only $4.99.</p>
 <button class="btn buy" id="buy">BUY AURA, COWARD</button>
 <button class="btn" id="nope">nah I'm broke</button>
-<div class="fine">This is fake. No money is collected. The orb is just being annoying.</div>
+<div class="fine">
+This is fake. No money is collected. The orb is just being annoying.
+</div>
 </div>
 
 <div class="pop" id="pop"></div>
@@ -242,58 +272,69 @@ const mtxSub=$("#mtxSub");
 const S={
 mode:localStorage.br8mode||"normal",
 unhinged:localStorage.br8u==="1",
+
 sound:localStorage.br8s!=="0",
 haptic:localStorage.br8h!=="0",
 tilt:localStorage.br8t==="1",
+
 motion:false,
 orient:false,
+
 busy:false,
 last:0,
 taps:[],
+
 x:0,
 y:0,
 r:0,
+
 vx:0,
 vy:0,
 vr:0,
+
 raf:0,
 running:false,
 lastT:0,
+
 tx:0,
 ty:0,
+
 p0:null,
 p1:null,
 moved:false,
-gmode:"pending",
-path:0,
-turnAbs:0,
-turnSigned:0,
-heading:null,
-cx:0,
-cy:0,
-lastAngle:0,
-spinV:0,
-spinPeak:0,
-spinT:0,
-curve:0,
-curveLife:0,
+
 throwVX:0,
 throwVY:0,
 throwT:0,
+
+rawVX:0,
+rawVY:0,
+
+angularPeak:0,
+
+curve:0,
+curveLife:0,
+
 lastThrowSpeed:0,
 lastThrowSpin:0,
+
 readToken:0,
 readable:false,
+
 audio:null,
+
 q:0,
 neg:0,
 aura:0,
 rizz:67,
+
 forced:false
 };
 
 const A={
+
 normal:{
+
 positive:[
 "you cooked",
 "let him cook",
@@ -316,6 +357,7 @@ positive:[
 "valid af",
 "hell yeah dude"
 ],
+
 neutral:[
 "idk fam",
 "bro...",
@@ -336,6 +378,7 @@ neutral:[
 "could go either way",
 "manifest harder"
 ],
+
 negative:[
 "you're cooked",
 "hard no",
@@ -356,9 +399,11 @@ negative:[
 "generational fumble",
 "brother eugh"
 ]
+
 },
 
 aggressive:{
+
 positive:[
 "YES. LOCK TF IN",
 "you actually cooked",
@@ -378,6 +423,7 @@ positive:[
 "LET BRO COOK",
 "THIS ACTUALLY SLAPS"
 ],
+
 neutral:[
 "bro WHAT",
 "50/50. cope.",
@@ -395,6 +441,7 @@ neutral:[
 "GO ASK THE GROUP CHAT",
 "THE ORB DECLINES"
 ],
+
 negative:[
 "SYBAU",
 "HELL NAH",
@@ -414,9 +461,11 @@ negative:[
 "YOUR COOKING LICENSE IS REVOKED",
 "STRAIGHT TO JAIL"
 ]
+
 },
 
 unhinged:{
+
 positive:[
 "SIGMA MODE ACTIVATED",
 "MANGO MANGO YES",
@@ -437,6 +486,7 @@ positive:[
 "THE PROPHECY IS BUSSIN",
 "WE'RE SO BACK x1000"
 ],
+
 neutral:[
 "still water detected",
 "german stare",
@@ -454,6 +504,7 @@ neutral:[
 "AURA CALCULATION PENDING",
 "DESTINY LEFT YOU ON READ"
 ],
+
 negative:[
 "ABSOLUTELY COOKED",
 "SKIBIDI DENIED",
@@ -473,7 +524,9 @@ negative:[
 "YOUR RIZZ HAS BEEN GARNISHED",
 "NEGATIVE INFINITY SIGMA"
 ]
+
 }
+
 };
 
 const W={
@@ -516,139 +569,406 @@ const sponsors=[
 ];
 
 const offers=[
-["Premium Oracle DLC — $4.99","Unlock 3% more certainty and one additional vibe."],
-["Sigma Pass — $2.99/month","Priority rizz processing and zero actual benefits."],
-["Remove Ads* — $7.99","There are no ads. This is just financial damage."],
-["Aura Booster Pack — $1.99","+15 imaginary aura. Probably cursed."],
-["Bag of Chips DLC — $1.49","All that, plus a legally distinct bag of chips."]
+
+[
+"Premium Oracle DLC — $4.99",
+"Unlock 3% more certainty and one additional vibe."
+],
+
+[
+"Sigma Pass — $2.99/month",
+"Priority rizz processing and zero actual benefits."
+],
+
+[
+"Remove Ads* — $7.99",
+"There are no ads. This is just financial damage."
+],
+
+[
+"Aura Booster Pack — $1.99",
+"+15 imaginary aura. Probably cursed."
+],
+
+[
+"Bag of Chips DLC — $1.49",
+"All that, plus a legally distinct bag of chips."
+]
+
 ];
 
-const pick=a=>a[Math.floor(Math.random()*a.length)];
-const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const pick=a=>
+a[
+Math.floor(
+Math.random()*a.length
+)
+];
+
+const clamp=(n,a,b)=>
+Math.max(
+a,
+Math.min(b,n)
+);
 
 function showToast(t,ms=1700){
+
 toast.textContent=t;
-toast.classList.add("show");
-clearTimeout(showToast.t);
-showToast.t=setTimeout(()=>toast.classList.remove("show"),ms);
+
+toast.classList.add(
+"show"
+);
+
+clearTimeout(
+showToast.t
+);
+
+showToast.t=
+setTimeout(
+()=>toast.classList.remove("show"),
+ms
+);
+
 }
 
 function showPop(t,ms=2500){
+
 pop.textContent=t;
-pop.classList.add("show");
-clearTimeout(showPop.t);
-showPop.t=setTimeout(()=>pop.classList.remove("show"),ms);
+
+pop.classList.add(
+"show"
+);
+
+clearTimeout(
+showPop.t
+);
+
+showPop.t=
+setTimeout(
+()=>pop.classList.remove("show"),
+ms
+);
+
 }
 
 function vib(p){
-if(S.haptic&&navigator.vibrate){
-try{navigator.vibrate(p)}catch{}
+
+if(
+S.haptic &&
+navigator.vibrate
+){
+
+try{
+navigator.vibrate(p);
+}catch{}
+
 }
+
 }
 
 function audio(){
+
 if(!S.sound)return null;
-const C=window.AudioContext||window.webkitAudioContext;
+
+const C=
+window.AudioContext ||
+window.webkitAudioContext;
+
 if(!C)return null;
-if(!S.audio)S.audio=new C;
-if(S.audio.state==="suspended")S.audio.resume();
-return S.audio;
+
+if(!S.audio){
+S.audio=new C;
 }
 
-function tone(f,d=.08,type="sine",g=.025,delay=0){
+if(
+S.audio.state==="suspended"
+){
+S.audio.resume();
+}
+
+return S.audio;
+
+}
+
+function tone(
+f,
+d=.08,
+type="sine",
+g=.025,
+delay=0
+){
+
 const c=audio();
+
 if(!c)return;
-const o=c.createOscillator();
-const a=c.createGain();
-const t=c.currentTime+delay;
+
+const o=
+c.createOscillator();
+
+const a=
+c.createGain();
+
+const t=
+c.currentTime+delay;
+
 o.type=type;
 o.frequency.value=f;
-a.gain.setValueAtTime(.0001,t);
-a.gain.exponentialRampToValueAtTime(g,t+.008);
-a.gain.exponentialRampToValueAtTime(.0001,t+d);
+
+a.gain.setValueAtTime(
+.0001,
+t
+);
+
+a.gain.exponentialRampToValueAtTime(
+g,
+t+.008
+);
+
+a.gain.exponentialRampToValueAtTime(
+.0001,
+t+d
+);
+
 o.connect(a);
 a.connect(c.destination);
+
 o.start(t);
-o.stop(t+d+.02);
+
+o.stop(
+t+d+.02
+);
+
 }
 
 function snd(k){
+
 if(k==="good"){
-tone(430,.08);
-tone(660,.1,"sine",.025,.06);
+
+tone(
+430,
+.08
+);
+
+tone(
+660,
+.1,
+"sine",
+.025,
+.06
+);
+
 }else if(k==="bad"){
-tone(170,.11,"sawtooth",.018);
-tone(125,.12,"sine",.02,.06);
+
+tone(
+170,
+.11,
+"sawtooth",
+.018
+);
+
+tone(
+125,
+.12,
+"sine",
+.02,
+.06
+);
+
 }else if(k==="rare"){
-tone(420,.07);
-tone(620,.08,"sine",.028,.05);
-tone(900,.14,"sine",.024,.11);
+
+tone(
+420,
+.07
+);
+
+tone(
+620,
+.08,
+"sine",
+.028,
+.05
+);
+
+tone(
+900,
+.14,
+"sine",
+.024,
+.11
+);
+
 }else{
-tone(220,.05,"sine",.018);
-}
+
+tone(
+220,
+.05,
+"sine",
+.018
+);
+
 }
 
-function setBall(x=S.x,y=S.y,r=S.r){
+}
+
+function setBall(
+x=S.x,
+y=S.y,
+r=S.r
+){
+
 S.x=x;
 S.y=y;
 S.r=r;
-bw.style.setProperty("--x",x+"px");
-bw.style.setProperty("--y",y+"px");
-bw.style.setProperty("--r",r+"deg");
+
+bw.style.setProperty(
+"--x",
+x+"px"
+);
+
+bw.style.setProperty(
+"--y",
+y+"px"
+);
+
+bw.style.setProperty(
+"--r",
+r+"deg"
+);
+
 }
 
 function bounds(){
-const rad=bw.offsetWidth/2;
-const st=$(".stage");
+
+const rad=
+bw.offsetWidth/2;
+
+const st=
+$(".stage");
+
 return{
-x:Math.max(42,innerWidth/2-rad+rad*.52),
-y:Math.max(34,st.clientHeight/2-rad+rad*.24)
+
+x:Math.max(
+42,
+innerWidth/2-rad+rad*.52
+),
+
+y:Math.max(
+34,
+st.clientHeight/2-rad+rad*.24
+)
+
 };
+
 }
 
 function stop(){
-if(S.raf)cancelAnimationFrame(S.raf);
+
+if(S.raf){
+cancelAnimationFrame(
+S.raf
+);
+}
+
 S.raf=0;
 S.running=false;
-S.vx=S.vy=S.vr=0;
+
+S.vx=0;
+S.vy=0;
+
 S.lastT=0;
+
 }
 
 function hit(){
+
 vib(6);
-tone(95,.04,"sine",.018);
+
+tone(
+95,
+.04,
+"sine",
+.018
+);
+
 }
 
 function physics(){
-if(S.running||S.p0)return;
+
+if(
+S.running ||
+S.p0
+)return;
 
 S.running=true;
-S.lastT=performance.now();
+
+S.lastT=
+performance.now();
 
 const step=n=>{
+
 if(!S.running)return;
 
-const dt=clamp((n-S.lastT)/1000,.008,.032);
+const dt=
+clamp(
+(n-S.lastT)/1000,
+.008,
+.032
+);
+
 S.lastT=n;
 
-if(S.tilt&&S.orient){
-S.vx+=S.tx*17*dt;
-S.vy+=S.ty*17*dt;
+if(
+S.tilt &&
+S.orient
+){
+
+S.vx+=
+S.tx*17*dt;
+
+S.vy+=
+S.ty*17*dt;
+
 }
 
-const sp=Math.hypot(S.vx,S.vy);
+const sp=
+Math.hypot(
+S.vx,
+S.vy
+);
 
-if(S.curveLife>.01&&Math.abs(S.curve)>.02&&sp>65){
-const turn=170*S.curve*S.curveLife*Math.PI/180*dt;
-const c=Math.cos(turn);
-const s=Math.sin(turn);
+if(
+S.curveLife>.01 &&
+Math.abs(S.curve)>.02 &&
+sp>65
+){
+
+const turn=
+118 *
+S.curve *
+S.curveLife *
+Math.PI/180 *
+dt;
+
+const c=
+Math.cos(turn);
+
+const s=
+Math.sin(turn);
+
 const vx=S.vx;
 const vy=S.vy;
 
-S.vx=vx*c-vy*s;
-S.vy=vx*s+vy*c;
+S.vx=
+vx*c-vy*s;
 
-S.curveLife*=Math.pow(.989,dt*60);
+S.vy=
+vx*s+vy*c;
+
+S.curveLife*=
+Math.pow(
+.989,
+dt*60
+);
+
 }
 
 S.x+=S.vx*dt;
@@ -658,136 +978,309 @@ if(!S.readable){
 S.r+=S.vr*dt;
 }
 
-const b=bounds();
+const b=
+bounds();
+
 let h=false;
 
 if(S.x>b.x){
+
 S.x=b.x;
-S.vx=-Math.abs(S.vx)*.38;
+
+S.vx=
+-Math.abs(S.vx)*.38;
+
 h=true;
+
 }else if(S.x<-b.x){
+
 S.x=-b.x;
-S.vx=Math.abs(S.vx)*.38;
+
+S.vx=
+Math.abs(S.vx)*.38;
+
 h=true;
+
 }
 
 if(S.y>b.y){
+
 S.y=b.y;
-S.vy=-Math.abs(S.vy)*.38;
+
+S.vy=
+-Math.abs(S.vy)*.38;
+
 h=true;
+
 }else if(S.y<-b.y){
+
 S.y=-b.y;
-S.vy=Math.abs(S.vy)*.38;
+
+S.vy=
+Math.abs(S.vy)*.38;
+
 h=true;
+
 }
 
 if(h){
+
 hit();
+
 S.curveLife*=.65;
+
 }
 
-const fr=Math.pow(.979,dt*60);
-S.vx*=fr;
-S.vy*=fr;
-S.vr*=Math.pow(.96,dt*60);
+S.vx*=
+Math.pow(
+.979,
+dt*60
+);
+
+S.vy*=
+Math.pow(
+.979,
+dt*60
+);
+
+S.vr*=
+Math.pow(
+.965,
+dt*60
+);
 
 setBall();
 
 if(
-Math.hypot(S.vx,S.vy)<22 &&
-!((S.tilt&&S.orient)&&(Math.abs(S.tx)>1||Math.abs(S.ty)>1))
+
+Math.hypot(
+S.vx,
+S.vy
+)<22 &&
+
+!(
+
+(S.tilt&&S.orient) &&
+
+(
+Math.abs(S.tx)>1 ||
+Math.abs(S.ty)>1
+)
+
+)
+
 ){
+
 S.running=false;
 S.raf=0;
-S.vx=S.vy=S.vr=0;
-S.curve=S.curveLife=0;
+
+S.vx=0;
+S.vy=0;
+S.vr=0;
+
+S.curve=0;
+S.curveLife=0;
+
 return;
+
 }
 
-S.raf=requestAnimationFrame(step);
+S.raf=
+requestAnimationFrame(
+step
+);
+
 };
 
-S.raf=requestAnimationFrame(step);
+S.raf=
+requestAnimationFrame(
+step
+);
+
 }
 
 function normDeg(d){
+
 d%=360;
-if(d>180)d-=360;
-if(d<-180)d+=360;
+
+if(d>180){
+d-=360;
+}
+
+if(d<-180){
+d+=360;
+}
+
 return d;
+
+}
+
+function normRad(a){
+
+while(a>Math.PI){
+a-=Math.PI*2;
+}
+
+while(a<-Math.PI){
+a+=Math.PI*2;
+}
+
+return a;
+
 }
 
 function readable(delay=0){
-const token=++S.readToken;
+
+const token=
+++S.readToken;
 
 setTimeout(()=>{
-if(token!==S.readToken)return;
+
+if(
+token!==S.readToken
+)return;
 
 S.readable=true;
+
 S.vr=0;
 
-const start=performance.now();
+const start=
+performance.now();
+
 const r0=S.r;
-const nearest=Math.round(r0/360)*360;
-const corr=normDeg(nearest-r0);
-const speed=S.lastThrowSpeed;
-const turns=speed>850?2:speed>430?1:0;
-const dir=Math.abs(S.lastThrowSpin)>20?Math.sign(S.lastThrowSpin):1;
-const delta=corr+dir*360*turns;
-const dur=900+turns*300;
+
+const target=
+Math.round(
+r0/360
+)*360;
+
+const delta=
+normDeg(
+target-r0
+);
+
+const dur=520;
 
 const step=n=>{
-if(token!==S.readToken)return;
 
-const t=Math.min(1,(n-start)/dur);
-const e=1-Math.pow(1-t,3.1);
+if(
+token!==S.readToken
+)return;
 
-setBall(S.x,S.y,r0+delta*e);
+const t=
+Math.min(
+1,
+(n-start)/dur
+);
+
+const e=
+1-Math.pow(
+1-t,
+3.2
+);
+
+setBall(
+S.x,
+S.y,
+r0+delta*e
+);
 
 if(t<1){
-requestAnimationFrame(step);
+
+requestAnimationFrame(
+step
+);
+
 }else{
-setBall(S.x,S.y,nearest);
+
+setBall(
+S.x,
+S.y,
+target
+);
+
 S.readable=false;
+
 }
+
 };
 
-requestAnimationFrame(step);
+requestAnimationFrame(
+step
+);
+
 },delay);
+
 }
 
 function result(){
+
 const m=S.mode;
 const h=new Date().getHours();
 
 if(S.forced){
+
 S.forced=false;
+
 return{
 kind:"neutral",
 text:pick(cursed),
 special:"cursed"
 };
+
 }
 
-if(Math.random()<.022){
-const t=pick(rare);
+if(
+Math.random()<.022
+){
+
+const t=
+pick(rare);
+
 return{
-kind:t.includes("BANKRUPTCY")?"bad":"good",
+
+kind:
+t.includes(
+"BANKRUPTCY"
+)
+?"bad"
+:"good",
+
 text:t,
+
 special:"rare"
+
 };
+
 }
 
-if((h>=22||h<5)&&Math.random()<.13){
+if(
+
+(h>=22||h<5) &&
+
+Math.random()<.13
+
+){
+
 return{
+
 kind:"neutral",
-text:pick(night),
+
+text:
+pick(night),
+
 special:"night"
+
 };
+
 }
 
-const r=Math.random();
-const w=W[m];
+const r=
+Math.random();
+
+const w=
+W[m];
+
 const kind=
 r<w[0]
 ?"positive"
@@ -796,16 +1289,29 @@ r<w[0]
 :"negative";
 
 return{
+
 kind,
-text:pick(A[m][kind]),
+
+text:
+pick(
+A[m][kind]
+),
+
 special:""
+
 };
+
 }
 
 function reveal(src="tap"){
-const now=performance.now();
 
-if(S.busy||now-S.last<500)return;
+const now=
+performance.now();
+
+if(
+S.busy ||
+now-S.last<500
+)return;
 
 S.last=now;
 S.busy=true;
@@ -814,216 +1320,457 @@ S.q++;
 audio();
 
 vib(
+
 src==="shake"
 ?[16,22,28]
+
 :src==="throw"
 ?[8,14,12]
+
 :14
+
 );
 
-bw.classList.remove("revealed");
+bw.classList.remove(
+"revealed"
+);
 
 if(src!=="throw"){
+
 stop();
-setBall(0,0,0);
-bw.classList.add("thinking");
+
+setBall(
+0,
+0,
+0
+);
+
+bw.classList.add(
+"thinking"
+);
+
 }
 
 status.textContent="";
 
 setTimeout(()=>{
-const z=result();
 
-ans.textContent=z.text;
+const z=
+result();
+
+ans.textContent=
+z.text;
 
 ans.dataset.s=
+
 z.text.length<12
 ?"lg"
+
 :z.text.length<20
 ?"md"
+
 :z.text.length>29
 ?"xs"
+
 :"sm";
 
-bw.classList.remove("thinking");
-bw.classList.add("revealed");
+bw.classList.remove(
+"thinking"
+);
+
+bw.classList.add(
+"revealed"
+);
 
 status.className=
 "status "+
 (
-z.kind==="positive"||z.kind==="good"
+
+z.kind==="positive" ||
+z.kind==="good"
+
 ?"good"
-:z.kind==="negative"||z.kind==="bad"
+
+:z.kind==="negative" ||
+z.kind==="bad"
+
 ?"bad"
+
 :"neutral"
+
 );
 
 status.textContent=
+
 z.special==="rare"
 ?"∞ aura pull"
+
 :z.special==="cursed"
 ?"cursed pull"
+
 :z.kind==="positive"
 ?"we up"
+
 :z.kind==="negative"
 ?"it's over"
+
 :"orb buffering";
 
-if(z.kind==="negative"||z.kind==="bad"){
+if(
+z.kind==="negative" ||
+z.kind==="bad"
+){
+
 S.neg++;
+
 S.aura-=67;
+
 snd("bad");
-}else if(z.kind==="positive"||z.kind==="good"){
+
+}else if(
+z.kind==="positive" ||
+z.kind==="good"
+){
+
 S.neg=0;
+
 S.aura+=100;
-snd(z.special==="rare"?"rare":"good");
+
+snd(
+z.special==="rare"
+?"rare"
+:"good"
+);
+
 }else{
+
 S.neg=0;
+
 S.aura+=7;
+
 snd("neutral");
+
 }
 
 if(S.neg>=3){
-showPop("🏆 Aura Bankruptcy — three Ls in a row.");
+
+showPop(
+"🏆 Aura Bankruptcy — three Ls in a row."
+);
+
 }
 
-if(z.text.includes("THOSE WHO KNOW")){
-showPop("🏆 Those Who Know 💀");
+if(
+z.text.includes(
+"THOSE WHO KNOW"
+)
+){
+
+showPop(
+"🏆 Those Who Know 💀"
+);
+
 }
 
-if(Math.random()<.03){
+if(
+Math.random()<.03
+){
+
 setTimeout(()=>{
-showPop("Definitely Sponsored: "+pick(sponsors));
+
+showPop(
+"Definitely Sponsored: "+
+pick(sponsors)
+);
+
 },500);
+
 }
+
+const realSpin=
+Math.abs(
+S.lastThrowSpin
+);
 
 readable(
-src==="throw"&&Math.abs(S.lastThrowSpin)>80
+
+src==="throw"
+
+?
+
+(
+realSpin>420
+?620
+
+:realSpin>140
 ?430
+
+:180
+)
+
 :0
+
 );
 
 setTimeout(()=>{
+
 S.busy=false;
+
 },700);
 
-},src==="throw"?0:420);
+},
+
+src==="throw"
+?0
+:420
+
+);
+
 }
 
 function power(){
-bw.classList.remove("power");
+
+bw.classList.remove(
+"power"
+);
+
 void bw.offsetWidth;
-bw.classList.add("power");
+
+bw.classList.add(
+"power"
+);
 
 snd("rare");
-vib([16,20,18,24,34]);
 
-showToast("+9999 imaginary aura");
+vib(
+[16,20,18,24,34]
+);
+
+showToast(
+"+9999 imaginary aura"
+);
 
 setTimeout(()=>{
-bw.classList.remove("power");
+
+bw.classList.remove(
+"power"
+);
+
 },7000);
+
 }
 
 function showMtx(force=false){
-if(!force&&Math.random()>.085)return;
 
-const o=pick(offers);
+if(
+!force &&
+Math.random()>.085
+)return;
 
-mtxTitle.textContent=o[0];
-mtxSub.textContent=o[1];
+const o=
+pick(offers);
 
-mtx.classList.add("show");
-mtxBg.classList.add("show");
+mtxTitle.textContent=
+o[0];
 
-vib([10,16,10]);
+mtxSub.textContent=
+o[1];
+
+mtx.classList.add(
+"show"
+);
+
+mtxBg.classList.add(
+"show"
+);
+
+vib(
+[10,16,10]
+);
+
 }
 
 function hideMtx(){
-mtx.classList.remove("show");
-mtxBg.classList.remove("show");
+
+mtx.classList.remove(
+"show"
+);
+
+mtxBg.classList.remove(
+"show"
+);
+
 }
 
 function mode(m){
-if(m==="unhinged"&&!S.unhinged)return;
+
+if(
+m==="unhinged" &&
+!S.unhinged
+)return;
 
 S.mode=m;
+
 localStorage.br8mode=m;
 
 document.documentElement.dataset.mode=m;
 
-document.querySelectorAll(".mode").forEach(b=>{
-b.classList.toggle("active",b.dataset.mode===m);
+document
+.querySelectorAll(".mode")
+.forEach(b=>{
+
+b.classList.toggle(
+"active",
+b.dataset.mode===m
+);
+
 });
 
 $("#pt").textContent=
+
 m==="normal"
 ?"ask ts. accept the consequences."
+
 :m==="aggressive"
 ?"ask ts then. don't fold."
+
 :"u found the lobotomy timeline.";
 
 $("#ps").textContent=
+
 m==="unhinged"
 ?"those who know 💀"
+
 :"tap, drag, throw, spin, or shake. orb knows ball.";
 
 stop();
-setBall(0,0,0);
-bw.classList.remove("revealed");
+
+setBall(
+0,
+0,
+0
+);
+
+bw.classList.remove(
+"revealed"
+);
+
 }
 
 function addU(){
+
 if($("#u"))return;
 
-const b=document.createElement("button");
+const b=
+document.createElement(
+"button"
+);
 
 b.id="u";
-b.className="mode unhinged";
-b.dataset.mode="unhinged";
-b.textContent="Unhinged";
+
+b.className=
+"mode unhinged";
+
+b.dataset.mode=
+"unhinged";
+
+b.textContent=
+"Unhinged";
 
 modes.appendChild(b);
+
 }
 
-if(S.unhinged)addU();
+if(S.unhinged){
+addU();
+}
 
 mode(
-S.mode==="unhinged"&&!S.unhinged
+
+S.mode==="unhinged" &&
+!S.unhinged
+
 ?"normal"
+
 :S.mode
+
 );
 
 modes.onclick=e=>{
-const b=e.target.closest(".mode");
-if(b)mode(b.dataset.mode);
+
+const b=
+e.target.closest(
+".mode"
+);
+
+if(b){
+mode(
+b.dataset.mode
+);
+}
+
 };
 
-brand.addEventListener("pointerup",()=>{
-const n=Date.now();
+brand.addEventListener(
+"pointerup",
+()=>{
 
-S.taps=S.taps.filter(t=>n-t<2400);
+const n=
+Date.now();
+
+S.taps=
+S.taps.filter(
+t=>n-t<2400
+);
+
 S.taps.push(n);
 
-if(S.taps.length>=5&&!S.unhinged){
+if(
+S.taps.length>=5 &&
+!S.unhinged
+){
+
 S.unhinged=true;
+
 localStorage.br8u="1";
 
 addU();
 
-showToast("UNHINGED UNLOCKED");
-vib([18,30,18,30,38]);
+showToast(
+"UNHINGED UNLOCKED"
+);
+
+vib(
+[18,30,18,30,38]
+);
+
 snd("rare");
-}
-});
 
-function angleNorm(a){
-while(a>Math.PI)a-=Math.PI*2;
-while(a<-Math.PI)a+=Math.PI*2;
-return a;
 }
 
-function begin(x,y,t=performance.now()){
+}
+);
+
+/*
+REAL ANGULAR PHYSICS
+
+Near center:
+mostly translation.
+
+Around edge:
+tangential motion becomes real rotation.
+
+No spin-mode detector.
+
+No fake 360 or 720 after release.
+*/
+
+function begin(
+x,
+y,
+t=performance.now()
+){
+
 ++S.readToken;
 
 S.readable=false;
@@ -1033,267 +1780,374 @@ stop();
 S.p0={
 x,
 y,
-t,
-bx:S.x,
-by:S.y
+t
 };
 
-S.p1={x,y,t};
+S.p1={
+x,
+y,
+t
+};
 
 S.moved=false;
-S.gmode="pending";
-
-S.path=0;
-S.turnAbs=0;
-S.turnSigned=0;
-S.heading=null;
-
-S.spinV=0;
-S.spinPeak=0;
-S.spinT=0;
 
 S.throwVX=0;
 S.throwVY=0;
 S.throwT=0;
 
-const r=bw.getBoundingClientRect();
+S.rawVX=0;
+S.rawVY=0;
 
-S.cx=r.left+r.width/2;
-S.cy=r.top+r.height/2;
-
-S.lastAngle=Math.atan2(
-y-S.cy,
-x-S.cx
-);
+S.angularPeak=0;
 
 S.curve=0;
 S.curveLife=0;
 
-bw.classList.remove("spin","max");
+bw.classList.remove(
+"spin",
+"max"
+);
+
 }
 
-function move(x,y,t=performance.now()){
-if(!S.p0)return;
+function move(
+x,
+y,
+t=performance.now()
+){
 
-const sx=x-S.p1.x;
-const sy=y-S.p1.y;
+if(
+!S.p0 ||
+!S.p1
+)return;
 
-const seg=Math.hypot(sx,sy);
+const dx=
+x-S.p1.x;
 
-const dt=Math.max(
+const dy=
+y-S.p1.y;
+
+const dt=
+Math.max(
 8,
 t-S.p1.t
 );
 
-const vx=sx/dt*1000;
-const vy=sy/dt*1000;
-const spd=Math.hypot(vx,vy);
+const rawVX=
+dx/dt*1000;
+
+const rawVY=
+dy/dt*1000;
 
 if(
+
 Math.hypot(
 x-S.p0.x,
 y-S.p0.y
 )>7
+
 ){
+
 S.moved=true;
+
 }
 
-if(seg>1.5){
-const h=Math.atan2(sy,sx);
+const rect=
+bw.getBoundingClientRect();
 
-if(S.heading!==null){
-const td=
-angleNorm(
-h-S.heading
-)*180/Math.PI;
+const cx=
+rect.left+
+rect.width/2;
 
-if(Math.abs(td)<100){
-S.turnAbs+=Math.abs(td);
-S.turnSigned+=td;
-}
-}
+const cy=
+rect.top+
+rect.height/2;
 
-S.heading=h;
-S.path+=seg;
-}
-
-if(S.gmode==="pending"){
-const cons=
-S.turnAbs
-?Math.abs(S.turnSigned)/S.turnAbs
-:0;
-
-if(
-S.path>=18 &&
-S.turnAbs>=20 &&
-cons>.55
-){
-S.gmode="spin";
-
-S.lastAngle=Math.atan2(
-y-S.cy,
-x-S.cx
+const rad=
+Math.max(
+1,
+rect.width/2
 );
 
-S.spinV=
-Math.sign(
-S.turnSigned||1
-)*180;
+const px=
+S.p1.x-cx;
 
-S.spinPeak=S.spinV;
-S.spinT=t;
+const py=
+S.p1.y-cy;
 
-bw.classList.add("spin");
+const cxv=
+x-cx;
 
-}else if(S.path>=34){
-S.gmode="drag";
-}
-}
+const cyv=
+y-cy;
 
-if(S.gmode==="spin"){
-const a=Math.atan2(
-y-S.cy,
-x-S.cx
+const rp=
+Math.hypot(
+px,
+py
 );
 
-const dd=
-angleNorm(
-a-S.lastAngle
-)*180/Math.PI;
-
-const rad=Math.hypot(
-x-S.cx,
-y-S.cy
+const rc=
+Math.hypot(
+cxv,
+cyv
 );
 
-const br=bw.offsetWidth/2;
+const ravg=
+Math.max(
+1,
+(rp+rc)/2
+);
+
+const a0=
+Math.atan2(
+py,
+px
+);
+
+const a1=
+Math.atan2(
+cyv,
+cxv
+);
+
+const da=
+normRad(
+a1-a0
+);
+
+const edge=
+clamp(
+
+(
+ravg/rad-.12
+)/.62,
+
+0,
+1
+
+);
+
+const spinCapture=
+edge*.96;
+
+const mid=
+a0+da/2;
+
+const tanDist=
+da*ravg;
+
+const tanX=
+-Math.sin(mid)*
+tanDist;
+
+const tanY=
+Math.cos(mid)*
+tanDist;
+
+const moveX=
+dx-
+tanX*spinCapture;
+
+const moveY=
+dy-
+tanY*spinCapture;
+
+const spinDeg=
+da*
+180/Math.PI*
+edge;
+
+const b=
+bounds();
+
+S.x=
+clamp(
+S.x+
+moveX*.96,
+-b.x,
+b.x
+);
+
+S.y=
+clamp(
+S.y+
+moveY*.96,
+-b.y,
+b.y
+);
+
+S.r+=
+spinDeg;
+
+const instVR=
+spinDeg/dt*1000;
+
+S.vr=
+S.vr*.58+
+instVR*.42;
 
 if(
-rad>br*.1 &&
-Math.abs(dd)<75
+
+Math.abs(S.vr)>
+Math.abs(S.angularPeak)
+
 ){
-S.r+=dd*1.35;
 
-const av=dd/dt*1000;
+S.angularPeak=
+S.vr;
 
-S.spinV=
-S.spinV*.62 +
-av*.38;
-
-if(
-Math.abs(S.spinV)>
-Math.abs(S.spinPeak)
-){
-S.spinPeak=S.spinV;
 }
 
-S.spinT=t;
+const transVX=
+moveX/dt*1000;
+
+const transVY=
+moveY/dt*1000;
+
+S.vx=
+transVX;
+
+S.vy=
+transVY;
+
+S.rawVX=
+rawVX;
+
+S.rawVY=
+rawVY;
+
+if(
+
+Math.hypot(
+transVX,
+transVY
+)>130
+
+){
+
+S.throwVX=
+transVX;
+
+S.throwVY=
+transVY;
+
+S.throwT=t;
+
+}
+
+const charge=
+Math.abs(
+S.vr
+);
+
+bw.classList.toggle(
+"spin",
+charge>100
+);
 
 bw.classList.toggle(
 "max",
-Math.abs(S.spinPeak)>500
+charge>520
 );
 
-setBall(
-S.p0.bx,
-S.p0.by,
-S.r
-);
+setBall();
+
+S.p1={
+x,
+y,
+t
+};
+
 }
 
-S.lastAngle=a;
+function end(
+x,
+y,
+t=performance.now()
+){
 
-}else if(S.gmode==="drag"){
-const b=bounds();
-
-setBall(
-clamp(
-S.p0.bx+(x-S.p0.x)*.94,
--b.x,
-b.x
-),
-clamp(
-S.p0.by+(y-S.p0.y)*.9,
--b.y,
-b.y
-),
-S.r+(x-S.p1.x)*.15
-);
-}
-
-S.vx=vx;
-S.vy=vy;
-
-if(spd>150){
-S.throwVX=vx;
-S.throwVY=vy;
-S.throwT=t;
-}
-
-S.p1={x,y,t};
-}
-
-function end(x,y,t=performance.now()){
 if(!S.p0)return;
 
-const dx=x-S.p0.x;
-const dy=y-S.p0.y;
-const dist=Math.hypot(dx,dy);
+const dx=
+x-S.p0.x;
+
+const dy=
+y-S.p0.y;
+
+const dist=
+Math.hypot(
+dx,
+dy
+);
 
 const tap=
+
 !S.moved &&
 dist<10;
 
-const spinSource=
-Math.abs(S.spinPeak)>
-Math.abs(S.spinV)
-?S.spinPeak
-:S.spinV;
-
-const hadSpin=
-S.spinT &&
-t-S.spinT<900 &&
-Math.abs(spinSource)>90;
-
-const modeWas=S.gmode;
-
 if(tap){
+
 clearGesture();
+
 reveal("tap");
+
 return;
+
 }
 
 let vx=
-S.throwVX||
+S.throwVX ||
 S.vx;
 
 let vy=
-S.throwVY||
+S.throwVY ||
 S.vy;
 
-let sp=Math.hypot(vx,vy);
-
-if(sp<120){
-if(hadSpin&&modeWas==="spin"){
-const a=
-S.lastAngle +
-(
-spinSource>0
-?Math.PI/2
-:-Math.PI/2
+let sp=
+Math.hypot(
+vx,
+vy
 );
 
-vx=Math.cos(a)*390;
-vy=Math.sin(a)*390;
+const rawSp=
+Math.hypot(
+S.rawVX,
+S.rawVY
+);
 
-}else{
-const mag=Math.max(1,dist);
+if(
+sp<120 &&
+rawSp>160
+){
 
-vx=dx/mag*390;
-vy=dy/mag*390;
+vx=
+S.rawVX;
+
+vy=
+S.rawVY;
+
+sp=
+rawSp;
+
 }
 
-sp=390;
+if(sp<120){
+
+const mag=
+Math.max(
+1,
+dist
+);
+
+vx=
+dx/mag*360;
+
+vy=
+dy/mag*360;
+
+sp=360;
+
 }
 
 const min=
@@ -1302,47 +2156,75 @@ dist>100
 :390;
 
 if(sp<min){
-vx=vx/sp*min;
-vy=vy/sp*min;
-}
 
-sp=Math.hypot(vx,vy);
+vx=
+vx/sp*min;
+
+vy=
+vy/sp*min;
+
+sp=min;
+
+}
 
 if(sp>1000){
-vx=vx/sp*1000;
-vy=vy/sp*1000;
+
+vx=
+vx/sp*1000;
+
+vy=
+vy/sp*1000;
+
 }
 
-S.vx=vx;
-S.vy=vy;
+const releaseSpin=
+
+Math.abs(S.angularPeak)>
+Math.abs(S.vr)
+
+?S.angularPeak
+
+:S.vr;
+
+S.vx=
+vx;
+
+S.vy=
+vy;
+
+S.vr=
+clamp(
+releaseSpin,
+-900,
+900
+);
 
 S.curve=
-hadSpin
+
+Math.abs(S.vr)>80
+
 ?clamp(
-spinSource/500,
--1.4,
-1.4
+S.vr/650,
+-1.25,
+1.25
 )
+
 :0;
 
 S.curveLife=
-hadSpin
+
+Math.abs(S.curve)>.02
 ?1
 :0;
 
-S.vr=
-hadSpin
-?clamp(
-spinSource,
--800,
-800
-)
-:vx*.28-vy*.06;
-
 S.lastThrowSpeed=
-Math.hypot(vx,vy);
+Math.hypot(
+vx,
+vy
+);
 
-S.lastThrowSpin=S.vr;
+S.lastThrowSpin=
+S.vr;
 
 clearGesture(false);
 
@@ -1358,27 +2240,26 @@ physics
 );
 
 showMtx();
+
 }
 
-function clearGesture(resetCurve=true){
+function clearGesture(
+resetCurve=true
+){
+
 S.p0=null;
 S.p1=null;
 
 S.moved=false;
-S.gmode="pending";
-
-S.path=0;
-S.turnAbs=0;
-S.turnSigned=0;
-S.heading=null;
-
-S.spinV=0;
-S.spinPeak=0;
-S.spinT=0;
 
 S.throwVX=0;
 S.throwVY=0;
 S.throwT=0;
+
+S.rawVX=0;
+S.rawVY=0;
+
+S.angularPeak=0;
 
 bw.classList.remove(
 "spin",
@@ -1386,13 +2267,19 @@ bw.classList.remove(
 );
 
 if(resetCurve){
+
 S.curve=0;
 S.curveLife=0;
+S.vr=0;
+
 }
+
 }
 
 const touch=
+
 ("ontouchstart" in window) ||
+
 navigator.maxTouchPoints>0;
 
 if(touch){
@@ -1400,16 +2287,21 @@ if(touch){
 bw.addEventListener(
 "touchstart",
 e=>{
-if(e.touches.length!==1)return;
+
+if(
+e.touches.length!==1
+)return;
 
 e.preventDefault();
 
-const q=e.touches[0];
+const q=
+e.touches[0];
 
 begin(
 q.clientX,
 q.clientY
 );
+
 },
 {passive:false}
 );
@@ -1417,19 +2309,25 @@ q.clientY
 bw.addEventListener(
 "touchmove",
 e=>{
+
 if(
+
 !S.p0 ||
+
 e.touches.length!==1
+
 )return;
 
 e.preventDefault();
 
-const q=e.touches[0];
+const q=
+e.touches[0];
 
 move(
 q.clientX,
 q.clientY
 );
+
 },
 {passive:false}
 );
@@ -1437,18 +2335,22 @@ q.clientY
 bw.addEventListener(
 "touchend",
 e=>{
+
 if(!S.p0)return;
 
 e.preventDefault();
 
 const q=
-e.changedTouches[0]||
+
+e.changedTouches[0] ||
+
 S.p1;
 
 end(
 q.clientX,
 q.clientY
 );
+
 },
 {passive:false}
 );
@@ -1456,7 +2358,9 @@ q.clientY
 bw.addEventListener(
 "touchcancel",
 ()=>{
+
 clearGesture();
+
 },
 {passive:false}
 );
@@ -1466,6 +2370,7 @@ clearGesture();
 bw.addEventListener(
 "pointerdown",
 e=>{
+
 if(e.button!==0)return;
 
 e.preventDefault();
@@ -1474,103 +2379,165 @@ begin(
 e.clientX,
 e.clientY
 );
+
 }
 );
 
 addEventListener(
 "pointermove",
 e=>{
+
 if(S.p0){
+
 move(
 e.clientX,
 e.clientY
 );
+
 }
+
 }
 );
 
 addEventListener(
 "pointerup",
 e=>{
+
 if(S.p0){
+
 end(
 e.clientX,
 e.clientY
 );
+
 }
+
 }
 );
 
 bw.addEventListener(
 "click",
 ()=>{
+
 if(!S.p0){
+
 reveal("tap");
+
 }
+
 }
 );
+
 }
 
 addEventListener(
 "blur",
 ()=>{
+
 clearGesture();
+
 }
 );
 
 document.addEventListener(
 "visibilitychange",
 ()=>{
+
 if(document.hidden){
+
 clearGesture();
+
 }
+
 }
 );
 
-$("#settings").onclick=()=>{
-modal.classList.add("open");
+$("#settings").onclick=
+()=>{
+
+modal.classList.add(
+"open"
+);
+
 };
 
-$("#close").onclick=()=>{
-modal.classList.remove("open");
+$("#close").onclick=
+()=>{
+
+modal.classList.remove(
+"open"
+);
+
 };
 
 modal.onclick=e=>{
+
 if(e.target===modal){
-modal.classList.remove("open");
+
+modal.classList.remove(
+"open"
+);
+
 }
+
 };
 
-sound.checked=S.sound;
-haptic.checked=S.haptic;
-tilt.checked=S.tilt;
+sound.checked=
+S.sound;
 
-sound.onchange=()=>{
-S.sound=sound.checked;
-localStorage.br8s=S.sound?"1":"0";
+haptic.checked=
+S.haptic;
+
+tilt.checked=
+S.tilt;
+
+sound.onchange=
+()=>{
+
+S.sound=
+sound.checked;
+
+localStorage.br8s=
+S.sound
+?"1"
+:"0";
 
 if(S.sound){
+
 snd("good");
+
 }
+
 };
 
-haptic.onchange=()=>{
-S.haptic=haptic.checked;
-localStorage.br8h=S.haptic?"1":"0";
+haptic.onchange=
+()=>{
+
+S.haptic=
+haptic.checked;
+
+localStorage.br8h=
+S.haptic
+?"1"
+:"0";
 
 vib(15);
+
 };
 
 function orient(e){
+
 if(!S.tilt)return;
 
-const g=clamp(
+const g=
+clamp(
 e.gamma||0,
 -35,
 35
 );
 
-const b=clamp(
+const b=
+clamp(
 e.beta||0,
 -35,
 35
@@ -1587,33 +2554,53 @@ Math.abs(b)<2
 :b*.7;
 
 if(
+
 !S.p0 &&
+
 (
 Math.abs(S.tx)>2 ||
 Math.abs(S.ty)>2
 )
+
 ){
+
 physics();
+
 }
+
 }
 
 async function enableTilt(){
-if(!window.DeviceOrientationEvent){
+
+if(
+!window.DeviceOrientationEvent
+){
+
 tilt.checked=false;
-tiltText.textContent="Tilt unavailable.";
+
+tiltText.textContent=
+"Tilt unavailable.";
+
 return false;
+
 }
 
 try{
 
 if(
+
 typeof DeviceOrientationEvent.requestPermission==="function" &&
+
 await DeviceOrientationEvent.requestPermission()!=="granted"
+
 ){
+
 return false;
+
 }
 
 if(!S.orient){
+
 addEventListener(
 "deviceorientation",
 orient,
@@ -1621,71 +2608,115 @@ orient,
 );
 
 S.orient=true;
+
 }
 
-tiltText.textContent="Enabled.";
+tiltText.textContent=
+"Enabled.";
 
 return true;
 
 }catch{
+
 return false;
-}
+
 }
 
-tilt.onchange=async()=>{
-S.tilt=tilt.checked;
-localStorage.br8t=S.tilt?"1":"0";
+}
+
+tilt.onchange=
+async()=>{
+
+S.tilt=
+tilt.checked;
+
+localStorage.br8t=
+S.tilt
+?"1"
+:"0";
 
 if(
+
 S.tilt &&
+
 !await enableTilt()
+
 ){
+
 S.tilt=false;
+
 tilt.checked=false;
 
 }else if(S.tilt){
+
 physics();
+
 }
+
 };
 
 function motionHandler(e){
-const a=e.accelerationIncludingGravity;
+
+const a=
+e.accelerationIncludingGravity;
 
 if(!a)return;
 
-const m=Math.hypot(
+const m=
+Math.hypot(
 a.x||0,
 a.y||0,
 a.z||0
 );
 
-const n=performance.now();
+const n=
+performance.now();
 
 if(
+
 m>21.5 &&
+
 n-(motionHandler.last||0)>1200
+
 ){
+
 motionHandler.last=n;
+
 reveal("shake");
+
 }
+
 }
 
 async function enableMotion(){
-if(!window.DeviceMotionEvent){
-motionText.textContent="Unavailable.";
+
+if(
+!window.DeviceMotionEvent
+){
+
+motionText.textContent=
+"Unavailable.";
+
 return;
+
 }
 
 try{
 
 if(
+
 typeof DeviceMotionEvent.requestPermission==="function" &&
+
 await DeviceMotionEvent.requestPermission()!=="granted"
+
 ){
+
 return;
+
 }
 
 if(!S.motion){
+
 addEventListener(
 "devicemotion",
 motionHandler,
@@ -1693,57 +2724,106 @@ motionHandler,
 );
 
 S.motion=true;
+
 }
 
-motion.textContent="Enabled";
+motion.textContent=
+"Enabled";
+
 motion.disabled=true;
-motionText.textContent="Enabled.";
+
+motionText.textContent=
+"Enabled.";
 
 }catch{
-motionText.textContent="Could not enable.";
-}
+
+motionText.textContent=
+"Could not enable.";
+
 }
 
-motion.onclick=enableMotion;
+}
+
+motion.onclick=
+enableMotion;
 
 if(
+
 window.DeviceMotionEvent &&
+
 typeof DeviceMotionEvent.requestPermission!=="function"
+
 ){
+
 enableMotion();
+
 }else{
+
 motionText.textContent=
+
 window.DeviceMotionEvent
+
 ?"Tap Enable to allow motion."
+
 :"Unavailable.";
+
 }
 
-$("#testMtx").onclick=()=>{
-modal.classList.remove("open");
+$("#testMtx").onclick=
+()=>{
+
+modal.classList.remove(
+"open"
+);
+
 showMtx(true);
+
 };
 
-$("#testChaos").onclick=()=>{
-modal.classList.remove("open");
+$("#testChaos").onclick=
+()=>{
+
+modal.classList.remove(
+"open"
+);
+
 S.forced=true;
+
 reveal("tap");
+
 };
 
-$("#nope").onclick=()=>{
+$("#nope").onclick=
+()=>{
+
 hideMtx();
-showPop("🏆 Financially Responsible");
+
+showPop(
+"🏆 Financially Responsible"
+);
+
 };
 
-$("#buy").onclick=()=>{
+$("#buy").onclick=
+()=>{
+
 hideMtx();
+
 S.aura+=9999;
+
 power();
-showPop("🏆 Pay-to-Win");
+
+showPop(
+"🏆 Pay-to-Win"
+);
+
 };
 
-mtxBg.onclick=()=>{};
+mtxBg.onclick=
+()=>{};
 
 })();
 </script>
+
 </body>
 </html>
